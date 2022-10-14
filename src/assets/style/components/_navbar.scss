@@ -1,0 +1,49 @@
+nav{
+    background-color: black;
+    height: 4em;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    padding: 0 5%;
+    align-items: center;
+
+    ul{
+        display: flex;
+        list-style: none;
+    }
+
+    a{
+        color: $color1;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 0 10px;
+        font-weight: 500;
+        font-size: 1.2rem;
+        position: relative;
+        transition: all .3s ease-in-out;
+    }
+    .logo{
+        position: absolute;
+        height: 4em;
+        left: 0;
+    }
+    .itemNumber{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color:red;
+        color: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 90%;
+        right: 2px;
+        transform: translateY(-50%);
+        font-size: .8rem;
+        text-align: center;
+    }
+    // active link
+    .active{
+        text-decoration: underline;
+        transition: all .3s ease-in-out;
+    }
+}

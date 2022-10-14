@@ -1,8 +1,11 @@
+import Header from "../components/Header/Index";
+
 const Home = () => {
     return (
-        <div>
+        <>
+        <Header />
             <h1>HOME</h1>
-        </div>
+        </>
     );
 }
 
