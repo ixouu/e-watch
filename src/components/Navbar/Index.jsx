@@ -1,62 +1,20 @@
-import { NavLink } from 'react-router-dom';
 import Logo from '../Logo';
+import NavLinkComponent from './NavLink';
 import ShoppingNumber from './ShoppingNumber';
+import MobileNav from './MobileNav';
 
 const NavBar = () => {
     return (
         <nav>
             <Logo/>
-            <ul>
-                <li>
-                    <NavLink 
-                    end
-                    to ='/' 
-                    className={({ isActive , isPending}) =>
-                        isActive
-                        ? 'active'
-                        : isPending
-                        ? 'pending'
-                        : ''
-                    }
-                     >Acceuil</NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                    to ='/categories'
-                    className={({ isActive , isPending}) =>
-                        isActive
-                        ? 'active'
-                        : isPending
-                        ? 'pending'
-                        : ''
-                    }
-                    >Catégories</NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                    to ='/contact'
-                    className={({ isActive , isPending}) =>
-                        isActive
-                        ? 'active'
-                        : isPending
-                        ? 'pending'
-                        : ''
-                    }
-                    >Contact</NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                    to ='/cart'
-                    className={({ isActive , isPending}) =>
-                        isActive
-                        ? 'active'
-                        : isPending
-                        ? 'pending'
-                        : ''
-                    }
-                    >Panier <ShoppingNumber/></NavLink>
-                </li>
+            <MobileNav/>
+            <ul className='desktop-Nav'>
+                <NavLinkComponent destination="/" title="Acceuil"/>
+                <NavLinkComponent destination="/categories" title="Catégories"/>
+                <NavLinkComponent destination="/contact" title="Contact"/>
+                <NavLinkComponent destination="/cart" title="Panier"/>
             </ul>
+            <ShoppingNumber/>
         </nav>
     );
 }

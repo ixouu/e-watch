@@ -7,9 +7,12 @@ nav{
     padding: 0 5%;
     align-items: center;
 
-    ul{
+    .desktop-Nav{
         display: flex;
         list-style: none;
+        @include mobile-only{
+            display: none;
+        }
     }
 
     a{
@@ -24,8 +27,17 @@ nav{
     }
     .logo{
         position: absolute;
-        height: 4em;
         left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        img{
+            height: 3.5rem;
+            margin-top: 10px;
+        }
+    }
+    .fa-bag-shopping{
+        color: $color1;
+        position: relative;
     }
     .itemNumber{
         display: inline-block;
@@ -41,9 +53,51 @@ nav{
         font-size: .8rem;
         text-align: center;
     }
+    // MOBILE NAV BAR
+    .mobileNavBar{
+    transform: translateX(9999px);
+    color: $color1;
+    display: flex;
+    position: relative;
+    z-index: 2000;
+    .mobileNavBar-links{
+        padding-top: 50px;
+        li{
+            border-bottom: 1px solid $color1;
+            list-style : none;
+            padding: 5px 0;
+        }
+    }
+    ul {
+        display: none;
+    }
+    @include mobile-only{
+        transform: translateX(0);
+    }
+    .mobileNavBar-btn{
+        padding: 5px;
+        border: none;
+        width: 50px;
+        height: 50px;
+        z-index: 2000;
+    }
+    .fa-bars{
+        font-size: 2rem;
+    }
+    // display mobile menu
+    .showMenu{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+
+        
+    }
+}
     // active link
     .active{
         text-decoration: underline;
         transition: all .3s ease-in-out;
     }
 }
+
