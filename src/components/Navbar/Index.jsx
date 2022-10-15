@@ -1,11 +1,20 @@
-import { Link } from 'react-router-dom';
+import Logo from '../Logo';
+import NavLinkComponent from './NavLink';
+import ShoppingNumber from './ShoppingNumber';
+import MobileNav from './MobileNav';
 
 const NavBar = () => {
     return (
         <nav>
-            <Link to ='/'>Acceuil</Link>
-            <Link to ='/contact'>Contact</Link>
-            <Link to ='/cart'>Panier</Link>
+            <Logo/>
+            <MobileNav/>
+            <ul className='desktop-Nav'>
+                <NavLinkComponent destination="/" title="Acceuil"/>
+                <NavLinkComponent destination="/categories" title="Catégories"/>
+                <NavLinkComponent destination="/contact" title="Contact"/>
+                <NavLinkComponent destination="/cart" title="Panier"/>
+            </ul>
+            <ShoppingNumber/>
         </nav>
     );
 }

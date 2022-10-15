@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Cart from './pages/Cart.jsx';
 import Product from './pages/Product.jsx';
 import Validation from './pages/Validation.jsx';
+import Categories from './pages/Categories.jsx';
 import Contact from './pages/Contact.jsx';
 import Error from './pages/Error.jsx';
 
@@ -27,8 +28,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/contact" element={<Contact />}/>
-        <Route path="/validation" element={<Validation />}/>
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/validation" element={<Validation />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

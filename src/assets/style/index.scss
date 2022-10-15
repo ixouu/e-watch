@@ -1,12 +1,15 @@
 
 @import './config/variables';
 @import './config/mixins';
+@import './config/main';
 @import './pages/cart';
 @import './pages/home';
 @import './pages/product';
 @import './components/footer';
 @import './components/header';
 @import './components/productCard';
+@import './components/navbar';
+@import './components/button';
 
 @import '@fontsource/roboto/300.css';
 @import '@fontsource/roboto/400.css';
