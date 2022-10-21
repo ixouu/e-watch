@@ -1,0 +1,32 @@
+.main-Services{
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 10%;
+    .home-service{
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        min-height: 300px;
+    }
+    h2{
+        text-align: center;
+        transition: all .3s ease-out;
+    }
+    .service-iconContainer{
+        font-size: 2rem;
+        display: inline-block;
+        align-self: center;
+        height: 50px;
+        transition: all .3s ease-out;
+        &:hover{
+            color: goldenrod;
+        }
+        &:hover+ h2{
+                color: goldenrod;
+        }
+    }
+    p{
+        font-size: 1.2rem;
+        padding: 0 10%;
+    }
+}
