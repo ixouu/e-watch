@@ -1,0 +1,12 @@
+.main-titleContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    h2{
+        font-size: 2rem;
+    }
+    span{
+        font-style: italic;
+        font-size: 1.4rem;
+    }
+}
