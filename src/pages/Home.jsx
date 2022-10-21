@@ -35,7 +35,7 @@ const Home = () => {
         <Header />
         <main className="home-main">
             <div className="main-titleContainer">
-                <h2>Portez votre montre avec élégance.</h2>
+                <h2>Portez votre montre avec élégance</h2>
                 <span> Les derniers modèles tendances sont disponibles dans notre magasin, découvrez-les sans plus tarder. </span>
             </div>
             <div className="main-Services">

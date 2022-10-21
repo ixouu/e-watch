@@ -2,13 +2,29 @@
     display: flex;
     justify-content: space-between;
     padding: 40px 10%;
+    @include mobile-only{
+        flex-direction: column;
+        padding: 20px 10%;
+    }
+    @include tablettes-only{
+        flex-direction: column;
+        padding: 20px 10%;
+    }
     .home-service{
         display: flex;
         flex-direction: column;
         width: 25%;
         min-height: 300px;
+        @include mobile-only{
+            width: 100%;
+            min-height: 250px;
+        }
+        @include tablettes-only{
+            width: 100%;
+            min-height: 250px;
+        }
     }
-    h2{
+    h3{
         text-align: center;
         transition: all .3s ease-out;
     }

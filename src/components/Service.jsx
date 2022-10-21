@@ -3,7 +3,7 @@ const Service = ({ title, desc, icon }) => {
     return (
         <article className="home-service">
             <span className="service-iconContainer"><i className={`${icon}`}></i></span>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <p>{desc}</p>
         </article>
     );
