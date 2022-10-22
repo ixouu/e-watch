@@ -18,7 +18,9 @@ function App() {
 
   const query = '*[_type == "product"]';
   const products = client.fetch(query);
-  console.log(products)
+  console.log(products);
+
+  
 
   return (
     <>
