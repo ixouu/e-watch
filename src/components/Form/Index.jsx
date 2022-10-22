@@ -1,29 +1,59 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { contactFormContext } from '../../context/contactFormContext';
 
-const Form = ({ id, inputs, legend, buttonValue, textArea }) => {
+const Form = (props) => {
 
-    const [value, setValue] = useState('')
+    const {
+        id,
+        legend,
+        buttonValue,
+        inputs,
+        textArea,
+        checkValidity,
+        isError,
+        error
+    } = props
+
+    const { children, submit = () => {}, initialValues } = props;
+
+    const [form, setForm] = useState(initialValues)
 
     const handleChange = (e) => {
-        setValue(e.target.value);
+        const { name, value } = e.target;
+        // Assign new value to the appropriate form field
+        const updatedForm = {
+            ...form,
+            [name]: value
+        };
+        
+        // Update state
+        setForm(updatedForm);
     }
-
 
     return (
         <form id={id}>
+        <contactFormContext.Provider value={{
+            form,
+            handleChange
+        }}>
+            {children}
+        </contactFormContext.Provider>
             <fieldset>
                 <legend>{legend}</legend>
-                {inputs.map(elem=> {
+                {inputs.map(elem => {
                     return (
                         <div key={elem.id} id={elem.id} className='formInput'>
                             <label htmlFor={elem.id}>{elem.label}</label>
                             <input 
                             type={elem.type}
-                            name={elem.type}
-                            autocomplete={elem.autocomplete}
-                            onChange={(e) => handleChange(e)}
+                            name={elem.name}
+                            autoComplete={elem.autocomplete}
+                            onChange={handleChange}
+                            onInputCapture={(e) => checkValidity(e)}
                             />
+                            {isError && elem.error && <p>{error}</p>}
                         </div>
+                        
                     )})
                 }
                 {textArea.map(elem=> {
@@ -33,13 +63,15 @@ const Form = ({ id, inputs, legend, buttonValue, textArea }) => {
                             <textarea 
                             type={elem.type}
                             value={elem.value}
-                            onChange={(e) => handleChange(e)}
+                            name={elem.name}
+                            onChange={handleChange}
+                            onBlur={checkValidity}
                             />
                         </div>
                     )})
                 }
             </fieldset>
-            <button>{buttonValue}</button>
+            <button type='button' onClick={() => submit(form)}>{buttonValue}</button>
         </form>
     );
 }

@@ -1,33 +1,131 @@
 import Form from "../components/Form/Index";
+import { useState } from "react";
 
 const Contact = () => {
 
-    const inputs = [
+    // inputs content
+    const [inputs, setInputs] = useState([
         {
             label: "Nom",
             type: "text",
-            id: "inputName",
-            autocomplete: 'name'
+            id: "inputLastName",
+            autocomplete: 'name',
+            name: 'lastName',
+            error : false
         },
         {
             label: 'Prénom',
             type: 'text',
-            id: "inputFirstName"
+            id: "inputFirstName",
+            name: 'firstName',
+            error : false
         },
         {
             label: 'Votre Adresse mail',
             type: 'email',
             id : 'inputEmail',
-            autocomplete: 'email'
+            autocomplete: 'email',
+            name: 'email',
+            error : false
         }
-    ]
+    ])
+
+    // textArea Content
     const textArea = [
         {
             label : 'Votre message',
             type: 'textarea',
-            id : 'inputMessage'
+            id : 'inputMessage',
+            name: 'content'
         }
     ]
+
+    // Initial values to save
+    const initialValues = {
+        lastName: '',
+        firstName : '',
+        email : '',
+        content :''
+    }
+
+    // regExp list
+    const regExpList = {
+        firstName: new RegExp('(^[a-zA-Zéè -]{3,20}$)'),
+        lastName: new RegExp('(^[a-zA-Z -]{3,30}$)'),
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
+    }
+
+    // error Statement
+    const [isError, setIsError] = useState(false);
+
+    // error Messages
+    const [error, setError] = useState('');
+
+    // function that check the RegExp and toggle the error value in inputs
+    function toggleError (inputName, value){
+        console.log(inputName)
+        if(!regExpList.inputName.test(value)){
+            setIsError(true);
+            
+            const newInputs = inputs.map( obj => {
+                if (obj.name === inputName){
+                    return { ...obj, error: true}
+                }
+                return obj
+            })
+            setInputs(newInputs) 
+        }else{
+            setIsError(false)
+            const newInputs = inputs.map( obj => {
+                if (obj.name === inputName){
+                    return { ...obj, error: false}
+                }
+                return obj
+            })
+            setInputs(newInputs)
+        }
+    }
+
+  
+    // check inputs validity 
+    const checkValidity = (e) => {
+        const value = e.target.value
+        switch (e.target.name) {
+            case "lastName":
+                setError('Le nom renseigné est incorrect ( exemple valide : Dupont).')
+                toggleError('lastName', value)
+                break;
+            case "firstName":
+                if(!regExpList.firstName.test(value)){
+                    setIsError(true);
+                    setError('Le prénom renseigné est incorrect ( exemple valide : John).')
+                }else{
+                    setIsError(false)
+                }
+                break;
+            case "email":
+                if(!regExpList.email.test(value)){
+                    setIsError(true);
+                    setError('L\'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).')
+                }else{
+                    setIsError(false)
+                }
+                break;
+            case "content":
+                break
+            default:
+                break;
+        }
+    }
+
+    // submited form message
+    const [message, setMessage ] = useState('');
+
+    // submited action
+    const submit = () => {
+        setMessage("Votre message a bien été enregistré")
+    }
+
     return (
         <main id='contact'>
             <div className='contact-container'>
@@ -48,12 +146,18 @@ const Contact = () => {
             </div>
             <div className="contact-container_form">
                 <Form 
+                submit={submit}
+                initialValues={initialValues}
                 id={"contact-form"} 
                 legend={"Formulaire de contact"}
                 buttonValue={"Envoyer"}
                 inputs={inputs}
                 textArea={textArea}
+                checkValidity={checkValidity}
+                isError={isError}
+                error={error}
                 />
+                <p>{message}</p>
             </div>
         </main>
     );
