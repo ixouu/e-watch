@@ -1,0 +1,42 @@
+.formInput{
+    display: flex;
+    flex-direction: column;
+
+}
+
+fieldset{
+    border-radius: 5px;
+}
+
+legend{
+    font-size: 1.4rem;
+}
+
+form{
+    width: 500px;
+}
+
+input, textarea{
+    background-color: $color3;
+    border-radius: 5px;
+    padding : 5px;
+}
+
+textarea{
+    min-height: 300px;
+}
+
+#inputName, #inputFirstName, #inputEmail {
+    width: 50%;
+}
+
+#contact-form{
+    button {
+        border: none;
+        font-size: 1rem;
+        padding: 5px 10px;
+        color: $color1;
+        background-color: $color2;
+        align-self: center;
+    }
+}

@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     .contact-container{
         max-width: 960px;
         width: 100%;
@@ -28,6 +29,7 @@
             overflow-x: visible;
             h1{
                 white-space: nowrap;
+                font-weight: 600;
             }
         }
         .contact-container_middle{
@@ -58,6 +60,9 @@
             }
 
         }
+    }
+    .contact-container_form{
+        margin-top: 60px;
     }
 
 
