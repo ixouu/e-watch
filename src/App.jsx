@@ -13,12 +13,15 @@ import Contact from './pages/Contact.jsx';
 import Error from './pages/Error.jsx';
 
 import NavBar from './components/Navbar/Index.jsx';
+import Footer from './components/Footer/Index.jsx';
 
 function App() {
 
   const query = '*[_type == "product"]';
   const products = client.fetch(query);
-  console.log(products)
+  console.log(products);
+
+  
 
   return (
     <>
@@ -33,6 +36,7 @@ function App() {
         <Route path="/validation" element={<Validation />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer/>
     </>
   );
 }

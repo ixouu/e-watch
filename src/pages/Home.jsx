@@ -1,4 +1,3 @@
-import Footer from "../components/Footer/Index";
 import Header from "../components/Header/Index";
 import Service from "../components/Service";
 
@@ -42,7 +41,6 @@ const Home = () => {
                 {displayServices()}
             </div>
         </main>
-        <Footer />
         </>
     );
 }

@@ -1,0 +1,70 @@
+.formInput{
+    display: flex;
+    flex-direction: column;
+
+}
+
+fieldset{
+    border-radius: 5px;
+}
+
+legend{
+    font-size: 1.4rem;
+}
+
+form{
+    width: 500px;
+    position: relative;
+    margin-bottom: 50px;
+    p{
+        color :rgb(155, 44, 44);
+        font-size: .8rem;
+        height: 25px;
+    }
+}
+
+input, textarea{
+    background-color: $color3;
+    border-radius: 5px;
+    padding : 5px;
+    font-size: 1rem;
+    font-family: $font1;
+}
+
+.inputInvalid {
+    background-color: rgba(155, 44, 44, 0.5);
+}
+.inputValid {
+    background-color: rgba(48, 116, 48, 0.5);
+}
+
+textarea{
+    min-height: 300px;
+}
+
+#inputFirstName, #inputLastName, #inputEmail {
+    input{
+        width: 50%;
+    }
+    
+}
+
+#contact-form{
+    button {
+        border: none;
+        font-size: 1rem;
+        padding: 10px 20px;
+        color: $color1;
+        background-color: $color2;
+        align-self: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -17px;
+        border-radius: 5px;
+        transition: all .3s ease-out;
+        &:hover{
+            background-color: rgb(64, 63, 63);
+        }
+    }
+}
