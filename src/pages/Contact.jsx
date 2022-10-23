@@ -37,17 +37,17 @@ const Contact = () => {
     ])
 
     // textArea Content
-    const textArea = [
+    const [textArea, setTextArea] = useState([
         {
             label : 'Votre message',
             type: 'textarea',
             id : 'inputMessage',
             name: 'content',
             error : false,
-            errorMessage :'Le contenu de votre message doit contenir au minimum 3 caracteres et 500 au maximum.',
+            errorMessage :'Le contenu de votre message doit contenir au minimum 30 caracteres et 500 au maximum.',
             className: ""
         }
-    ]
+    ])
 
     // Initial values to save
     const initialValues = {
@@ -71,24 +71,45 @@ const Contact = () => {
 
     function addError (inputName){
             setIsError(true);
-            const newInputs = inputs.map( obj => {
-                if (obj.name === inputName){
-                    return { ...obj, error: true, className:"inputInvalid"}
-                }
-                return obj
-            })
-            setInputs(newInputs) 
+            if(inputName === "content"){
+                const newTextArea = textArea.map( obj => {
+                    if (obj.name === inputName){
+                        return { ...obj, error: true, className:"inputInvalid"}
+                    }
+                    return obj
+                })
+                setTextArea(newTextArea) 
+            } else {
+                const newInputs = inputs.map( obj => {
+                    if (obj.name === inputName){
+                        return { ...obj, error: true, className:"inputInvalid"}
+                    }
+                    return obj
+                })
+                setInputs(newInputs) 
+            } 
     }
 
     function rmError(inputName){
         setIsError(false);
-        const newInputs = inputs.map( obj => {
-            if (obj.name === inputName){
-                return { ...obj, error: false , className:"inputValid"}
-            }
-            return obj
-        })
-        setInputs(newInputs)
+        if(inputName === "content"){
+            const newTextArea = textArea.map( obj => {
+                if (obj.name === inputName){
+                    return { ...obj, error: false, className:"inputValid"}
+                }
+                return obj
+            })
+            setTextArea(newTextArea) 
+        }else {
+            const newInputs = inputs.map( obj => {
+                if (obj.name === inputName){
+                    return { ...obj, error: false , className:"inputValid"}
+                }
+                return obj
+            })
+            setInputs(newInputs)
+        }
+        
     }
 
   
@@ -106,6 +127,11 @@ const Contact = () => {
                 !regExpList.email.test(value) ? addError('email') : rmError('email');
                 break;
             case "content":
+                if (value.length < 30 || value.length > 500 ){
+                    addError('content')
+                }else {
+                    rmError('content')
+                }
                 break
             default:
                 break;
@@ -117,6 +143,9 @@ const Contact = () => {
 
     // submited action
     const submit = () => {
+        if (isError){
+            alert("Notok")
+        }
         setMessage("Votre message a bien été enregistré")
     }
 

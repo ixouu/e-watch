@@ -10,7 +10,6 @@ const Form = (props) => {
         inputs,
         textArea,
         checkValidity,
-        isError,
     } = props
 
     const { children, submit = () => {}, initialValues } = props;
@@ -52,7 +51,7 @@ const Form = (props) => {
                             onChange={handleChange}
                             onBlur={(e) => checkValidity(e)}
                             />
-                            {isError && elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
+                            {elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
                         </div>
                         
                     )})
@@ -62,12 +61,14 @@ const Form = (props) => {
                         <div key={elem.id} id={elem.id} className='formInput'>
                             <label htmlFor={elem.id}>{elem.label}</label>
                             <textarea 
+                            className={elem.className}
                             type={elem.type}
                             value={elem.value}
                             name={elem.name}
                             onChange={handleChange}
-                            onBlur={checkValidity}
+                            onBlur={(e) => checkValidity(e)}
                             />
+                            {elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
                         </div>
                     )})
                 }
