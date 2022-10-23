@@ -56,7 +56,7 @@ const Form = (props) => {
                         
                     )})
                 }
-                {textArea.map(elem=> {
+                {textArea && textArea.map(elem=> {
                     return (
                         <div key={elem.id} id={elem.id} className='formInput'>
                             <label htmlFor={elem.id}>{elem.label}</label>

@@ -1,5 +1,6 @@
 import Form from "../components/Form/Index";
 import { useState } from "react";
+import  regExpList  from '../utils/regExp'
 
 const Contact = () => {
     
@@ -57,18 +58,10 @@ const Contact = () => {
         content :''
     }
 
-    // regExp list
-    const regExpList = {
-        firstName: new RegExp('(^[a-zA-Zéè -]{2,20}$)'),
-        lastName: new RegExp('(^[a-zA-Z -]{3,30}$)'),
-        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
-    }
-
-
     // error Statement
     const [isError, setIsError] = useState(false);
 
-
+    // Select the right input and add the corresponding error
     function addError (inputName){
             setIsError(true);
             if(inputName === "content"){
@@ -90,6 +83,7 @@ const Contact = () => {
             } 
     }
 
+    // Select the right input and remove the error
     function rmError(inputName){
         setIsError(false);
         if(inputName === "content"){
@@ -108,8 +102,7 @@ const Contact = () => {
                 return obj
             })
             setInputs(newInputs)
-        }
-        
+        } 
     }
 
   
@@ -144,7 +137,8 @@ const Contact = () => {
     // submited action
     const submit = () => {
         if (isError){
-            alert("Notok")
+            alert("DIDNT WORK")
+            return
         }
         setMessage("Votre message a bien été enregistré")
     }
