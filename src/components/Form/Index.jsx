@@ -11,7 +11,6 @@ const Form = (props) => {
         textArea,
         checkValidity,
         isError,
-        error
     } = props
 
     const { children, submit = () => {}, initialValues } = props;
@@ -39,19 +38,21 @@ const Form = (props) => {
             {children}
         </contactFormContext.Provider>
             <fieldset>
+                
                 <legend>{legend}</legend>
                 {inputs.map(elem => {
                     return (
                         <div key={elem.id} id={elem.id} className='formInput'>
                             <label htmlFor={elem.id}>{elem.label}</label>
-                            <input 
+                            <input
+                            className={elem.className}
                             type={elem.type}
                             name={elem.name}
                             autoComplete={elem.autocomplete}
                             onChange={handleChange}
-                            onInputCapture={(e) => checkValidity(e)}
+                            onBlur={(e) => checkValidity(e)}
                             />
-                            {isError && elem.error && <p>{error}</p>}
+                            {isError && elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
                         </div>
                         
                     )})

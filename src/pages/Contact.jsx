@@ -2,7 +2,7 @@ import Form from "../components/Form/Index";
 import { useState } from "react";
 
 const Contact = () => {
-
+    
     // inputs content
     const [inputs, setInputs] = useState([
         {
@@ -11,14 +11,18 @@ const Contact = () => {
             id: "inputLastName",
             autocomplete: 'name',
             name: 'lastName',
-            error : false
+            error : false,
+            errorMessage: 'Le nom renseigné est incorrect ( exemple valide : Dupont).',
+            className: ""
         },
         {
             label: 'Prénom',
             type: 'text',
             id: "inputFirstName",
             name: 'firstName',
-            error : false
+            error : false,
+            errorMessage : 'Le prénom renseigné est incorrect ( exemple valide : Paul).',
+            className: ""
         },
         {
             label: 'Votre Adresse mail',
@@ -26,7 +30,9 @@ const Contact = () => {
             id : 'inputEmail',
             autocomplete: 'email',
             name: 'email',
-            error : false
+            error : false,
+            errorMessage : 'L\'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).',
+            className: ""
         }
     ])
 
@@ -36,7 +42,10 @@ const Contact = () => {
             label : 'Votre message',
             type: 'textarea',
             id : 'inputMessage',
-            name: 'content'
+            name: 'content',
+            error : false,
+            errorMessage :'Le contenu de votre message doit contenir au minimum 3 caracteres et 500 au maximum.',
+            className: ""
         }
     ]
 
@@ -50,40 +59,36 @@ const Contact = () => {
 
     // regExp list
     const regExpList = {
-        firstName: new RegExp('(^[a-zA-Zéè -]{3,20}$)'),
+        firstName: new RegExp('(^[a-zA-Zéè -]{2,20}$)'),
         lastName: new RegExp('(^[a-zA-Z -]{3,30}$)'),
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
     }
 
+
     // error Statement
     const [isError, setIsError] = useState(false);
 
-    // error Messages
-    const [error, setError] = useState('');
 
-    // function that check the RegExp and toggle the error value in inputs
-    function toggleError (inputName, value){
-        console.log(inputName)
-        if(!regExpList.inputName.test(value)){
+    function addError (inputName){
             setIsError(true);
-            
             const newInputs = inputs.map( obj => {
                 if (obj.name === inputName){
-                    return { ...obj, error: true}
+                    return { ...obj, error: true, className:"inputInvalid"}
                 }
                 return obj
             })
             setInputs(newInputs) 
-        }else{
-            setIsError(false)
-            const newInputs = inputs.map( obj => {
-                if (obj.name === inputName){
-                    return { ...obj, error: false}
-                }
-                return obj
-            })
-            setInputs(newInputs)
-        }
+    }
+
+    function rmError(inputName){
+        setIsError(false);
+        const newInputs = inputs.map( obj => {
+            if (obj.name === inputName){
+                return { ...obj, error: false , className:"inputValid"}
+            }
+            return obj
+        })
+        setInputs(newInputs)
     }
 
   
@@ -92,24 +97,13 @@ const Contact = () => {
         const value = e.target.value
         switch (e.target.name) {
             case "lastName":
-                setError('Le nom renseigné est incorrect ( exemple valide : Dupont).')
-                toggleError('lastName', value)
+                !regExpList.lastName.test(value) ? addError('lastName') : rmError('lastName');
                 break;
             case "firstName":
-                if(!regExpList.firstName.test(value)){
-                    setIsError(true);
-                    setError('Le prénom renseigné est incorrect ( exemple valide : John).')
-                }else{
-                    setIsError(false)
-                }
+                !regExpList.firstName.test(value) ? addError('firstName') : rmError('firstName');
                 break;
             case "email":
-                if(!regExpList.email.test(value)){
-                    setIsError(true);
-                    setError('L\'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).')
-                }else{
-                    setIsError(false)
-                }
+                !regExpList.email.test(value) ? addError('email') : rmError('email');
                 break;
             case "content":
                 break
@@ -155,7 +149,6 @@ const Contact = () => {
                 textArea={textArea}
                 checkValidity={checkValidity}
                 isError={isError}
-                error={error}
                 />
                 <p>{message}</p>
             </div>

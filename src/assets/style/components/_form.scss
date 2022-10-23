@@ -14,12 +14,26 @@ legend{
 
 form{
     width: 500px;
+    p{
+        color :rgb(155, 44, 44);
+        font-size: .8rem;
+        height: 25px;
+    }
 }
 
 input, textarea{
     background-color: $color3;
     border-radius: 5px;
     padding : 5px;
+    font-size: 1rem;
+    font-family: $font1;
+}
+
+.inputInvalid {
+    background-color: rgba(155, 44, 44, 0.5);
+}
+.inputValid {
+    background-color: rgba(48, 116, 48, 0.5);
 }
 
 textarea{
@@ -27,7 +41,10 @@ textarea{
 }
 
 #inputFirstName, #inputLastName, #inputEmail {
-    width: 50%;
+    input{
+        width: 50%;
+    }
+    
 }
 
 #contact-form{
