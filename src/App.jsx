@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 
-import { urlFor, client } from "./lib/client.js";
+
 
 import { StateContext } from './context/stateContext.js';
+import { DataContext } from './context/dataContext.js';
 
 
 import Layout from "./components/Layout/Index.jsx";
@@ -19,27 +20,25 @@ import Footer from './components/Footer/Index.jsx';
 
 function App() {
 
-  const query = '*[_type == "product"]';
-  const products = client.fetch(query);
-  console.log(products);
-
   
 
   return (
     <>
       <StateContext>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route index element={<Home />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/validation" element={<Validation />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <Footer/>
+        <DataContext>
+          <NavBar/>
+          <Routes>
+            <Route path="/" element={<Layout />} />
+            <Route index element={<Home />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/validation" element={<Validation />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+          <Footer/>
+        </DataContext>
       </StateContext>
     </>
   );

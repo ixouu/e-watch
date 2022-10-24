@@ -1,5 +1,10 @@
+import { useEffect, useState, useContext } from "react";
+import { urlFor, client } from "../lib/client";
+
 import Header from "../components/Header/Index";
 import Service from "../components/Service";
+import { useDataContext } from "../context/dataContext";
+
 
 const servicesData = [
     {
@@ -21,14 +26,31 @@ const servicesData = [
     }
 ]
 
-
+// return all the services from servicesData 
 const displayServices = () => {
     return servicesData.map ((e, index) => {
         return <Service key={index} title={e.title} icon={e.icon} desc={e.desc}/>
     })
 }
 
+const query = '*[_type == "product"]';
+
 const Home = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const {data, setData}  = useDataContext();
+
+    // fetch the data and store onto the context
+    useEffect(()=> {
+        setIsLoading(true)
+        async function getData (){
+            let products = await  client.fetch(query)
+            !!products && setData(products);
+            setIsLoading(false)
+        }
+        getData();
+    },[setData])
+
     return (
         <>
         <Header />
