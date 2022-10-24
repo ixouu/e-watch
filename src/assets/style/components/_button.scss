@@ -2,11 +2,16 @@
     min-width: 150px;
     border: 0;
     margin: 0 10px;
+    padding: 0 10px;
     font-family: $font1;
     font-size: 1rem;
     transition: all .3s ease-out;
-    background-color: $color1;
+    background-color: $color2;
+    color : $color1;
+    border: 1px solid $color1;
+    border-radius: 4px;
     &:hover{
         background: #d2d0d0!important;
+        color : $color2;
     }
 }
