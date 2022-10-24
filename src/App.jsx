@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 
 import { urlFor, client } from "./lib/client.js";
 
+import { StateContext } from './context/stateContext.js';
+
 
 import Layout from "./components/Layout/Index.jsx";
 import Home from './pages/Home.jsx';
@@ -25,18 +27,20 @@ function App() {
 
   return (
     <>
-      <NavBar/>
-      <Routes>
-        <Route path="/" element={<Layout />} />
-        <Route index element={<Home />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/validation" element={<Validation />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer/>
+      <StateContext>
+        <NavBar/>
+        <Routes>
+          <Route path="/" element={<Layout />} />
+          <Route index element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/validation" element={<Validation />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <Footer/>
+      </StateContext>
     </>
   );
 }
