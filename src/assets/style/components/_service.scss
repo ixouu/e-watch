@@ -1,7 +1,8 @@
 .main-Services{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 40px 10%;
+    gap: 80px;
     @include mobile-only{
         flex-direction: column;
         padding: 20px 10%;
