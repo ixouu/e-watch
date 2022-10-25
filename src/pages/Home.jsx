@@ -4,6 +4,7 @@ import { client } from "../lib/client";
 import Header from "../components/Header/Index";
 import Service from "../components/Service";
 import ProductCard from '../components/ProductCard/Index'
+import ButtonComponent from "../components/ButtonComponent";
 
 
 
@@ -69,15 +70,16 @@ const Home = () => {
             <div className="main-products">
                 <h2>Nos montres coups de coeur</h2>
                 <span>Plébiscitées par nos visiteurs, les montres "Best" sont les plus vendues. Laissez vous
-tenter par leurs charmes ...</span>
+                tenter par leurs charmes ...</span>
                 <div className="main-products_content">
                     { isLoading
                     ?(<p> Chargement en cours...</p>)
                     :
                         data.slice(0,4).map(product=>{
-                        return (<ProductCard key={product._id} image={product.image} title={product.title} price={product.price} brand={product.brand}  slug={product.slug.current}/>)
+                        return (<ProductCard key={product._id} image={product.image} title={product.title} price={product.price} brand={product.brand}  slug={product.slug.current} availableStock={product.availableStock}/>)
                     })}
                 </div>
+                    <ButtonComponent title={"Toutes les montres"} link={'categories'} width={"200px"} height={"70px"}/>
             </div>
         </main>
         </>
