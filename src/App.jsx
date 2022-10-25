@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 
 
 import { StateContext } from './context/stateContext.js';
-import { DataContext } from './context/dataContext.js';
 
 
 import Layout from "./components/Layout/Index.jsx";
@@ -25,7 +24,6 @@ function App() {
   return (
     <>
       <StateContext>
-        <DataContext>
           <NavBar/>
           <Routes>
             <Route path="/" element={<Layout />} />
@@ -38,7 +36,6 @@ function App() {
             <Route path="*" element={<Error />} />
           </Routes>
           <Footer/>
-        </DataContext>
       </StateContext>
     </>
   );
