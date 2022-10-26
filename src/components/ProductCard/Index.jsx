@@ -11,7 +11,7 @@ function Index({ image, title, price, brand, slug, availableStock}) {
     if (availableStock < 10 && availableStock > 1){
       return <p className='shortStock'><i className="fa-solid fa-check"></i>Stock faible</p>
     }
-    if (availableStock > 0){
+    if (availableStock === 0){
       return <p className='noStock'><i className="fa-solid fa-xmark"></i> Ruputure de stock</p>
     }
   }

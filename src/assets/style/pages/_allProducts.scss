@@ -1,0 +1,32 @@
+.main-allProducts{
+    padding: 40px 10%;
+}
+
+.main-allProducts_text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    h1{
+        text-align: center;
+        font-family: $font2;
+    }
+}
+
+.main-allProducts_categoriesContainer{
+    h2{
+        font-weight: 500;
+    }
+    display: flex;
+    .main-allProducts_categories{
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+}
+
+.main-allProducts_content{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
