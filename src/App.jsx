@@ -16,6 +16,7 @@ import Error from './pages/Error.jsx';
 
 import NavBar from './components/Navbar/Index.jsx';
 import Footer from './components/Footer/Index.jsx';
+import AllProducts from './pages/AllProducts.jsx';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<Layout />} />
             <Route index element={<Home />} />
             <Route path="/product/:id" element={<Product />} />
+            <Route path="/all-products" element={<AllProducts/>}/>
             <Route path="/cart" element={<Cart />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/contact" element={<Contact />} />

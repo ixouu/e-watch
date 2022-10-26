@@ -10,6 +10,14 @@
         margin: 0;
         font-weight: 500;
     }
+
+    img{
+        transition: all .6s ease-out;
+        margin-bottom: 10px;
+        &:hover{
+            transform: scale(1.06);
+        }
+    }
     .product-card_price{
         display: flex;
         color : grey;

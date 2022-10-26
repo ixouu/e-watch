@@ -79,8 +79,13 @@ const Home = () => {
                         return (<ProductCard key={product._id} image={product.image} title={product.title} price={product.price} brand={product.brand}  slug={product.slug.current} availableStock={product.availableStock}/>)
                     })}
                 </div>
-                    <ButtonComponent title={"Toutes les montres"} link={'categories'} width={"200px"} height={"70px"}/>
-            </div>
+                    <ButtonComponent 
+                    title={"Toutes les montres"} 
+                    link={'all-products'} 
+                    width={"200px"} 
+                    height={"70px"}
+                    />
+                </div>
         </main>
         </>
     );
