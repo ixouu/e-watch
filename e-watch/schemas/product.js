@@ -65,5 +65,11 @@ export default {
                 ]
             }
         },
+        {
+            name : 'popularity',
+            title : 'populairty',
+            type: 'number',
+            max: 5
+        }
     ]
 }

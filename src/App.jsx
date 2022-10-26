@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 
 
 import { StateContext } from './context/stateContext.js';
-import { DataContext } from './context/dataContext.js';
 
 
 import Layout from "./components/Layout/Index.jsx";
@@ -17,6 +16,7 @@ import Error from './pages/Error.jsx';
 
 import NavBar from './components/Navbar/Index.jsx';
 import Footer from './components/Footer/Index.jsx';
+import AllProducts from './pages/AllProducts.jsx';
 
 function App() {
 
@@ -25,12 +25,12 @@ function App() {
   return (
     <>
       <StateContext>
-        <DataContext>
           <NavBar/>
           <Routes>
             <Route path="/" element={<Layout />} />
             <Route index element={<Home />} />
             <Route path="/product/:id" element={<Product />} />
+            <Route path="/all-products" element={<AllProducts/>}/>
             <Route path="/cart" element={<Cart />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/contact" element={<Contact />} />
@@ -38,7 +38,6 @@ function App() {
             <Route path="*" element={<Error />} />
           </Routes>
           <Footer/>
-        </DataContext>
       </StateContext>
     </>
   );

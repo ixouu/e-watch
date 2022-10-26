@@ -1,9 +1,11 @@
-import { useEffect, useState, useContext } from "react";
-import { urlFor, client } from "../lib/client";
+import { useEffect, useState} from "react";
+import { client } from "../lib/client";
 
 import Header from "../components/Header/Index";
 import Service from "../components/Service";
-import { useDataContext } from "../context/dataContext";
+import ProductCard from '../components/ProductCard/Index'
+import ButtonComponent from "../components/ButtonComponent";
+
 
 
 const servicesData = [
@@ -37,19 +39,22 @@ const query = '*[_type == "product"]';
 
 const Home = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
-    const {data, setData}  = useDataContext();
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState();
 
-    // fetch the data and store onto the context
-    useEffect(()=> {
-        setIsLoading(true)
-        async function getData (){
-            let products = await  client.fetch(query)
-            !!products && setData(products);
-            setIsLoading(false)
+    useEffect(() =>{
+        const fetchData = async() => {
+            setIsLoading(true);
+            try{
+                const result = await client.fetch(query)
+                setData(result)
+                setIsLoading(false);
+            } catch (err) {
+                console.log(err)
+            }
         }
-        getData();
-    },[setData])
+        fetchData();
+    },[])
 
     return (
         <>
@@ -62,6 +67,25 @@ const Home = () => {
             <div className="main-Services">
                 {displayServices()}
             </div>
+            <div className="main-products">
+                <h2>Nos montres coups de coeur</h2>
+                <span>Plébiscitées par nos visiteurs, les montres "Best" sont les plus vendues. Laissez vous
+                tenter par leurs charmes ...</span>
+                <div className="main-products_content">
+                    { isLoading
+                    ?(<p> Chargement en cours...</p>)
+                    :
+                        data.slice(0,4).map(product=>{
+                        return (<ProductCard key={product._id} image={product.image} title={product.title} price={product.price} brand={product.brand}  slug={product.slug.current} availableStock={product.availableStock}/>)
+                    })}
+                </div>
+                    <ButtonComponent 
+                    title={"Toutes les montres"} 
+                    link={'all-products'} 
+                    width={"200px"} 
+                    height={"70px"}
+                    />
+                </div>
         </main>
         </>
     );

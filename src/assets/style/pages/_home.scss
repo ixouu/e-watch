@@ -11,3 +11,27 @@
         font-size: 1.2rem;
     }
 }
+
+.main-products{
+    padding: 40px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2, span{
+        text-align: center;
+        display: inline-block;
+    }
+    span{
+        max-width: 50%;
+    }
+    button{
+        margin-top: 40px;
+    }
+}
+
+.main-products_content{
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
