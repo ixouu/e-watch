@@ -61,7 +61,7 @@ const AllProducts = () => {
                         )})
                     }
                     {
-                        isFilter && <button style={{backgroundColor: "red"}}className="tag" onClick={() => {setIsFilter(false); setCurrentCategory('')}}><i className="fa-solid fa-xmark"></i></button>
+                        isFilter && <button className="tag tag-Close" onClick={() => {setIsFilter(false); setCurrentCategory('')}}><i className="fa-solid fa-xmark"></i></button>
                     }
                 </div>
             </div>

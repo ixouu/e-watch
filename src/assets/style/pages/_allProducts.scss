@@ -1,5 +1,7 @@
 .main-allProducts{
     padding: 40px 10%;
+    min-height: 91.5vh;
+
 }
 
 .main-allProducts_text{
@@ -18,10 +20,14 @@
         font-weight: 500;
     }
     display: flex;
+    @include mobile-only{
+        flex-direction: column;   
+    }
     .main-allProducts_categories{
         display: flex;
         align-items: center;
         margin-left: 20px;
+
     }
 }
 
@@ -29,4 +35,8 @@
     margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
+    @include mobile-only{
+        flex-direction: column;
+        align-items: center;
+    }
 }

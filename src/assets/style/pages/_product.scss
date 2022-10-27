@@ -4,6 +4,7 @@
         text-decoration: none;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     h3, h4{
         text-align: center;
@@ -16,6 +17,14 @@
         margin-bottom: 10px;
         &:hover{
             transform: scale(1.06);
+        }
+        @include mobile-only{
+            width: 150px;
+            height: auto;
+        }
+        @include tablettes-only{
+            width: 180px;
+            height: auto;
         }
     }
     .product-card_price{
