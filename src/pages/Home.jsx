@@ -40,7 +40,7 @@ const query = '*[_type == "product"]';
 const Home = () => {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
 
     useEffect(() =>{
         const fetchData = async() => {
