@@ -62,10 +62,22 @@ const Product = () => {
     }
   }
 
+  // return rating 
+  const defRating = (value) => {
+    const roundRating = Math.round(value);
+    const maxRating = 5;
+    const starsArr = [];
+    const star = '<i class="fa-solid fa-star"></i>';
+    for (let i= 1; i<roundRating; i++){
+        starsArr.push(star)
+    }
+    
+  }
+
 
 
     return (
-        <main>
+        <main className="main-product">
             {error && <p>{error}</p> }
             {isLoading
             ?<p>Chargement...</p>
@@ -77,39 +89,65 @@ const Product = () => {
                         src={urlFor(productData.image[0])}
                         alt={`Montre ${productData.title}`}
                         className='product-card_img'
-                        height={300}
+                        height={400}
                         ></img>
                     </div>
                     <div className="product-container_right" id={productData.id}>
                         <div className="product-informations">
                             <h1 className="product-title">{productData.title}</h1>
                             <h2 className="product-brand">{productData.brand}</h2>
-                            <span className="product-price">{productData.price},00 €</span>
-                            <span>TTC</span>    
+                            <div className="product-price_container">
+                                <span className="product-price">{productData.price},</span>
+                                <span className="product-price_decimal">00 </span>
+                                <span className="product-price_sign">€</span>
+                            </div> 
+                            <span className="product-price_decimal">TTC</span>   
                             <div className="product-paimentFacilities"></div>
                             <p className="product-desc">{productData.details}</p>
                         </div>
                         <div className="product-addToCart">
                             <form>
-                                <label htmlFor="product-qty">Quantité</label>
-                                <input type="number" id="product-qty" min="1" max={productData.availableStock}defaultValue="1"/>
-                                <ButtonComponent title={"AJOUTER AU PANIER"} color={"#239de5"} width="200px" height="50px" borderRadius={"5px"}/>
-                                {displayStock(productData.availableStock)}
+                                <div className="formQty">
+                                    <label htmlFor="product-qty">Quantité</label>
+                                    <input type="number" id="product-qty" min="1" max={productData.availableStock}defaultValue="1"/>
+                                </div>
+                                <div className="formBtn">
+                                    <ButtonComponent title={"AJOUTER AU PANIER"} color={"#239de5"} width="200px" height="50px" borderRadius={"5px"}/>
+                                    {displayStock(productData.availableStock)}
+                                </div>
                             </form>
                         </div>
-                    </div>
-                    <div className="reassurance">
+                        <div className="reassurance">
                         <ul>
                             <li><div className="reassurance-item"><span><i className="fa-solid fa-truck"></i> Expédié sous 24h</span></div></li>
                             <li><div className="reassurance-item"><span><i className="fa-solid fa-thumbs-up"></i>Satisfait ou remboursé</span></div></li>
                             <li><div className="reassurance-item"><span><i className="fa-solid fa-shield"></i>Garantie 2 ans</span></div></li>
                         </ul>
                     </div>
+                    </div>
+                  
                 </div>
                 <div className="tabs">
                     <ul className="tabs-list">
-                        <li><a href="#description">Description</a></li>
-                        <li><a href="#popularity">Avis client</a></li>
+                        <li>
+                            <details>
+                                <summary>Description</summary>
+                                {productData.details}
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary>Avis client</summary>
+                                {defRating()}
+                                <div className="Rating">
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                </div>
+                            </details>
+                        </li>
                     </ul>
                 </div>
                 <div className="tab-content">
