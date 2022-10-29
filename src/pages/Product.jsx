@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { client , urlFor } from "../lib/client";
 
 import ButtonComponent from "../components/ButtonComponent";
+import Star from '../components/Star'
 
 
 const Product = () => {
@@ -19,7 +20,25 @@ const Product = () => {
         price: 0,
     });
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+
+    // Tabs States
+    const [descIsActive, setDescIsActive] = useState(false);
+    const [ratingIsActive, setRatingIsActive] = useState(false);
+
+    // Article details expension
+    const [detailsAreExpand, setDetailsAreExpand] = useState(false);
+
+    function showTabs(name){
+        if ( name ==="desc"){
+            ratingIsActive && setRatingIsActive(!ratingIsActive);
+            setDescIsActive(!descIsActive);
+        }
+        if ( name === "rating"){
+            descIsActive && setDescIsActive(!descIsActive);
+            setRatingIsActive(!ratingIsActive);
+        }
+    }
 
     // find Id params 
     const slug = useParams().id;
@@ -63,13 +82,18 @@ const Product = () => {
   }
 
   // return rating 
-  const defRating = (value) => {
-    const roundRating = Math.round(value);
-    const maxRating = 5;
-    const starsArr = [];
-    const star = '<i class="fa-solid fa-star"></i>';
-    for (let i= 1; i<roundRating; i++){
-        starsArr.push(star)
+  const renderStar = (i) => {
+    const roundRating = productData.popularity;
+    if (
+        (i === 1 && roundRating < 1) ||
+        (i === 2 && roundRating < 2) ||
+        (i === 3 && roundRating < 3) ||
+        (i === 4 && roundRating < 4) ||
+        (i === 5 && roundRating < 5)
+    ){
+        return <Star color={"grey"}/>
+    }else{
+        return <Star color={"goldenrod"}/>
     }
     
   }
@@ -103,7 +127,10 @@ const Product = () => {
                             </div> 
                             <span className="product-price_decimal">TTC</span>   
                             <div className="product-paimentFacilities"></div>
-                            <p className="product-desc">{productData.details}</p>
+                            {detailsAreExpand 
+                                ?(<p className="product-desc">{productData.details}</p>)
+                                :(<><p className="product-desc">{productData.details.slice(0, 200)}</p><button className="expandDetailsBtn" onClick={(e) => {setDetailsAreExpand(!detailsAreExpand); e.preventDefault()}}>lire la suite..</button></>)
+                            }
                         </div>
                         <div className="product-addToCart">
                             <form>
@@ -129,29 +156,29 @@ const Product = () => {
                 </div>
                 <div className="tabs">
                     <ul className="tabs-list">
-                        <li>
-                            <details>
-                                <summary>Description</summary>
-                                {productData.details}
-                            </details>
+                        <li onClick={() => showTabs("desc")}>
+                            <span>Description</span>
                         </li>
-                        <li>
-                            <details>
-                                <summary>Avis client</summary>
-                                {defRating()}
-                                <div className="Rating">
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-                            </details>
+                        <li onClick={() => showTabs("rating")}>
+                        <span>Avis client</span>
+                        
                         </li>
                     </ul>
-                </div>
-                <div className="tab-content">
-
+                    <div className="tabs-details">
+                        {ratingIsActive && 
+                            <div className="rating">
+                                {renderStar(1)}
+                                {renderStar(2)}
+                                {renderStar(3)}
+                                {renderStar(4)}
+                                {renderStar(5)}
+                                <span>({productData.popularity})</span>
+                            </div>
+                        }
+                        {descIsActive &&
+                            <section>{productData.details}</section>
+                        }
+                    </div>
                 </div>
                 </>
             )
