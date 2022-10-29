@@ -73,7 +73,7 @@ const AllProducts = () => {
                     filteredData.map(product => {
                     return (
                         <ProductCard 
-                        key={product._id} 
+                        key={product._id}
                         image={product.image} 
                         title={product.title} 
                         price={product.price} 

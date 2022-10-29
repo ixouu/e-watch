@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ButtonComponent = ({title, color, disabled, link, width, height , icon, class1}) => {
+const ButtonComponent = ({title, color, disabled, link, width, height , icon, class1, borderRadius}) => {
 
     const navigate = useNavigate()
     const handleLink = () => {
@@ -28,7 +28,7 @@ const ButtonComponent = ({title, color, disabled, link, width, height , icon, cl
         backgroundColor: `${color}`,
         width : `${width}`,
         height : `${height}`,
-
+        borderRadius : `${borderRadius}`
     }}
     disabled = {disabled}
     onClick = {() => handleLink()}
