@@ -26,9 +26,11 @@ const Product = () => {
     const [descIsActive, setDescIsActive] = useState(false);
     const [ratingIsActive, setRatingIsActive] = useState(false);
 
-    // Article details expension
+    // Article details expension State
     const [detailsAreExpand, setDetailsAreExpand] = useState(false);
 
+
+    // Toggle the right tab on Click
     function showTabs(name){
         if ( name ==="desc"){
             ratingIsActive && setRatingIsActive(!ratingIsActive);
@@ -81,7 +83,7 @@ const Product = () => {
     }
   }
 
-  // return rating 
+  // return Star component
   const renderStar = (i) => {
     const roundRating = productData.popularity;
     if (
@@ -97,8 +99,6 @@ const Product = () => {
     }
     
   }
-
-
 
     return (
         <main className="main-product">
@@ -175,9 +175,7 @@ const Product = () => {
                                 <span>({productData.popularity})</span>
                             </div>
                         }
-                        {descIsActive &&
-                            <section>{productData.details}</section>
-                        }
+                        {descIsActive && <section>{productData.details}</section>}
                     </div>
                 </div>
                 </>
