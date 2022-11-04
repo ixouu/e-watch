@@ -3,8 +3,6 @@ import Button from '../components/ButtonComponent';
 
 const Categories = () => {
     
-
-
     const displayTitle = (title) => {
         switch (title) {
             case 'Child':
@@ -18,7 +16,6 @@ const Categories = () => {
         }
     }
 
-
     const diplayBtns = (cats) => {
         return cats.map((cat, index) => {
             const linkURL = `../categories/${cat}`
@@ -26,7 +23,6 @@ const Categories = () => {
         })
     }
 
-  
     return (
         <main className="main-categoeries">
             <h1>Catégories</h1>
