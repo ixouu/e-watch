@@ -15,14 +15,7 @@ const AllProducts = () => {
     const [currentCategory, setCurrentCategory] = useState("");
     const [filteredData, setFilteredData] = useState([]);
 
-
-
     useEffect(() =>{
-        const result = data.filter(product => product.category[0] === currentCategory);
-        if (result.length !== 0){
-            setIsFilter(true)
-            setFilteredData(result)
-        }  
         const fetchData = async() => {
             setIsLoading(true);
             try{
@@ -34,15 +27,17 @@ const AllProducts = () => {
             }
         }
         fetchData();
-    },[setData, currentCategory])
-
-
+    },[setData])
 
     const filterCategory = (e) => {
         // const foundId = e.target.id.toLowerCase();
-        setCurrentCategory(`${e.toLowerCase()}`);
+        setCurrentCategory(e.toLowerCase());
         console.log(currentCategory)
-       
+        const result = data.filter(product => product.category[0] === currentCategory);
+        if (result.length !== 0){
+            setIsFilter(true)
+            setFilteredData(result)
+        }  
     }
     return (
         <main className="main-allProducts">
