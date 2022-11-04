@@ -14,6 +14,7 @@ import Error from './pages/Error.jsx';
 import NavBar from './components/Navbar/Index.jsx';
 import Footer from './components/Footer/Index.jsx';
 import AllProducts from './pages/AllProducts.jsx';
+import Category from './pages/Category.jsx';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/all-products" element={<AllProducts/>}/>
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/categories" element={<Categories />} />
+                <Route path="/categories/:category" element={<Category/>}/>
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/validation" element={<Validation />} />
                 <Route path="*" element={<Error />} />

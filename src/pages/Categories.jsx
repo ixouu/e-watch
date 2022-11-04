@@ -1,7 +1,9 @@
 import categories from "../utils/categories";
-import Button from '../components/ButtonComponent'
+import Button from '../components/ButtonComponent';
 
 const Categories = () => {
+    
+
 
     const displayTitle = (title) => {
         switch (title) {
@@ -16,9 +18,11 @@ const Categories = () => {
         }
     }
 
+
     const diplayBtns = (cats) => {
         return cats.map((cat, index) => {
-             return <li key={index} ><Button key={cat} title={displayTitle(cat)} width={"400px"} height={"100px"}/></li>
+            const linkURL = `../categories/${cat}`
+             return <li key={index} ><Button key={cat} title={displayTitle(cat)} width={"400px"} height={"100px"} link={linkURL}/></li>
         })
     }
 
