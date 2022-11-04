@@ -1,7 +1,5 @@
 .main-allProducts{
-    padding: 40px 10%;
-    min-height: 91.5vh;
-
+    @include mainPadding;
 }
 
 .main-allProducts_text{
@@ -10,8 +8,7 @@
     flex-direction: column;
 
     h1{
-        text-align: center;
-        font-family: $font2;
+        @include pageTitle;
     }
 }
 
@@ -31,7 +28,7 @@
     }
 }
 
-.main-allProducts_content{
+.main-allProducts_productContent{
     margin-top: 40px;
     display: flex;
     flex-wrap: wrap;

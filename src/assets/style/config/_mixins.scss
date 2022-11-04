@@ -14,8 +14,17 @@
   };
 
  
-  @mixin largscreen-only {
+  @mixin largeScreen-only {
     @media screen and (min-width : map-get($breakpoints, largeScreen)) {
       @content
     }
   };
+
+@mixin pageTitle {
+    text-align: center;
+    font-family: $font2;
+}
+
+@mixin mainPadding {
+    padding: 40px 10%;
+}

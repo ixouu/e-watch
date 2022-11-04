@@ -50,7 +50,14 @@ const Index = ({ parentComponent, category}) => {
                     return componentGetter(data.slice(0,4))
                 case 'category':
                     const filteredData = data.filter(product => product.category[0] === category.toLowerCase());
-                    return componentGetter(filteredData)
+                    return componentGetter(filteredData);
+                case 'allProducts':
+                    if (category === "all"){
+                    return componentGetter(data);
+                    } else {
+                        const filteredData = data.filter(product => product.category[0] === category.toLowerCase());
+                        return componentGetter(filteredData);
+                    }
                 default:
                     return <p>Désolé aucuns produits à afficher</p>
             }

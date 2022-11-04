@@ -14,4 +14,7 @@
         background: #d2d0d0!important;
         color : $color2;
     }
+    @include mobile-only{
+        width: 250px!important;
+    }
 }

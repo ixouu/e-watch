@@ -13,7 +13,7 @@
 }
 
 .main-products{
-    padding: 40px 10%;
+    @include mainPadding;
     display: flex;
     flex-direction: column;
     align-items: center;
