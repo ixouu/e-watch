@@ -21,7 +21,7 @@ const Category = () => {
 
     // data Fetching
     const [catData, setCatData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async() => {
