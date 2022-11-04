@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Tag = ({ title, handleClick, id }) => {
-    const displayTitle = (title) => {
+    const displayTitle = () => {
         switch (title) {
             case 'Child':
                 return "Enfant";
@@ -18,7 +18,7 @@ const Tag = ({ title, handleClick, id }) => {
             className='tag'
             onClick={() => handleClick(title)}
         >
-                <span id={id}>{displayTitle(title)}</span>
+                <span id={id}>{displayTitle()}</span>
         </button>
     );
 }
