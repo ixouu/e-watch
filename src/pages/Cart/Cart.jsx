@@ -1,6 +1,6 @@
 import { useState } from "react";
-import regExpList from "../utils/regExp";
-import Form  from '../components/Form/Index'
+import regExpList from "../../utils/regExp";
+import Form  from '../../components/Form/Form'
 const Cart = () => {
 
      // inputs content

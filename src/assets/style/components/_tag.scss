@@ -1,5 +1,4 @@
 .tag{
-    
     background-color: $color2;
     border-radius: 20px;
     margin: 0 5px;
@@ -11,11 +10,18 @@
         padding: 15px;
         font-size: 1.2rem;
         color: white;
+        @include mobile-only{
+            font-size: 1rem;
+            padding: 15px;
+        }
     }
     i{
         color: white;
         font-size: 1.2rem;
         padding: 2px;
+    }
+    @include mobile-only{
+        margin-bottom: 10px;
     }
 }
 
@@ -25,6 +31,9 @@
     opacity: 0;
     background-color: rgb(192, 11, 11);
     transform: scale(.9);
+    @include mobile-only{
+        font-size: 0.9rem;
+    }
 }
 
 @keyframes show {

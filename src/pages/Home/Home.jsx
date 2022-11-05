@@ -1,12 +1,8 @@
-import { useEffect, useState} from "react";
-import { client } from "../lib/client";
+import Header from "../../components/Header/Header";
+import Service from "../../components/Service/Service";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
-import Header from "../components/Header/Index";
-import Service from "../components/Service";
-import ProductCard from '../components/ProductCard/Index'
-import ButtonComponent from "../components/ButtonComponent";
-
-
+import ProductContent from '../../components/ProductContent/ProductContent'
 
 const servicesData = [
     {
@@ -35,26 +31,9 @@ const displayServices = () => {
     })
 }
 
-const query = '*[_type == "product"]';
-
 const Home = () => {
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState([]);
-
-    useEffect(() =>{
-        const fetchData = async() => {
-            setIsLoading(true);
-            try{
-                const result = await client.fetch(query)
-                setData(result)
-                setIsLoading(false);
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fetchData();
-    },[])
+ 
 
     return (
         <>
@@ -71,20 +50,13 @@ const Home = () => {
                 <h2>Nos montres coups de coeur</h2>
                 <span>Plébiscitées par nos visiteurs, les montres "Best" sont les plus vendues. Laissez vous
                 tenter par leurs charmes ...</span>
-                <div className="main-products_content">
-                    { isLoading
-                    ?(<p> Chargement en cours...</p>)
-                    :
-                        data.slice(0,4).map(product=>{
-                        return (<ProductCard key={product._id} image={product.image} title={product.title} price={product.price} brand={product.brand}  slug={product.slug.current} availableStock={product.availableStock}/>)
-                    })}
-                </div>
-                    <ButtonComponent 
-                    title={"Toutes les montres"} 
-                    link={'all-products'} 
-                    width={"200px"} 
-                    height={"70px"}
-                    />
+                <ProductContent parentComponent={'home'}/>
+                <ButtonComponent 
+                title={"Toutes les montres"} 
+                link={'all-products'} 
+                width={"200px"} 
+                height={"70px"}
+                />
                 </div>
         </main>
         </>

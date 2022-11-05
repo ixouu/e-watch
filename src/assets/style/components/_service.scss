@@ -1,7 +1,7 @@
 .main-Services{
+    @include mainPadding;
     display: flex;
     justify-content: center;
-    padding: 40px 10%;
     gap: 80px;
     @include mobile-only{
         flex-direction: column;
@@ -22,7 +22,7 @@
         }
         @include tablettes-only{
             width: 100%;
-            min-height: 250px;
+            min-height: 150px;
         }
     }
     h3{

@@ -15,16 +15,17 @@
     img{
         transition: all .6s ease-out;
         margin-bottom: 10px;
+        height: 300px;
         &:hover{
             transform: scale(1.06);
         }
         @include mobile-only{
-            width: 150px;
-            height: auto;
+            height: 150px;
+            width: auto;
         }
         @include tablettes-only{
-            width: 180px;
-            height: auto;
+            height: 180px;
+            width: auto;
         }
     }
     .product-card_price{

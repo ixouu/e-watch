@@ -1,4 +1,4 @@
-import Logo from '../Logo';
+import Logo from '../Logo/Logo';
 import NavLinkComponent from './NavLink';
 import ShoppingNumber from './ShoppingNumber';
 import MobileNav from './MobileNav';

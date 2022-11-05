@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { client , urlFor } from "../lib/client";
+import { client , urlFor } from "../../lib/client";
 
-import ButtonComponent from "../components/ButtonComponent";
-import Star from '../components/Star'
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import Star from '../../components/Star/Star'
 
 
 const Product = () => {
