@@ -21,10 +21,27 @@ header {
         @include pageTitle;
         color : $color1;
         font-size: 2.5rem;
+        padding: 0 5%;
+        @include mobile-only{
+            font-size: 1.5rem;
+            padding: 5% 24px 0 24px;
+        }
+        @include tablettes-only{
+            font-size: 2rem;
+            padding: 5% 24px ;
+        }
     }
     .header-btns{
         display: flex;
         justify-content: center;
-    
+        @include mobile-only {
+            margin-top: auto;
+            flex-direction: column;
+            align-items: center;
+            button{
+                margin: 10px 0;
+                padding: 15px 0;
+            }
+        }
     }
 }

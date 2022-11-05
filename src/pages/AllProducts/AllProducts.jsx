@@ -1,8 +1,8 @@
 import { useState } from "react";
-import categories from "../utils/categories";
+import categories from "../../utils/categories";
 
-import Tag from "../components/Tag";
-import ProductContent from '../components/ProductContent/Index';
+import Tag from "../../components/Tag/Tag";
+import ProductContent from '../../components/ProductContent/ProductContent';
 
 
 const AllProducts = () => {

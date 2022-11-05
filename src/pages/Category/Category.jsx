@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { categoriesService } from '../utils/categories'
-import ProductContent from '../components/ProductContent/Index'
+import { categoriesService } from '../../utils/categories'
+import ProductContent from '../../components/ProductContent/ProductContent'
 
 
 const Category = () => {

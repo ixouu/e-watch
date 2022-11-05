@@ -1,4 +1,4 @@
-import LogoImg from '../assets/images/navLogo.webp'
+import LogoImg from '../../assets/images/navLogo.webp'
 import { Link } from 'react-router-dom'
 
 const Logo = () => {

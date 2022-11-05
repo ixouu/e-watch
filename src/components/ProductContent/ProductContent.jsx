@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { client } from "../../lib/client";
-import ProductCard from '../ProductCard/Index'
+import ProductCard from '../ProductCard/ProductCard'
 
 const query = '*[_type == "product"]';
 

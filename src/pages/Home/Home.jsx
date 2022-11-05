@@ -1,8 +1,8 @@
-import Header from "../components/Header/Index";
-import Service from "../components/Service";
-import ButtonComponent from "../components/ButtonComponent";
+import Header from "../../components/Header/Header";
+import Service from "../../components/Service/Service";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
-import ProductContent from '../components/ProductContent/Index'
+import ProductContent from '../../components/ProductContent/ProductContent'
 
 const servicesData = [
     {

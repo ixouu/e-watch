@@ -1,6 +1,6 @@
-import Form from "../components/Form/Index";
+import Form from "../../components/Form/Form";
 import { useState } from "react";
-import  regExpList  from '../utils/regExp'
+import  regExpList  from '../../utils/regExp'
 
 const Contact = () => {
     

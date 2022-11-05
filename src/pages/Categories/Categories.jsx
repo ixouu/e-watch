@@ -1,5 +1,5 @@
-import categories from "../utils/categories";
-import Button from '../components/ButtonComponent';
+import categories from "../../utils/categories";
+import Button from '../../components/ButtonComponent/ButtonComponent';
 
 const Categories = () => {
     

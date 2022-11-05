@@ -9,6 +9,12 @@
     span{
         font-style: italic;
         font-size: 1.2rem;
+        @include mobile-only{
+            padding : 0 10%;
+        }
+        @include tablettes-only{
+            padding : 0 5%;
+        }
     }
 }
 
@@ -23,6 +29,9 @@
     }
     span{
         max-width: 50%;
+        @include mobile-only{
+            max-width: 100%;
+        }
     }
     button{
         margin-top: 40px;
@@ -34,4 +43,8 @@
     display: flex;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap;
+    @include mobile-only{
+        flex-direction: column;
+    }
 }
