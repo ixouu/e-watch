@@ -98,6 +98,11 @@ const Product = () => {
     
   }
 
+  // Add to cart function
+  const addToCart = (e) => {
+    e.preventDefault();
+    window.alert("ok")
+  }
 
 
     return (
@@ -139,7 +144,7 @@ const Product = () => {
                                     <input type="number" id="product-qty" min="1" max={productData.availableStock}defaultValue="1"/>
                                 </div>
                                 <div className="formBtn">
-                                    <ButtonComponent title={"AJOUTER AU PANIER"} color={"#239de5"} width="200px" height="50px" borderRadius={"5px"}/>
+                                    <button className="btn product-button" onClick={(e) => addToCart(e)}>AJOUTER AU PANIER</button>
                                     {displayStock(productData.availableStock)}
                                 </div>
                             </form>
