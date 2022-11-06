@@ -10,7 +10,6 @@ import { StateContext } from "../../context/stateContext";
 
 const Product = () => {
 
-    const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
 
     const [productData, setProductData] = useState({
@@ -55,7 +54,7 @@ const Product = () => {
             try{
                 const result = await client.fetch(query);
                 setProductData({
-                    id : result[0].id,
+                    id : result[0]._id,
                     title : result[0].title,
                     availableStock: result[0].availableStock,
                     brand : result[0].brand,
@@ -106,7 +105,9 @@ const Product = () => {
   // ADD TO CART 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
+
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove, onAdd } = useStateContext();
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -115,8 +116,9 @@ const Product = () => {
         setSuccess(false);
     }else{
         setSuccess(true);
+        onAdd(productData, value);
+
     }
-    // localStorage.set("cart", JSON.stringify)
    
     !modalIsOpen? setModalIsOpen(true) : setModalIsOpen(false);
   }

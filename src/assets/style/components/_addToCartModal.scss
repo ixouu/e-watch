@@ -65,6 +65,45 @@
     }
 }
 
+// Product preview
+.cartPreview-item{
+  display: flex;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  justify-content: space-between;
+  h3{
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  img{
+    height: 50px;
+  }
+  .num{
+    padding: 0 10px;
+  }
+  .cartPreview-item_Price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cartPreview-item_Delete{
+    border: none;
+    background-color: transparent;
+    color: red;
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  .minus, .plus{
+    font-size: 1.2rem;
+    color : rgb(17, 17, 158);
+    background-color: transparent;
+    border: none;
+  }
+}
+
+
   
   @-webkit-keyframes shake {
     from,
