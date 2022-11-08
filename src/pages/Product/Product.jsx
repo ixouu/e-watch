@@ -6,12 +6,10 @@ import Star from '../../components/Star/Star';
 import AddToCartModal from "../../components/Modals/AddToCartModal/AddToCartModal";
 
 import { useStateContext } from '../../context/stateContext';
-import { StateContext } from "../../context/stateContext";
+import { useCart } from "../../hooks/useCart";
 
 const Product = () => {
-
-
-
+    
     const [productData, setProductData] = useState({
         title: '',
         id : '',
@@ -107,7 +105,7 @@ const Product = () => {
   const [success, setSuccess] = useState(false);
   const [value, setValue] = useState(1);
 
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove, onAdd } = useStateContext();
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove, onAdd } = useCart();
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -116,8 +114,8 @@ const Product = () => {
         setSuccess(false);
     }else{
         setSuccess(true);
+        // onAdd(productData, value);
         onAdd(productData, value);
-
     }
    
     !modalIsOpen? setModalIsOpen(true) : setModalIsOpen(false);

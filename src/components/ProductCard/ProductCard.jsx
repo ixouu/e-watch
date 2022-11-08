@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { urlFor } from '../../lib/client';
 
-
 function Index({ image, title, price, brand, slug, availableStock, product}) {
 
   const displayStock = () => {
