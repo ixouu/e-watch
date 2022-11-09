@@ -34,8 +34,8 @@ export const StateContext = ({ children }) => {
                 saveCart(updatedStorage);
                 setCartItems(updatedStorage);
             }
-
         }
+        totalQuantities();
     }
 
     const removeFromBasket = (id) => {
@@ -74,32 +74,34 @@ export const StateContext = ({ children }) => {
     }
 
     const onAdd = (product, quantity) => {
-        const checkProductInCart = cartItems.find(item => item.id === product.id);
-        if (checkProductInCart) {
             updateBasket(product.id, quantity, product.image, product.title, product.price);
-        } else {
-            updateBasket(product.id, quantity, product.image, product.title, product.price);
-        }
+
     }
 
     const totalQuantities = () => {
         const quantities = []
-        cartItems.map(product => {
+        if (cartItems.length >= 1){
+            cartItems.map(product => {
             let result = 0;
             result += product.qty
             return quantities.push(result)
         })
         return quantities.reduce((a, b) => a + b)
+        }
+        else return 0;
     }
 
     const totalPrice = () => {
         const prices = [];
-        cartItems.map(product => {
-            let result = 0;
-            result += product.qty * product.price
-            return prices.push(result)
-        })
-        return prices.reduce((a, b) => a + b)
+        if (cartItems.length >= 1){
+            cartItems.map(product => {
+                let result = 0;
+                result += product.qty * product.price
+                return prices.push(result)
+            })
+            return prices.reduce((a, b) => a + b)
+        }
+        else return 0;
     }
 
     return (

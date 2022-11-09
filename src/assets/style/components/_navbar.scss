@@ -40,17 +40,19 @@ nav{
         position: relative;
     }
     .itemNumber{
-        display: inline-block;
-        width: 16px;
-        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
         background-color:red;
         color: black;
         border-radius: 50%;
         position: absolute;
-        top: 90%;
-        right: 2px;
+        top: 95%;
+        right: -8px;
         transform: translateY(-50%);
-        font-size: .8rem;
+        font-size: .9rem;
         text-align: center;
     }
     // MOBILE NAV BAR

@@ -37,7 +37,7 @@ const AddToCartModal = ({ open, onClose, successHandlter, productName }) => {
                 alt='product icon'
 							/>
 						</div>
-						<h3>{item.title}</h3>
+						<h4>{item.title}</h4>
 						<div className='cartPreview-item_Qty'>
 							<div className='quantity-desc'>
 								<button
@@ -100,19 +100,22 @@ const AddToCartModal = ({ open, onClose, successHandlter, productName }) => {
 				<div className='cartPreview'>
 					<h3>Votre panier : </h3>
 					{displayPreviewCart()}
-					<p>{totalQuantities()}</p>
-					<p>{totalPrice()}</p>
-					<ButtonComponent
+        </div>
+        <div className="cartNumbers">
+					<p>TOTAL ({totalQuantities()} {totalQuantities() >= 1 ? <span>articles</span> : <span>article</span>}) : {totalPrice()},00 €</p>
+        </div>
+        <div className="cartButtons">
+        <ButtonComponent
+						title={"Continuer mes achats"}
+						height={"50px"}
+					/>
+        <ButtonComponent
 						title={"Passer la commande"}
 						color={"#239de5"}
 						height={"50px"}
 						link={"/cart"}
 					/>
-					<ButtonComponent
-						title={"Continuer mes achats"}
-						height={"50px"}
-					/>
-				</div>
+        </div>
 			</div>
 		</>,
 		document.getElementById("modal-root")
