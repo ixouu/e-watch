@@ -1,0 +1,77 @@
+.cart{
+    @include mainPadding;
+    h1{
+        @include pageTitle;
+        margin-bottom: 20px;
+    }
+    .cart-products{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .cartProduct-card{
+            display: flex;
+            width: 550px;
+            height: 200px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid lightgrey;
+            padding: 8px;
+            align-items: center;
+            h3{
+                font-weight: 500;
+            }
+
+            .cartProduct-card_imgContainer{
+                display: flex;
+                justify-content: center;
+                width: 150px;
+                img{
+                    height: 150px;
+                }
+            }
+            .cartProduct-details{
+                display: flex;
+                flex-direction: column;
+                margin-left: 8px;
+            }
+            
+
+        }
+    }
+    .cartProduct-right{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-left: auto;
+        height: 200px;
+        width: auto;
+        button{
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+    }
+
+    .cartProduct-delete{
+        border: none;
+        background-color: transparent;
+        color: lightgrey;
+    }
+
+    .cart-totalContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-end;
+        margin-top: 40px;
+        padding-right: 20%;
+        .cart-subtotal, .cart-deleveryFees, .cart-total{
+            display : flex;
+            justify-content: space-between;
+            width: 200px;
+        }
+        .cart-total{
+            margin-top: 40px;
+        }
+    }
+}
