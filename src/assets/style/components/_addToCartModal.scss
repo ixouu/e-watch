@@ -99,6 +99,8 @@
     font-size: 1rem;
     overflow-x: hidden;
     margin-right: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .cartPreview-item-img_Container{
     margin-right: 16px;
