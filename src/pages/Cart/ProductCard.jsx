@@ -1,8 +1,10 @@
 import React from 'react';
 import { urlFor } from "../../lib/client";
-import { Link } from 'react-router-dom'
+import { useStateContext } from '../../context/stateContext';
 
 const ProductCard = ({ id, title, price, qty, image }) => {
+
+  const { onRemove } = useStateContext();
   return (
     <div className='cartProduct-card'>
       <div className="cartProduct-card_imgContainer">
@@ -16,7 +18,7 @@ const ProductCard = ({ id, title, price, qty, image }) => {
       <div className="cartProduct-right">
         <button
             className='cartProduct-delete'
-            // onClick={() => onRemove(item.id)}
+            onClick={() => onRemove(id)}
           >
             <i className='fa-solid fa-circle-xmark'></i>
         </button>

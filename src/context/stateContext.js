@@ -9,13 +9,14 @@ export const StateContext = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    const updateBasket = (id, qty, image, title, price) => {
+    const updateBasket = (id, qty, image, title, price, availableStock) => {
         const productToAdd = {
             id,
             qty,
             image,
             title,
-            price
+            price, 
+            availableStock
         }
         let foundProduct = storage.find(item => item.id === id);
         if (!foundProduct) {
@@ -65,16 +66,19 @@ export const StateContext = ({ children }) => {
     const toggleCartItemQuanitity = (id, action) => {
         foundProduct = cartItems.find((item) => item.id === id);
         if (action === 'inc' && foundProduct) {
-            updateBasket(foundProduct.id, foundProduct.qty + 1, foundProduct.image, foundProduct.title, foundProduct.price)
+            if (foundProduct.qty === foundProduct.availableStock){
+                return updateBasket(foundProduct.id, foundProduct.qty, foundProduct.image, foundProduct.title, foundProduct.price, foundProduct.availableStock)
+            }
+            updateBasket(foundProduct.id, foundProduct.qty + 1, foundProduct.image, foundProduct.title, foundProduct.price, foundProduct.availableStock)
         } else if (action === 'dec' && foundProduct) {
             if (foundProduct.qty > 1) {
-                updateBasket(foundProduct.id, foundProduct.qty - 1, foundProduct.image, foundProduct.title, foundProduct.price)
+                updateBasket(foundProduct.id, foundProduct.qty - 1, foundProduct.image, foundProduct.title, foundProduct.price, foundProduct.availableStock)
             }
         }
     }
 
     const onAdd = (product, quantity) => {
-            updateBasket(product.id, quantity, product.image, product.title, product.price);
+            updateBasket(product.id, quantity, product.image, product.title, product.price, product.availableStock);
 
     }
 

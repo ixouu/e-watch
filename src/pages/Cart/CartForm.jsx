@@ -147,7 +147,7 @@ const CartForm = () => {
                 submit={submit}
                 initialValues={initialValues}
                 id={"cart-form"} 
-                legend={"Enregistrez vos informations"}
+                legend={"Informations personnelles"}
                 buttonValue={"Envoyer"}
                 inputs={inputs}
                 checkValidity={checkValidity}

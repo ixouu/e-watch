@@ -6,17 +6,31 @@
     }
     .cart-products{
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 100%;
+        justify-content: center;
+        .cart-products_left{
+            display: flex;
+            flex-direction: column;
+            align-items :flex-end;
+            justify-content: flex-start;
+            width: 65%;
+            
+            button{
+                margin: 20px auto 0 0;
+            }
+        }
+        .cart-products_right{
+            width: 35%;
+        }
         .cartProduct-card{
             display: flex;
             width: 550px;
             height: 200px;
-            margin: 8px 0;
             border-radius: 5px;
             border: 1px solid lightgrey;
             padding: 8px;
             align-items: center;
+            margin-bottom: 8px;
             h3{
                 font-weight: 500;
             }
@@ -59,19 +73,48 @@
     }
 
     .cart-totalContainer{
+        width: 100%;
+        margin: 0 20% 0 10%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        
+        button{
+            margin: 20px 0 0 30px;
+        }
+    }
+    .cart-total{
         display: flex;
         flex-direction: column;
-        width: 100%;
-        align-items: flex-end;
-        margin-top: 40px;
-        padding-right: 20%;
+        align-items: flex-start;
+        padding: 40px 0 40px 8px;
+        width: 250px;
+        background-color: rgb(240, 240, 240);
         .cart-subtotal, .cart-deleveryFees, .cart-total{
             display : flex;
             justify-content: space-between;
-            width: 200px;
+            width: 100%;
+            padding-right: 8px;
         }
-        .cart-total{
+        .cart-total_priceContainer{
             margin-top: 40px;
+            width: 100%;
+            span{
+                vertical-align: center;
+                display: inline-flex;
+                justify-content: space-between;
+            }
+            .cart-total_price{
+                font-size: 1.5rem;
+                display: inline-block;
+                // padding-left: 8px;
+                margin-left: 30px;
+            }
         }
     }
+}
+.cart-from_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
