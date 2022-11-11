@@ -14,9 +14,10 @@ const Cart = () => {
 		toggleCartItemQuanitity,
 		onRemove,
 	} = useStateContext();
-
+	// fetch data from backend
 	const { isLoading, data, error } = useData();
-
+	
+	// display all Cart products based on localstorage informations
 	const displayCartProducts = () => {
 		if (cartItems.length >= 1) {
 			return cartItems.map((product) => {

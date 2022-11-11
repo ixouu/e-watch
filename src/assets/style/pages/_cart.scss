@@ -118,3 +118,35 @@
     display: flex;
     justify-content: center;
 }
+#inputAddress{
+    position: relative;
+}
+
+#cart-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button{
+        margin-top: 20px;
+        justify-self: center;
+    }
+}
+
+.adress-finder{
+    padding-left: 16px;
+    border: 1px solid black;
+    border-top : none;
+    position: absolute;
+    z-index: 1100;
+    top: 60px;
+    width: 100%;
+    background-color: $color1;
+    p{
+        margin: 0;
+        color: $color2;
+
+    }
+    .address{
+        text-decoration: underline;
+    }
+}

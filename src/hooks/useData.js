@@ -18,6 +18,8 @@ export const useData = () => {
                 setIsLoading(false);
             } catch (err) {
                 setError(err)
+            } finally {
+                setIsLoading(false)
             }
         }
         fetchData();
