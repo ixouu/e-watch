@@ -40,7 +40,7 @@ const AdressFinder = ({ adress, replaceAdressValue }) => {
 
 	const pasteTheFoundAdress = (e) => {
 		let address= e.target.textContent.split(" ")
-		replaceAdressValue(address.slice(0, -2).join(" ").replace(',',' '), address.slice(-2)[0], address.slice(-1)[0]);
+		replaceAdressValue(e.target.textContent.split(" ").slice(0, -2).join(" ").replace(',',' '), address.slice(-2)[0], address.slice(-1)[0]);
 	};
 
 	const displayData = () => {
