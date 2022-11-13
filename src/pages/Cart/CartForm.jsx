@@ -1,14 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import regExpList from "../../utils/regExp";
 import AdressFinder from "./AdressFinder";
-import ButtonCompononent from '../../components/ButtonComponent/ButtonComponent'
 
 const CartForm = () => {
-	// give the focus on the first input
 	const formRef = useRef(null);
 	const adressRef = useRef(null);
 	const postalCodeRef = useRef(null);
 	const cityRef = useRef(null);
+	// give the focus on the first input
 	useEffect(() => {
 		formRef.current[1].focus();
 	}, []);
@@ -49,7 +48,7 @@ const CartForm = () => {
 		},
 	]);
 
-	const adress = {
+	const [adress, setAdress] = useState({
 		label: "Adresse",
 		type: "text",
 		id: "inputAddress",
@@ -57,7 +56,7 @@ const CartForm = () => {
 		error: false,
 		errorMessage: "Veuillez saisir une adresse valide.",
 		className: "inputAddress",
-	};
+	});
 
 	const addressComplementary = {
 		label: "",
@@ -66,11 +65,11 @@ const CartForm = () => {
 		name: "addressComplementary",
 		error: false,
 		errorMessage: "Veuillez saisir un complement d'adresse valide.",
-		placeholder: 'Apt, suite, unité, nom de l\'entreprise(falcultatif)',
-		className: "inputAddress",
-	}
+		placeholder: "Apt, suite, unité, nom de l'entreprise(falcultatif)",
+		className: "addressComplementary",
+	};
 
-	const postalCode = {
+	const [postalCode, setPostalCode] = useState({
 		label: "Code postal",
 		type: "text",
 		id: "postalCode",
@@ -78,22 +77,26 @@ const CartForm = () => {
 		error: false,
 		errorMessage: "Veuillez saisir un code postal valide.",
 		className: "postalCode",
-	}
-	const city = {
-		label : "Ville",
+	});
+
+	const [city, setCity] = useState({
+		label: "Ville",
 		type: "text",
 		id: "city",
 		name: "city",
 		error: false,
 		errorMessage: "Veuillez saisir une ville valide.",
 		className: "city",
-	}
+	});
 
 	const initialValues = {
 		lastName: "",
 		firstName: "",
 		email: "",
 		address: "",
+		postalCode: 0,
+		addressComplementary: "",
+		city: "",
 	};
 
 	// error Statement
@@ -101,33 +104,73 @@ const CartForm = () => {
 
 	// Select the right input and add the corresponding error
 	function addError(inputName) {
+		console.log(inputName);
 		setIsError(true);
-		const newInputs = inputs.map((obj) => {
-			if (obj.name === inputName) {
-				return { ...obj, error: true, className: "inputInvalid" };
-			}
-			return obj;
-		});
-		setInputs(newInputs);
+		if (inputName === "postalCode") {
+			setPostalCode({
+				...postalCode,
+				error: true,
+				className: "postalCode inputInvalid",
+			});
+		} else if (inputName === "city") {
+			setCity({ ...city, error: true, className: "city inputInvalid" });
+		} else if (inputName === "adress") {
+			setAdress({
+				...adress,
+				error: true,
+				className: "adress inputInvalid",
+			});
+		} else {
+			const newInputs = inputs.map((obj) => {
+				if (obj.name === inputName) {
+					return { ...obj, error: true, className: "inputInvalid" };
+				}
+				return obj;
+			});
+			setInputs(newInputs);
+		}
 	}
 
 	// Select the right input and remove the error
 	function rmError(inputName) {
 		setIsError(false);
+		if (inputName === "postalCode"){
+			setPostalCode({
+				...postalCode,
+				error: false,
+				className: `${inputName}`,
+			});
+		}
+		else if (inputName === "city"){
+			setCity({
+				...city,
+				error: false,
+				className: `${inputName}`,
+			});
+		}
+		else if (inputName === "adress"){
+			setAdress({
+				...adress,
+				error: false,
+				className: `${inputName}`,
+			});
+		}
+		else {
 		const newInputs = inputs.map((obj) => {
 			if (obj.name === inputName) {
-				return { ...obj, error: false, className: "inputValid" };
+				return { ...obj, error: false, className: `${inputName}` };
 			}
 			return obj;
 		});
 		setInputs(newInputs);
-	}
+	}};
 
 	// Function that save changes
 
 	const [form, setForm] = useState(initialValues);
 	const [openAdressFinder, setOpenAdressFinder] = useState(false);
 	const handleChange = (e) => {
+		//console.log(e)
 		const { name, value } = e.target;
 		// Assign new value to the appropriate form field
 		const updatedForm = {
@@ -142,13 +185,13 @@ const CartForm = () => {
 			e.target.value.length !== 0
 		) {
 			setOpenAdressFinder(true);
-		}else {
-			return 
+		} else {
+			return;
 		}
 	};
-
 	// check inputs validity
 	const checkValidity = (e) => {
+		console.log(e.target.name);
 		// timer has been setted to be able to click the adress before the blur
 		setTimeout(() => {
 			setOpenAdressFinder(false);
@@ -171,10 +214,18 @@ const CartForm = () => {
 					: rmError("email");
 				break;
 			case "address":
-				value.length < 10 
-				? addError("adress")
-				: rmError("adress");
-				break
+				value.length < 10 ? addError("adress") : rmError("adress");
+				break;
+			case "postalCode":
+				typeof value != "number"
+					? addError("postalCode")
+					: rmError("postalCode");
+				break;
+			case "city":
+				!regExpList.city.test(value)
+					? addError("city")
+					: rmError("city");
+				break;
 			default:
 				break;
 		}
@@ -184,21 +235,24 @@ const CartForm = () => {
 	const [message, setMessage] = useState("");
 
 	// submited action
-	const submit = () => {
-		if (isError) {
-			alert("DIDNT WORK");
-			return;
-		}
-		setMessage("Votre message a bien été enregistré");
+	const submit = (e, form) => {
+		e.preventDefault();
+		console.log(form);
 	};
 
-	// handle the suggested adress and replace the input value 
-	const replaceAdressValue = (adress, postalCode, city) =>{ 
+	// handle the suggested adress and replace the input value
+	const replaceAdressValue = (adress, postalCode, city) => {
 		adressRef.current.value = adress;
 		postalCodeRef.current.value = postalCode;
 		cityRef.current.value = city;
 		setOpenAdressFinder(false);
-	}
+		setForm({
+			...form,
+			adress,
+			postalCode,
+			city,
+		});
+	};
 
 	return (
 		<main id='cart'>
@@ -208,7 +262,7 @@ const CartForm = () => {
 			>
 				<fieldset>
 					<legend>Renseignez vos informations personelles</legend>
-					{/* Add Inputs first name, name, email */}
+					{/* Inputs first name, name, email */}
 					{inputs.map((elem) => {
 						return (
 							<div
@@ -233,7 +287,7 @@ const CartForm = () => {
 							</div>
 						);
 					})}
-					{/* Add adress input */}
+					{/* adress input */}
 					<div
 						key={adress.id}
 						id={adress.id}
@@ -241,15 +295,24 @@ const CartForm = () => {
 					>
 						<label htmlFor={adress.id}>{adress.label}</label>
 						<input
-							ref ={adressRef}
+							ref={adressRef}
 							className={adress.className}
 							type={adress.type}
 							name={adress.name}
 							onChange={(e) => handleChange(e)}
 							onBlur={(e) => checkValidity(e)}
 						/>
-						{openAdressFinder && <AdressFinder adress={adressRef.current.value} replaceAdressValue={replaceAdressValue}/>}
-						<label htmlFor={addressComplementary.id}>{addressComplementary.label}</label>
+						{/* adress finder */}
+						{openAdressFinder && (
+							<AdressFinder
+								adress={adressRef.current.value}
+								replaceAdressValue={replaceAdressValue}
+							/>
+						)}
+						{/* adress complementary */}
+						<label htmlFor={addressComplementary.id}>
+							{addressComplementary.label}
+						</label>
 						<input
 							className={addressComplementary.className}
 							type={addressComplementary.type}
@@ -259,21 +322,29 @@ const CartForm = () => {
 							onBlur={(e) => checkValidity(e)}
 						/>
 						{adress.error ? <p>{adress.errorMessage}</p> : <p></p>}
-						<div className="city">
-							<div className="city-postalCode">
-							<label htmlFor={postalCode.id}>{postalCode.label}</label>
-							<input
-								className={postalCode.className}
-								ref={postalCodeRef}
-								type={postalCode.type}
-								name={postalCode.name}
-								onChange={(e) => handleChange(e)}
-								onBlur={(e) => checkValidity(e)}
-							/>
-							{postalCode.error ? <p>{postalCode.errorMessage}</p> : <p></p>}
-						</div>
-							<div className="city-city">
-							<label htmlFor={city.id}>{city.label}</label>
+						<div className='city'>
+						{/* postal Code input */}
+							<div className='city-postalCode'>
+								<label htmlFor={postalCode.id}>
+									{postalCode.label}
+								</label>
+								<input
+									className={postalCode.className}
+									ref={postalCodeRef}
+									type={postalCode.type}
+									name={postalCode.name}
+									onChange={(e) => handleChange(e)}
+									onBlur={(e) => checkValidity(e)}
+								/>
+								{postalCode.error ? (
+									<p>{postalCode.errorMessage}</p>
+								) : (
+									<p></p>
+								)}
+							</div>
+							<div className='city-city'>
+							{/* city input */}
+								<label htmlFor={city.id}>{city.label}</label>
 								<input
 									ref={cityRef}
 									className={city.className}
@@ -282,12 +353,21 @@ const CartForm = () => {
 									onChange={(e) => handleChange(e)}
 									onBlur={(e) => checkValidity(e)}
 								/>
-								{city.error ? <p>{city.errorMessage}</p> : <p></p>}
+								{city.error ? (
+									<p>{city.errorMessage}</p>
+								) : (
+									<p></p>
+								)}
 							</div>
 						</div>
 					</div>
 				</fieldset>
-				<ButtonCompononent title={'Valider ma commande'} height={"80px"}/>
+				<button
+					type='button'
+					onClick={(e) => submit(e, form)}
+				>
+					Valider ma commande
+				</button>
 			</form>
 		</main>
 	);

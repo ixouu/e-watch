@@ -3,7 +3,7 @@ import { contactFormContext } from "../../context/contactFormContext";
 
 const Form = (props) => {
 	const formRef = useRef();
-
+	// give the focus on the first input
 	useEffect(() => {
 		formRef.current[1].focus();
 	}, []);
