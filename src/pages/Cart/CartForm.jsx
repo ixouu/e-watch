@@ -5,8 +5,10 @@ import ButtonCompononent from '../../components/ButtonComponent/ButtonComponent'
 
 const CartForm = () => {
 	// give the focus on the first input
-	const formRef = useRef();
-	const adressRef = useRef();
+	const formRef = useRef(null);
+	const adressRef = useRef(null);
+	const postalCodeRef = useRef(null);
+	const cityRef = useRef(null);
 	useEffect(() => {
 		formRef.current[1].focus();
 	}, []);
@@ -56,6 +58,36 @@ const CartForm = () => {
 		errorMessage: "Veuillez saisir une adresse valide.",
 		className: "inputAddress",
 	};
+
+	const addressComplementary = {
+		label: "",
+		type: "text",
+		id: "addressComplementary",
+		name: "addressComplementary",
+		error: false,
+		errorMessage: "Veuillez saisir un complement d'adresse valide.",
+		placeholder: 'Apt, suite, unité, nom de l\'entreprise(falcultatif)',
+		className: "inputAddress",
+	}
+
+	const postalCode = {
+		label: "Code postal",
+		type: "text",
+		id: "postalCode",
+		name: "postalCode",
+		error: false,
+		errorMessage: "Veuillez saisir un code postal valide.",
+		className: "postalCode",
+	}
+	const city = {
+		label : "Ville",
+		type: "text",
+		id: "city",
+		name: "city",
+		error: false,
+		errorMessage: "Veuillez saisir une ville valide.",
+		className: "city",
+	}
 
 	const initialValues = {
 		lastName: "",
@@ -111,7 +143,7 @@ const CartForm = () => {
 		) {
 			setOpenAdressFinder(true);
 		}else {
-			setOpenAdressFinder(false);
+			return 
 		}
 	};
 
@@ -122,7 +154,6 @@ const CartForm = () => {
 			setOpenAdressFinder(false);
 		}, 200);
 		const value = e.target.value;
-		console.log(e.target.name)
 		switch (e.target.name) {
 			case "lastName":
 				!regExpList.lastName.test(value)
@@ -162,8 +193,10 @@ const CartForm = () => {
 	};
 
 	// handle the suggested adress and replace the input value 
-	const replaceAdressValue = (pickedValue) =>{ 
-		adressRef.current.value = pickedValue;
+	const replaceAdressValue = (adress, postalCode, city) =>{ 
+		adressRef.current.value = adress;
+		postalCodeRef.current.value = postalCode;
+		cityRef.current.value = city;
 		setOpenAdressFinder(false);
 	}
 
@@ -216,7 +249,42 @@ const CartForm = () => {
 							onBlur={(e) => checkValidity(e)}
 						/>
 						{openAdressFinder && <AdressFinder adress={adressRef.current.value} replaceAdressValue={replaceAdressValue}/>}
+						<label htmlFor={addressComplementary.id}>{addressComplementary.label}</label>
+						<input
+							className={addressComplementary.className}
+							type={addressComplementary.type}
+							name={addressComplementary.name}
+							placeholder={addressComplementary.placeholder}
+							onChange={(e) => handleChange(e)}
+							onBlur={(e) => checkValidity(e)}
+						/>
 						{adress.error ? <p>{adress.errorMessage}</p> : <p></p>}
+						<div className="city">
+							<div className="city-postalCode">
+							<label htmlFor={postalCode.id}>{postalCode.label}</label>
+							<input
+								className={postalCode.className}
+								ref={postalCodeRef}
+								type={postalCode.type}
+								name={postalCode.name}
+								onChange={(e) => handleChange(e)}
+								onBlur={(e) => checkValidity(e)}
+							/>
+							{postalCode.error ? <p>{postalCode.errorMessage}</p> : <p></p>}
+						</div>
+							<div className="city-city">
+							<label htmlFor={city.id}>{city.label}</label>
+								<input
+									ref={cityRef}
+									className={city.className}
+									type={city.type}
+									name={city.name}
+									onChange={(e) => handleChange(e)}
+									onBlur={(e) => checkValidity(e)}
+								/>
+								{city.error ? <p>{city.errorMessage}</p> : <p></p>}
+							</div>
+						</div>
 					</div>
 				</fieldset>
 				<ButtonCompononent title={'Valider ma commande'} height={"80px"}/>

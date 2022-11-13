@@ -150,3 +150,19 @@
         text-decoration: underline;
     }
 }
+
+.city{
+    display: flex;
+    justify-items: space-between;
+    width: 100%;
+    .city-postalCode{
+        width: 50%;
+        input{
+            width: 60%;
+        }
+    }
+    .city-city{
+        margin-left: 50px;
+        width: 60%;
+    }
+}

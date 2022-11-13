@@ -17,40 +17,50 @@ const AdressFinder = ({ adress, replaceAdressValue }) => {
 				.trimEnd()
 				.replace(/ +/g, "+")}`
 		);
-		const FetchData = async (urlToSearch) => {
-			try {
-				setAxiosIsLoading(true);
-
-				const result = await axios({
-					method: "get",
-					url: urlToSearch,
-				});
-				setAxiosData(result.data.features);
-				setAxiosIsLoading(false);
-				setAxiosError(null);
-			} catch (err) {
-				setAxiosError(err.message);
-			} finally {
-				setAxiosIsLoading(false);
-			}
-		};
-		FetchData(adressToFetch);
+		if (adress.length >= 3) {
+			const FetchData = async (urlToSearch) => {
+				try {
+					setAxiosIsLoading(true);
+					const result = await axios({
+						method: "get",
+						url: urlToSearch,
+					});
+					setAxiosData(result.data.features);
+					setAxiosIsLoading(false);
+					setAxiosError(null);
+				} catch (err) {
+					setAxiosError(err.message);
+				} finally {
+					setAxiosIsLoading(false);
+				}
+			};
+			FetchData(adressToFetch);
+		}else return
 	}, [adress, adressToFetch]);
 
-  const addToInput = (e) => {
-    replaceAdressValue(e.target.textContent)
-  }
+	const pasteTheFoundAdress = (e) => {
+		let address= e.target.textContent.split(" ")
+		replaceAdressValue(address.slice(0, -2).join(" ").replace(',',' '), address.slice(-2)[0], address.slice(-1)[0]);
+	};
 
 	const displayData = () => {
-    if (axiosIsLoading) return <p>Loading...</p>
+		if (axiosIsLoading) return <p>Loading...</p>;
 		if (axiosError !== null) {
 			return <p>{axiosError}</p>;
 		} else {
-      if(axiosData.length > 1){
-				 return axiosData.map((result, index) => {
-					return <p key={index} onClick={(e) => addToInput(e)} className="address">{result.properties.label}</p>
-				})
-      }else return <p > 0 résultats à afficher</p>
+			if (axiosData.length > 1) {
+				return axiosData.map((result, index) => {
+					return (
+						<p
+							key={index}
+							onClick={(e) => pasteTheFoundAdress(e)}
+							className='address'
+						>
+							{result.properties.label}
+						</p>
+					);
+				});
+			} else return <p> Pas de résultats.</p>;
 		}
 	};
 
