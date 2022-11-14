@@ -1,8 +1,16 @@
 import React from 'react'
+import CreditCardBack from './CreditCardBack'
+import CreditCardFront from './CreditCardFront'
 
-const Paiement = ({ totalPrice, orderInformations}) => {
+const Paiement = () => {
   return (
-    <div>Paiement</div>
+    <main className='paiement'>
+        <div className='paiement-leftContainer'>
+        <CreditCardFront/>
+        <CreditCardBack/>
+        </div>
+        <div className='paiement-rightContainer'></div>
+    </main>
   )
 }
 

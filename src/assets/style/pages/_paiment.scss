@@ -1,0 +1,165 @@
+.paiement{
+    height: 91.1vh;
+    position: relative;
+    .paiement-leftContainer{
+        width: 30%;
+        height: 100%;
+        background: rgb(54,57,57);
+        background:   linear-gradient(140deg, rgb(45, 47, 47) 20%, rgba(54,57,57,1) 25%, rgb(178, 179, 179) 35%, #B1B2B2 45%, rgba(54,57,57,1) 55%, rgba(54,57,57,1) 65%)
+    }
+}
+
+.creditCardFront{
+    width: 500px;
+    height: 250px;
+    background: rgb(210,211,211);
+    background: linear-gradient(227deg, rgba(210,211,211,1) 45%, rgba(132, 151, 166) 54%, rgba(132, 151, 166) 58%, rgba(210,211,211,1) 65%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-family: $font3;
+    position: absolute;
+    left: 10%;
+    z-index: 1100;
+    top: 200px;
+
+    .creditCardFront-circle_container{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-top: 20px;
+        .creditCardFront-circle_1{
+            width: 50px;
+            height: 50px;
+            background-color: #FFF;
+            border-radius: 50%;
+            margin-left: 40px;
+        }
+        .creditCardFront-circle_2{
+            width: 25px;
+            height: 25px;
+            border: 1px solid #FFF;
+            border-radius: 50%;
+            margin-left: 15px;
+        }
+      
+    }
+    .creditCardFront-number{
+        margin: 40px 0 0 0;
+        width: 100%;
+        span{
+            font-size: 1.8rem;
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+        }
+    }
+
+    .creditCardFront-bottom{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: auto 0 8px 0;
+        padding: 0 8px;
+        font-size: 1.3rem;
+    }
+   
+}
+
+.creditCardBack{
+    width: 500px;
+    height: 250px;
+    background: rgb(210,211,211);
+    border-radius: 10px;
+    left: 18%;
+    z-index: 1100;
+    top: 600px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .creditCardBack-band{
+        margin-top: 40px;
+        width: 100%;
+        height: 45px;
+        background-color: #252727;
+    }
+    .creditCardBack-cvc_container{
+        margin-top: 20px;
+        display:  flex;
+        justify-content: center;
+        width: 100%;
+        .creditCardBack-cvc{
+            width: 80%;
+            display: flex;
+            justify-content: flex-end;
+            background-color: #e7e9e9;
+            border-radius: 2px;
+            span{
+                margin-right: 8px;
+                display: inline-block;
+                padding: 8px 0;
+            }
+        }
+        
+        
+    }
+    .creditCardBack-phantom_container{
+        margin-top: 16px;
+        width: 40%;
+        height: 80px;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-family: $font3;
+        .ccp{
+            background-color: #e7e9e9;
+            border-radius: 40px;
+            margin: 0 4px;
+            height: 4px;
+        }
+        .ccp1{
+            width: 40px;
+        }
+        .ccp2{
+            width: 8px;
+        }
+        .ccp3 {
+            width: 20px;
+        }
+        .ccp4 {
+            width: 32px;
+        }
+        .ccp5{
+            width: 8px;
+        }
+        .ccp6{
+            width: 24px;
+        }
+        .ccp7{
+            width: 44px;
+        }
+        .ccp8{
+            width: 30px;
+        }
+        .ccp9{
+            width: 12px;
+        }
+        .ccp10{
+            width: 55px;
+        }
+        .ccp11{
+            width: 33px;
+        }
+        .ccp12{
+            width: 55px;
+        }
+        .ccp13{
+            width: 20px;
+        }
+        .ccp14{
+            width: 20px;
+        }
+    }
+}
