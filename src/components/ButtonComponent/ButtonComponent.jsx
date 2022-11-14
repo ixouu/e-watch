@@ -11,6 +11,8 @@ const ButtonComponent = ({
 	icon,
 	class1,
 	borderRadius,
+	fontColor,
+	type
 }) => {
 	const navigate = useNavigate();
 
@@ -39,8 +41,10 @@ const ButtonComponent = ({
 				width: `${width}`,
 				height: `${height}`,
 				borderRadius: `${borderRadius}`,
+				color: `${fontColor}`
 			}}
 			disabled={disabled}
+			type={`${type}`}
 			onClick={() => handleClick()}
 		>
 			{title} {addIcon()}

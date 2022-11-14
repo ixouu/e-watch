@@ -16,7 +16,7 @@ const CartForm = () => {
 	}, []);
 
 	// import function to store userinformation from the context
-	const { saveUserInformations, userInformations } = useStateContext();
+	const { saveUserInformations } = useStateContext();
 	// inputs content
 	const [inputs, setInputs] = useState([
 		{
