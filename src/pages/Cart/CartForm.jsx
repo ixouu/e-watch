@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import regExpList from "../../utils/regExp";
 import AdressFinder from "./AdressFinder";
+import { useStateContext } from "../../context/stateContext";
+import { useNavigate } from "react-router-dom";
 
 const CartForm = () => {
+	const navigate = useNavigate();
 	const formRef = useRef(null);
 	const adressRef = useRef(null);
 	const postalCodeRef = useRef(null);
@@ -12,6 +15,8 @@ const CartForm = () => {
 		formRef.current[1].focus();
 	}, []);
 
+	// import function to store userinformation from the context
+	const { saveUserInformations, userInformations } = useStateContext();
 	// inputs content
 	const [inputs, setInputs] = useState([
 		{
@@ -104,7 +109,6 @@ const CartForm = () => {
 
 	// Select the right input and add the corresponding error
 	function addError(inputName) {
-		console.log(inputName);
 		setIsError(true);
 		if (inputName === "postalCode") {
 			setPostalCode({
@@ -170,7 +174,6 @@ const CartForm = () => {
 	const [form, setForm] = useState(initialValues);
 	const [openAdressFinder, setOpenAdressFinder] = useState(false);
 	const handleChange = (e) => {
-		//console.log(e)
 		const { name, value } = e.target;
 		// Assign new value to the appropriate form field
 		const updatedForm = {
@@ -191,7 +194,6 @@ const CartForm = () => {
 	};
 	// check inputs validity
 	const checkValidity = (e) => {
-		console.log(e.target.name);
 		// timer has been setted to be able to click the adress before the blur
 		setTimeout(() => {
 			setOpenAdressFinder(false);
@@ -217,7 +219,7 @@ const CartForm = () => {
 				value.length < 10 ? addError("adress") : rmError("adress");
 				break;
 			case "postalCode":
-				typeof value != "number"
+				value.length === 5
 					? addError("postalCode")
 					: rmError("postalCode");
 				break;
@@ -234,10 +236,23 @@ const CartForm = () => {
 	// submited form message
 	const [message, setMessage] = useState("");
 
-	// submited action
+	// If there is no errors, display paiement page
 	const submit = (e, form) => {
 		e.preventDefault();
-		console.log(form);
+		if (isError){
+			setMessage("Veuillez renseignez les informations demandées.");
+			e.target.className="shake"
+			return
+		} else{
+			e.target.className="bounceOut"
+			setMessage("");
+			saveUserInformations(form);
+			const timer = () => setTimeout(() => {
+				navigate('../paiement')
+			}, 750);
+			timer();
+			clearTimeout(timer);
+		}
 	};
 
 	// handle the suggested adress and replace the input value
@@ -363,11 +378,13 @@ const CartForm = () => {
 					</div>
 				</fieldset>
 				<button
-					type='button'
+					type='submit'
 					onClick={(e) => submit(e, form)}
+					className="cartForm-btn"
 				>
-					Valider ma commande
+					Procéder au paiement
 				</button>
+				{message ? <p>{message}</p> : <p></p>}
 			</form>
 		</main>
 	);

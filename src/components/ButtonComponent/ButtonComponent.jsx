@@ -13,9 +13,10 @@ const ButtonComponent = ({
 	borderRadius,
 }) => {
 	const navigate = useNavigate();
-	const handleLink = () => {
+
+	const handleClick = () => {
 		if (link === undefined) {
-			return;
+			return
 		} else {
 			navigate(`${link}`);
 		}
@@ -40,7 +41,7 @@ const ButtonComponent = ({
 				borderRadius: `${borderRadius}`,
 			}}
 			disabled={disabled}
-			onClick={() => handleLink()}
+			onClick={() => handleClick()}
 		>
 			{title} {addIcon()}
 		</button>

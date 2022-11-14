@@ -12,6 +12,7 @@ import Product from './pages/Product/Product.jsx';
 import Validation from './pages/Validation/Validation.jsx';
 import Categories from './pages/Categories/Categories.jsx';
 import Contact from './pages/Contact/Contact.jsx';
+import Paiement from './pages/Paiement/Paiement.jsx';
 import Error from './pages/Error/Error.jsx';
 
 import NavBar from './components/Navbar/Navbar.jsx';
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/categories/:category" element={<Category/>}/>
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/validation" element={<Validation />} />
+                <Route path="/paiement" element={<Paiement />} />
                 <Route path="*" element={<Error />} />
               </Routes>
               <Footer/>

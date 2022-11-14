@@ -108,6 +108,13 @@ export const StateContext = ({ children }) => {
         else return 0;
     }
 
+    const [ userInformations, setUserInformations ] = useState({})
+    const saveUserInformations = (form) => {
+        setUserInformations(form)
+    }
+
+
+
     return (
         <Context.Provider value={{
             showCart,
@@ -117,7 +124,9 @@ export const StateContext = ({ children }) => {
             totalQuantities,
             onAdd,
             toggleCartItemQuanitity,
-            onRemove
+            onRemove,
+            saveUserInformations,
+            userInformations
         }}
         >
             {children}

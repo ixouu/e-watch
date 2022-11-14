@@ -1,19 +1,14 @@
 import React, {useState} from "react";
-import CartForm from "./CartForm";
 import { useStateContext } from "../../context/stateContext";
 import { useData } from "../../hooks/useData";
+
+import CartForm from "./CartForm";
 import ProductCard from "./ProductCard";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 const Cart = () => {
 	document.title = "E-watch | Panier";
-	const {
-		totalPrice,
-		totalQuantities,
-		cartItems,
-		toggleCartItemQuanitity,
-		onRemove,
-	} = useStateContext();
+	const { cartItems } = useStateContext();
 	// fetch data from backend
 	const { isLoading, data, error } = useData();
 	
@@ -35,24 +30,30 @@ const Cart = () => {
 		} else return <p>Aucuns produits présent dans votre panier.</p>;
 	};
 
+
 	// fetch data from the local storage and price from the backend
 	const displayTotalPrice = () => {
-		let prices = [];
-		if (cartItems.length >= 1) {
-			cartItems.map((product) => {
-				const item = data.find((item) => item._id === product.id);
-				item && prices.push(item.price * product.qty);
-			});
-			const totalPrice =
-				prices.length > 0 && prices.reduce((a, b) => a + b);
-			return totalPrice;
+		if (isLoading){
+			return <p>Chargement en cours</p>
+		}else if (error){
+			return <p>{error}</p>
 		} else {
-			return 0;
+			let prices = [];
+			if (cartItems.length >= 1) {
+				cartItems.map((product) => {
+					const item = data.find((item) => item._id === product.id);
+					item && prices.push(item.price * product.qty);
+			});
+			const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
+			return totalPrice;
+			} else {
+				return 0;
+			}
 		}
+		
 	};
 
 	// display the form
-
 	const [formIsOpen, setFormIsOpen] = useState(false);
 	const openForm =  () =>{
 		setFormIsOpen(prevState => !prevState)
@@ -65,7 +66,6 @@ const Cart = () => {
 				<div className='cart-products'>
 					<div className='cart-products_left'>
 						{displayCartProducts()}
-						<ButtonComponent title={'CONTINUER MES ACHATS'} height={'80px'} width={'230px'} link={'/'}/>
 					</div>
 					<div className='cart-products_right'>
 						<div className='cart-totalContainer'>
@@ -90,6 +90,9 @@ const Cart = () => {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div className="continueOrderBtn-Container">
+					<ButtonComponent title={'CONTINUER MES ACHATS'} height={'80px'} width={'230px'} link={'/'}/>
 				</div>
 				<div className="cart-from_container">
 					{
