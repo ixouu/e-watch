@@ -23,8 +23,14 @@
 @mixin pageTitle {
     text-align: center;
     font-family: $font2;
+    @include mobile-only{
+      font-size: 1.5rem;
+    }
 }
 
 @mixin mainPadding {
     padding: 40px 10%;
+    @include mobile-only{
+      padding: 20px 0;
+    }
 }

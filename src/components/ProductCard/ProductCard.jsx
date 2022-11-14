@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { urlFor } from '../../lib/client'
+import { urlFor } from '../../lib/client';
 
 function Index({ image, title, price, brand, slug, availableStock, product}) {
 
   const displayStock = () => {
-    if (availableStock > 10){
+    if (availableStock >= 10){
       return <p className='largeStock'><i className="fa-solid fa-check"></i>En stock</p>
     }
     if (availableStock < 10 && availableStock > 1){

@@ -1,4 +1,4 @@
-import Form from "../../components/Form/Form";
+import Form from "./Form";
 import { useState } from "react";
 import  regExpList  from '../../utils/regExp'
 

@@ -1,159 +1,107 @@
-import { useState } from "react";
-import regExpList from "../../utils/regExp";
-import Form  from '../../components/Form/Form'
+import React, {useState} from "react";
+import { useStateContext } from "../../context/stateContext";
+import { useData } from "../../hooks/useData";
+
+import CartForm from "./CartForm";
+import ProductCard from "./ProductCard";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+
 const Cart = () => {
-
-     // inputs content
-     const [inputs, setInputs] = useState([
-        {
-            label: "Nom",
-            type: "text",
-            id: "inputLastName",
-            autocomplete: 'name',
-            name: 'lastName',
-            error : false,
-            errorMessage: 'Le nom renseigné est incorrect ( exemple valide : Dupont).',
-            className: ""
-        },
-        {
-            label: 'Prénom',
-            type: 'text',
-            id: "inputFirstName",
-            name: 'firstName',
-            error : false,
-            errorMessage : 'Le prénom renseigné est incorrect ( exemple valide : Paul).',
-            className: ""
-        },
-        {
-            label: 'Votre Adresse mail',
-            type: 'email',
-            id : 'inputEmail',
-            autocomplete: 'email',
-            name: 'email',
-            error : false,
-            errorMessage : 'L\'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).',
-            className: ""
-        },
-        {
-            label: 'Adresse',
-            type: 'text',
-            id : 'inputAddress',
-            name: 'address',
-            error : false,
-            errorMessage : 'Veuillez saisir une adresse valide.',
-            className: ""
-        },
-        {
-            label: 'Code Postal',
-            type: 'text',
-            id : 'inputPostalCode',
-            name: 'postalCode',
-            error : false,
-            errorMessage : 'Veuillez saisir un code postal valide.',
-            className: ""
-        },
-        {
-            label: 'Ville',
-            type: 'text',
-            id : 'inputCity',
-            name: 'city',
-            error : false,
-            errorMessage : 'Veuillez sasir une ville valide.',
-            className: ""
-        }
-    ])
-
-    const initialValues = {
-        lastName: '',
-        firstName : '',
-        email : '',
-        address: '',
-        postalCode : '',
-        city : ''
-    }
+	document.title = "E-watch | Panier";
+	const { cartItems } = useStateContext();
+	// fetch data from backend
+	const { isLoading, data, error } = useData();
+	
+	// display all Cart products based on localstorage informations
+	const displayCartProducts = () => {
+		if (cartItems.length >= 1) {
+			return cartItems.map((product) => {
+				return (
+					<ProductCard
+						key={product.id}
+						id={product.id}
+						title={product.title}
+						price={product.price}
+						qty={product.qty}
+						image={product.image[0]}
+					/>
+				);
+			});
+		} else return <p>Aucuns produits présent dans votre panier.</p>;
+	};
 
 
-    // error Statement
-    const [isError, setIsError] = useState(false);
+	// fetch data from the local storage and price from the backend
+	const displayTotalPrice = () => {
+		if (isLoading){
+			return <p>Chargement en cours</p>
+		}else if (error){
+			return <p>{error}</p>
+		} else {
+			let prices = [];
+			if (cartItems.length >= 1) {
+				cartItems.map((product) => {
+					const item = data.find((item) => item._id === product.id);
+					item && prices.push(item.price * product.qty);
+			});
+			const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
+			return totalPrice;
+			} else {
+				return 0;
+			}
+		}
+		
+	};
 
-    // Select the right input and add the corresponding error
-    function addError (inputName){
-        setIsError(true);
-            const newInputs = inputs.map( obj => {
-                if (obj.name === inputName){
-                    return { ...obj, error: true, className:"inputInvalid"}
-                }
-                return obj
-            })
-            setInputs(newInputs) 
-    }
+	// display the form
+	const [formIsOpen, setFormIsOpen] = useState(false);
+	const openForm =  () =>{
+		setFormIsOpen(prevState => !prevState)
+	}
 
-    // Select the right input and remove the error
-    function rmError(inputName){
-        setIsError(false);
-        const newInputs = inputs.map( obj => {
-            if (obj.name === inputName){
-                return { ...obj, error: false , className:"inputValid"}
-            }
-            return obj
-        })
-        setInputs(newInputs)
-    }
-
-    // check inputs validity 
-    const checkValidity = (e) => {
-        const value = e.target.value
-        switch (e.target.name) {
-            case "lastName":
-                !regExpList.lastName.test(value) ? addError('lastName') : rmError('lastName');
-                break;
-            case "firstName":
-                !regExpList.firstName.test(value) ? addError('firstName') : rmError('firstName');
-                break;
-            case "email":
-                !regExpList.email.test(value) ? addError('email') : rmError('email');
-                break;
-            case "address":
-                !regExpList.address.test(value) ? addError('adress') : rmError('adress');
-                break;
-            case "postalCode":
-                !regExpList.postalCode.test(value) ? addError('postalCode') : rmError('postalCode');
-                break;
-            case "city":
-                !regExpList.city.test(value) ? addError('city') : rmError('city');
-            break
-            default:
-                break;
-        }
-    }
-
-    // submited form message
-    const [message, setMessage ] = useState('');
-
-    // submited action
-    const submit = () => {
-        if (isError){
-            alert("DIDNT WORK")
-            return
-        }
-        setMessage("Votre message a bien été enregistré")
-    }
-
-
-    return (
-        <main id='cart'>
-                <Form 
-                submit={submit}
-                initialValues={initialValues}
-                id={"cart-form"} 
-                legend={"Enregistrez vos informations"}
-                buttonValue={"Envoyer"}
-                inputs={inputs}
-                checkValidity={checkValidity}
-                isError={isError}
-                />
-        </main>
-    );
-}
+	return (
+		<>
+			<main className='cart'>
+				<h1>Votre panier</h1>
+				<div className='cart-products'>
+					<div className='cart-products_left'>
+						{displayCartProducts()}
+					</div>
+					<div className='cart-products_right'>
+						<div className='cart-totalContainer'>
+							<div className='cart-total'>
+								<div className='cart-subtotal'>
+									<span>Sous-total</span>
+									<span>{displayTotalPrice()},00 €</span>
+								</div>
+								<div className='cart-deleveryFees'>
+									<span>Livraison</span>
+									<span>Gratuit</span>
+								</div>
+								<div className='cart-total_priceContainer'>
+									<span>TOTAL TTC</span>
+									<span className='cart-total_price'>
+										{displayTotalPrice()},00 €
+									</span>
+								</div>
+							</div>
+							<div className="btnContainer" onClick={openForm}>
+								<ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="continueOrderBtn-Container">
+					<ButtonComponent title={'CONTINUER MES ACHATS'} height={'80px'} width={'230px'} link={'/'}/>
+				</div>
+				<div className="cart-from_container">
+					{
+						formIsOpen && <CartForm />
+					}
+				</div>
+			</main>
+		</>
+	);
+};
 
 export default Cart;
