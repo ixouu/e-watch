@@ -130,7 +130,7 @@ const Paiement = () => {
 
   return (
     <main className='paiement'>
-        {cartItems.length === 0 || !verifiesUserInformations() ? <Error/> : (
+        {cartItems.length === 0 ? <Error/> : (
             <>
                 <div className='paiement-leftContainer'>
             <CreditCardFront paiementInformations={paiementInformations}/>
@@ -147,3 +147,5 @@ const Paiement = () => {
 }
 
 export default Paiement
+
+// || !verifiesUserInformations() 
