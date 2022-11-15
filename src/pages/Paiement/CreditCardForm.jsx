@@ -4,7 +4,7 @@ import Options from "./Options";
 import { useStateContext } from "../../context/stateContext";
 
 
-const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) => {
+const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange, isError, checkValidity }) => {
 	const {totalPrice } = useStateContext();
 	return (
 		<form className='creditCard_form'>
@@ -27,7 +27,7 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 							maxLength={elem.maxLength}
 							autoCapitalize={elem.autocapitalize}
 							pattern={elem.pattern}
-							// onBlur={(e) => checkValidity(e)}
+							onBlur={(e) => checkValidity(e)}
 						/>
 						{elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
 					</div>
@@ -56,7 +56,7 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 										placeholder={elem.placeholder}
 										onChange={ (e) => handleChange(e)}
 										maxLength={elem.maxLength}
-										// onBlur={(e) => checkValidity(e)}
+										onBlur={(e) => checkValidity(e)}
 									>
 									<Options options={elem.options}/>
 									</select>
@@ -86,14 +86,15 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 								required
 								pattern={`${cvcInput.pattern}`}
 								inputMode={`${cvcInput.inputmode}`}
+								onBlur={(e) => checkValidity(e)}
 							/>
 						}
 					</div>
 				</div>
 			</div>
 			<div className="creditCard-form_btns">
-				<ButtonComponent title={"VALIDER VOTRE COMMANDE ("+totalPrice()+",00 €)"} height={"80px"} color={"#239de5"} type={"submit"}/>
-				<ButtonComponent title={"ANNULER"} height={"80px"} color={"#d2d0d0"} fontColor={"rgb(18, 18, 18)"} link={'../cart'}/>
+				<ButtonComponent title={"PAYER VOTRE COMMANDE ("+totalPrice()+",00 €)"} height={"80px"} color={"#239de5"} type={"submit"} disabled={isError}/>
+				<ButtonComponent title={"ANNULER"} height={"60px"} color={"#d2d0d0"} fontColor={"rgb(18, 18, 18)"} link={'../cart'} width={"130px"}/>
 			</div>
 			
 		</form>

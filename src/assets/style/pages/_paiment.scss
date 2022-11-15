@@ -296,7 +296,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         height: 175px;
+        button{
+            flex-wrap: nowrap;
+        }
     }
 }
 

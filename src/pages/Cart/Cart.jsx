@@ -30,28 +30,6 @@ const Cart = () => {
 		} else return <p>Aucuns produits présent dans votre panier.</p>;
 	};
 
-
-	// fetch data from the local storage and price from the backend
-	const displayTotalPrice = () => {
-		if (isLoading){
-			return <p>Chargement en cours</p>
-		}else if (error){
-			return <p>{error}</p>
-		} else {
-			let prices = [];
-			if (cartItems.length >= 1) {
-				cartItems.map((product) => {
-					const item = data.find((item) => item._id === product.id);
-					item && prices.push(item.price * product.qty);
-			});
-			const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
-			return totalPrice;
-			} else {
-				return 0;
-			}
-		}
-	};
-
 	// display the form
 	const [formIsOpen, setFormIsOpen] = useState(false);
 	const openForm =  () =>{
