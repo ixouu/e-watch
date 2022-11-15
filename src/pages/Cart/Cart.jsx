@@ -85,7 +85,10 @@ const Cart = () => {
 								</div>
 							</div>
 							<div className="btnContainer" onClick={openForm}>
-								<ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} />
+								{cartItems.length === 0 
+								? <ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} disabled={true}/>
+								:<ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} />
+								}
 							</div>
 						</div>
 					</div>

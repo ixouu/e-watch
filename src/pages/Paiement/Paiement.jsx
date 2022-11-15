@@ -1,11 +1,15 @@
-import { Autocomplete } from '@mui/material'
 import React, { useState } from 'react'
 import CreditCardBack from './CreditCardBack'
 import CreditCardForm from './CreditCardForm'
 import CreditCardFront from './CreditCardFront'
+import { useStateContext  } from '../../context/stateContext';
+import Error from '../Error/Error'
 
 const Paiement = () => {
     document.title='E-watch | Paiement';
+
+    // import cartList
+    const { cartItems } = useStateContext();
     // From the actual date, return an array with the next 10 years
     const generateYears = () => {
         let years = [];
@@ -117,13 +121,18 @@ const Paiement = () => {
 
   return (
     <main className='paiement'>
-        <div className='paiement-leftContainer'>
-        <CreditCardFront paiementInformations={paiementInformations}/>
-        <CreditCardBack paiementInformations={paiementInformations}/>
-        </div>
-        <div className='paiement-rightContainer'>
-            <CreditCardForm cvcInput={cvcInput} expirationInputs={expirationInputs} inputs={inputs} handleChange={handleChange}/>
-        </div>
+        {cartItems.length === 0 ? <Error/> : (
+            <>
+                <div className='paiement-leftContainer'>
+            <CreditCardFront paiementInformations={paiementInformations}/>
+            <CreditCardBack paiementInformations={paiementInformations}/>
+            </div>
+            <div className='paiement-rightContainer'>
+                <CreditCardForm cvcInput={cvcInput} expirationInputs={expirationInputs} inputs={inputs} handleChange={handleChange}/>
+            </div>
+        </>
+        )}
+       
     </main>
   )
 }
