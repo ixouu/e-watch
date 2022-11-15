@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'
+import React from "react";
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
+import Options from "./Options";
+import { useStateContext } from "../../context/stateContext";
+
 
 const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) => {
+	const {totalPrice } = useStateContext();
 	return (
 		<form className='creditCard_form'>
 			{inputs.map((elem) => {
@@ -20,6 +24,9 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 							required
 							placeholder={elem.placeholder}
 							onChange={ (e) => handleChange(e)}
+							maxLength={elem.maxLength}
+							autoCapitalize={elem.autocapitalize}
+							pattern={elem.pattern}
 							// onBlur={(e) => checkValidity(e)}
 						/>
 						{elem.error ? <p>{elem.errorMessage}</p> : <p></p>}
@@ -39,7 +46,7 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 									<label htmlFor={elem.id}>
 										{elem.label}
 									</label>
-									<input
+									<select 
 										id={elem.id}
 										className={elem.className}
 										type={elem.type}
@@ -48,8 +55,11 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 										required
 										placeholder={elem.placeholder}
 										onChange={ (e) => handleChange(e)}
+										maxLength={elem.maxLength}
 										// onBlur={(e) => checkValidity(e)}
-									/>
+									>
+									<Options options={elem.options}/>
+									</select>
 									{elem.error ? (
 										<p>{elem.errorMessage}</p>
 									) : (
@@ -69,17 +79,21 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange }) =>
 								className={cvcInput.className}
 								type={cvcInput.type}
 								name={cvcInput.name}
+								autoComplete={cvcInput.autocomplete}
 								placeholder={cvcInput.placeholder}
 								onChange={ (e) => handleChange(e)}
+								maxLength={`${cvcInput.maxLength}`}
 								required
+								pattern={`${cvcInput.pattern}`}
+								inputMode={`${cvcInput.inputmode}`}
 							/>
 						}
 					</div>
 				</div>
 			</div>
 			<div className="creditCard-form_btns">
-				<ButtonComponent title={"ANNULER"} height={"80px"} color={"#d2d0d0"} fontColor={"rgb(18, 18, 18)"}/>
-				<ButtonComponent title={"PASSEZ LA COMMANDE"} height={"80px"} color={"#239de5"} type={"submit"}/>
+				<ButtonComponent title={"VALIDER VOTRE COMMANDE ("+totalPrice()+",00 €)"} height={"80px"} color={"#239de5"} type={"submit"}/>
+				<ButtonComponent title={"ANNULER"} height={"80px"} color={"#d2d0d0"} fontColor={"rgb(18, 18, 18)"} link={'../cart'}/>
 			</div>
 			
 		</form>

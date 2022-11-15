@@ -8,7 +8,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 const Cart = () => {
 	document.title = "E-watch | Panier";
-	const { cartItems } = useStateContext();
+	const { cartItems, totalPrice } = useStateContext();
 	// fetch data from backend
 	const { isLoading, data, error } = useData();
 	
@@ -50,7 +50,6 @@ const Cart = () => {
 				return 0;
 			}
 		}
-		
 	};
 
 	// display the form
@@ -72,7 +71,7 @@ const Cart = () => {
 							<div className='cart-total'>
 								<div className='cart-subtotal'>
 									<span>Sous-total</span>
-									<span>{displayTotalPrice()},00 €</span>
+									<span>{totalPrice()},00 €</span>
 								</div>
 								<div className='cart-deleveryFees'>
 									<span>Livraison</span>
@@ -81,7 +80,7 @@ const Cart = () => {
 								<div className='cart-total_priceContainer'>
 									<span>TOTAL TTC</span>
 									<span className='cart-total_price'>
-										{displayTotalPrice()},00 €
+										{totalPrice()},00 €
 									</span>
 								</div>
 							</div>

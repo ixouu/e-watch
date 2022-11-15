@@ -181,10 +181,17 @@
         top: 50%;
         transform: translate(-50%, -50%);
         position: absolute;
-        max-width: 300px;
+        max-width: 325px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        select{
+            background-color: $color3;
+            border-radius: 5px;
+            padding : 5px;
+            font-size: 1rem;
+            font-family: $font1;
+        }
     }
     .reditCard_form_bottomLine{
         display: flex;
@@ -210,7 +217,7 @@
     }
     .creditCard-form_btns{
         display: flex;
-        overflow-x: visible;
+        flex-direction: column;
     }
 }
 
