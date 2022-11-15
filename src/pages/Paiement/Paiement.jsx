@@ -9,7 +9,7 @@ const Paiement = () => {
     document.title='E-watch | Paiement';
 
     // import cartList
-    const { cartItems } = useStateContext();
+    const { cartItems, userInformations} = useStateContext();
     // From the actual date, return an array with the next 10 years
     const generateYears = () => {
         let years = [];
@@ -18,6 +18,15 @@ const Paiement = () => {
             years.push(i)
         } 
         return years;
+    }
+
+    // function who verifies if all informations needed are provided
+    const  verifiesUserInformations = () => {
+        let result = true;
+        if(userInformations.lastName === undefined || userInformations.firstName  === undefined || userInformations.email  === undefined || userInformations.address  === undefined || userInformations.postalCode  === undefined || userInformations.city  === undefined ){
+            result = !result
+        }
+        return result
     }
     
     // state to manage provided informations form the from
@@ -121,7 +130,7 @@ const Paiement = () => {
 
   return (
     <main className='paiement'>
-        {cartItems.length === 0 ? <Error/> : (
+        {cartItems.length === 0 || !verifiesUserInformations() ? <Error/> : (
             <>
                 <div className='paiement-leftContainer'>
             <CreditCardFront paiementInformations={paiementInformations}/>
