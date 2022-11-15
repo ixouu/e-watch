@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
+import { useData } from "../hooks/useData";
 
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
-
+    const { isLoading, data, error } = useData();
     const storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const saveCart = (cart) => {
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -95,18 +96,19 @@ export const StateContext = ({ children }) => {
         else return 0;
     }
 
-    const totalPrice = () => {
-        const prices = [];
-        if (cartItems.length >= 1){
-            cartItems.map(product => {
-                let result = 0;
-                result += product.qty * product.price
-                return prices.push(result)
-            })
-            return prices.reduce((a, b) => a + b)
+        const totalPrice = () =>{
+            let prices = [];
+                if (cartItems.length >= 1) {
+                    cartItems.map((product) => {
+                        const item = data.find((item) => item._id === product.id);
+                        item && prices.push(item.price * product.qty);
+                });
+                const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
+                return totalPrice;
+                } else {
+                    return 0;
+                }
         }
-        else return 0;
-    }
 
     const [ userInformations, setUserInformations ] = useState({})
     const saveUserInformations = (form) => {
@@ -126,7 +128,7 @@ export const StateContext = ({ children }) => {
             toggleCartItemQuanitity,
             onRemove,
             saveUserInformations,
-            userInformations
+            userInformations,
         }}
         >
             {children}

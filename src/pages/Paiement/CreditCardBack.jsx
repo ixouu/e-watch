@@ -1,11 +1,18 @@
-import React from 'react'
+import React,{useRef, useEffect} from 'react'
 
-const CreditCardBack = () => {
+const CreditCardBack = ({paiementInformations}) => {
+
+  const cvcRef = useRef(null);
+
+  useEffect(() => {
+    cvcRef.current.value = paiementInformations.creditCardCvc
+  },[paiementInformations.creditCardCvc])
+
   return (
     <div className='creditCardBack'>
         <div className="creditCardBack-band"></div>
         <div className="creditCardBack-cvc_container">
-            <div className="creditCardBack-cvc"><span>000</span></div>
+            <div className="creditCardBack-cvc"><span ref={cvcRef}>{paiementInformations.creditCardCvc}</span></div>
         </div>
         <div className="creditCardBack-phantom_container">
             <div className="ccp ccp1"></div>
