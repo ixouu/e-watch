@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const OrderSummary = ({ cart, orderNumber, userInformations }) => {
 	return (
 		<article className='order-summary'>
 			<h2>Récapitulatif de votre commande : </h2>
-			<span className='order-orderNumber'>Numero de commande : <span className="order-orderNumber_num">{orderNumber}</span></span>
+			<h3 className='order-orderNumber'>Numero de commande : <span className="order-orderNumber_num">{orderNumber}</span></h3>
 			<h3> Liste des articles:</h3>
 			<ul>
 				{cart.map((item, index) => {
@@ -16,7 +15,7 @@ const OrderSummary = ({ cart, orderNumber, userInformations }) => {
 					);
 				})}
 			</ul>
-			<h3>Coordonnées:</h3>
+			<h3>Vos coordonnées:</h3>
 			<div className='order-summary_userInfos'>
 				<span>Nom : {userInformations.lastName}</span>
 				<span>Prenom : {userInformations.firstName}</span>
@@ -33,7 +32,6 @@ const OrderSummary = ({ cart, orderNumber, userInformations }) => {
 
 			<div className='order-summary_links'>
                 <p>Une erreur dans votre commande? Contactez-nous <a href="mailto:sav@ewatch.com">sav@ewatch.com</a></p>
-                <Link to='../'>Retour à l'acceuil</Link>
             </div>
 		</article>
 	);

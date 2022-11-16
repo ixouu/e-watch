@@ -12,7 +12,6 @@ const Paiement = () => {
 	// form error
 	const [isError, setIsError] = useState(false);
 
-
 	// import cartList
 	const { cartItems, userInformations } = useStateContext();
 

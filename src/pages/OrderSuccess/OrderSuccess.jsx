@@ -25,17 +25,17 @@ const OrderSuccess = () => {
 	// decrement product's quantity from the DB
 	const updateProduct = (id, qty) => {
 		!successUpdateProduct && setSuccessUpdateProduct(false);
-		client
-			.patch(id)
-			.dec({ availableStock: qty })
-			.commit()
-			.then(() => {
-				setSuccessUpdateProduct(true);
-			})
-			.catch((err) => {
-				setError(true);
-				setErrorMessage(err.message);
-			});
+	// 	client
+	// 		.patch(id)
+	// 		.dec({ availableStock: qty })
+	// 		.commit()
+	// 		.then(() => {
+	// 			setSuccessUpdateProduct(true);
+	// 		})
+	// 		.catch((err) => {
+	// 			setError(true);
+	// 			setErrorMessage(err.message);
+	// 		});
 	};
 
 	// return the array of products for the order
@@ -72,17 +72,17 @@ const OrderSuccess = () => {
 		};
 		// verifies if there is at leat 1 item before uploading order to the DB
 		if (cartItems.length >= 1) {
-			client
-				.create(order)
-				.then(() => {
-					setIsLoading(false);
-					setError(false);
-				})
-				.catch((err) => {
-					setError(true);
-					setErrorMessage(err.message);
-					setIsLoading(false);
-				});
+			// client
+			// 	.create(order)
+			// 	.then(() => {
+			// 		setIsLoading(false);
+			// 		setError(false);
+			// 	})
+			// 	.catch((err) => {
+			// 		setError(true);
+			// 		setErrorMessage(err.message);
+			// 		setIsLoading(false);
+			// 	});
 		} else {
 			// set error if cartItems is empty
 			setError(true);
@@ -141,7 +141,14 @@ const OrderSuccess = () => {
 					)}
 				</>
 			)}
+			<OrderSummary
+										cart={cartItems}
+										orderNumber={orderNumber}
+										userInformations={userInformations}
+									/>
+									<SocialMedias />
 		</main>
+		
 	);
 };
 
