@@ -4,11 +4,17 @@ import { useData } from "../hooks/useData";
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
+    let foundProduct;
+    let index;
+    
     const { isLoading, data, error } = useData();
     const storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const saveCart = (cart) => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
+
+    const [showCart, setShowCart] = useState(false);
+    const [cartItems, setCartItems] = useState(storage);
 
     const updateBasket = (id, qty, image, title, price, availableStock) => {
         const productToAdd = {
@@ -50,18 +56,16 @@ export const StateContext = ({ children }) => {
         }
     }
 
-    const [showCart, setShowCart] = useState(false);
-    const [cartItems, setCartItems] = useState(storage);
-
-
-    let foundProduct;
-    let index;
-
     const onRemove = (id) => {
         foundProduct = cartItems.find((item) => item.id === id);
         const newCartItems = cartItems.filter((item) => item.id !== id)
         setCartItems(newCartItems);
         removeFromBasket(id);
+    }
+
+    const onClearLocalStorage = () =>{
+        localStorage.clear();
+        setCartItems([]);
     }
 
     const toggleCartItemQuanitity = (id, action) => {
@@ -85,7 +89,7 @@ export const StateContext = ({ children }) => {
 
     const totalQuantities = () => {
         const quantities = []
-        if (cartItems.length >= 1){
+        if (cartItems && cartItems.length >= 1){
             cartItems.map(product => {
             let result = 0;
             result += product.qty
@@ -129,6 +133,7 @@ export const StateContext = ({ children }) => {
             onRemove,
             saveUserInformations,
             userInformations,
+            onClearLocalStorage
         }}
         >
             {children}
