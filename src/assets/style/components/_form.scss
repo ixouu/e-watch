@@ -24,18 +24,19 @@ form{
 }
 
 input, textarea{
-    background-color: $color3;
+    background-color: $color1;
     border-radius: 5px;
     padding : 5px;
     font-size: 1rem;
     font-family: $font1;
+    border: 3px solid transparent;
 }
 
 .inputInvalid {
-    background-color: rgba(155, 44, 44, 0.5);
+    border: 3px solid rgba(155, 44, 44, 0.5);
 }
 .inputValid {
-    background-color: rgba(48, 116, 48, 0.5);
+    background-color: 3px solid rgba(155, 44, 44, 0.5);
 }
 
 textarea{
