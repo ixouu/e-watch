@@ -12,30 +12,24 @@ const OrderSuccess = () => {
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const [emptyCart, setEmptyCart] = useState(false);
-	const {
-		cartItems,
-		userInformations,
-		totalPrice,
-		saveUserInformations,
-		onClearLocalStorage,
-	} = useStateContext();
+	const [orderInfos, setOrderInfos] = useState(undefined);
+	const { cartItems, userInformations, totalPrice } = useStateContext();
 	const orderNumber = Math.round(Date.now() + Math.random());
 
 	// decrement product's quantity from the DB
 	const updateProduct = (id, qty) => {
 		!successUpdateProduct && setSuccessUpdateProduct(false);
-	// 	client
-	// 		.patch(id)
-	// 		.dec({ availableStock: qty })
-	// 		.commit()
-	// 		.then(() => {
-	// 			setSuccessUpdateProduct(true);
-	// 		})
-	// 		.catch((err) => {
-	// 			setError(true);
-	// 			setErrorMessage(err.message);
-	// 		});
+		client
+			.patch(id)
+			.dec({ availableStock: qty })
+			.commit()
+			.then(() => {
+				setSuccessUpdateProduct(true);
+			})
+			.catch((err) => {
+				setError(true);
+				setErrorMessage(err.message);
+			});
 	};
 
 	// return the array of products for the order
@@ -72,17 +66,21 @@ const OrderSuccess = () => {
 		};
 		// verifies if there is at leat 1 item before uploading order to the DB
 		if (cartItems.length >= 1) {
-			// client
-			// 	.create(order)
-			// 	.then(() => {
-			// 		setIsLoading(false);
-			// 		setError(false);
-			// 	})
-			// 	.catch((err) => {
-			// 		setError(true);
-			// 		setErrorMessage(err.message);
-			// 		setIsLoading(false);
-			// 	});
+			client
+				.create(order)
+				.then(() => {
+					setIsLoading(false);
+					setError(false);
+				})
+
+				.catch((err) => {
+					setError(true);
+					setErrorMessage(err.message);
+					setIsLoading(false);
+				})
+				.finally(() => {
+					setOrderInfos(order);
+				});
 		} else {
 			// set error if cartItems is empty
 			setError(true);
@@ -91,19 +89,15 @@ const OrderSuccess = () => {
 		}
 	};
 
-	const sendOrder = () => {
-		if (cartItems.length !== 0){
+	const sendOrder = async () => {
+		if (cartItems.length !== 0) {
 			// update DB
-		cartItems.forEach((item) => {
-			updateProduct(item.id, item.qty);
-		});
-		// add order to DB
-		addOrder();
-		// delete usersInformations from the context, delete Local Storage
-		onClearLocalStorage();
-		saveUserInformations({});
-		} else setEmptyCart(true)
-		
+			cartItems.forEach((item) => {
+				updateProduct(item.id, item.qty);
+			});
+			// add order to DB
+			addOrder();
+		} else return;
 	};
 
 	useEffect(() => {
@@ -113,14 +107,14 @@ const OrderSuccess = () => {
 
 	return (
 		<main className='order'>
-			{/* Verifies is the cart is not empty  */}
-			{ emptyCart? (
-				<Error />
+			{/* Display loarder  */}
+			{isLoading ? (
+				<p>Chargement...</p>
 			) : (
 				<>
-					{/* Display loarder  */}
-					{isLoading ? (
-						<p>Chargement...</p>
+					{/* Verifies is the cart is not empty  */}
+					{orderInfos === undefined ? (
+						<Error />
 					) : (
 						<>
 							{/* Toggle error or orderSummary */}
@@ -129,11 +123,7 @@ const OrderSuccess = () => {
 							) : (
 								<div className='order-success'>
 									<h1>Votre commande a été envoyée</h1>
-									<OrderSummary
-										cart={cartItems}
-										orderNumber={orderNumber}
-										userInformations={userInformations}
-									/>
+									<OrderSummary orderInfos={orderInfos} />
 								</div>
 							)}
 							<SocialMedias />
@@ -141,14 +131,7 @@ const OrderSuccess = () => {
 					)}
 				</>
 			)}
-			<OrderSummary
-										cart={cartItems}
-										orderNumber={orderNumber}
-										userInformations={userInformations}
-									/>
-									<SocialMedias />
 		</main>
-		
 	);
 };
 

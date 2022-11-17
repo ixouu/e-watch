@@ -1,32 +1,53 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useStateContext } from "../../context/stateContext";
 
-const OrderSummary = ({ cart, orderNumber, userInformations }) => {
+const OrderSummary = ({orderInfos}) => {
+
+	const {
+	orderNumber,
+	orderedProducts,
+	customerLastName,
+	customerFirstName,
+	customerEmail,
+	customerStreet,
+	customeraddressComplementary,
+	customerPostalCode,
+	customerCity} = orderInfos
+
+	const {saveUserInformations,onClearLocalStorage,} = useStateContext();
+
+	// delete usersInformations from the context, delete Local Storage
+	useEffect(()=>{
+		onClearLocalStorage()
+		saveUserInformations({});
+	},[])
+
 	return (
 		<article className='order-summary'>
 			<h2>Récapitulatif de votre commande : </h2>
 			<h3 className='order-orderNumber'>Numero de commande : <span className="order-orderNumber_num">{orderNumber}</span></h3>
 			<h3> Liste des articles:</h3>
 			<ul>
-				{cart.map((item, index) => {
+				{orderedProducts.map((item, index) => {
 					return (
 						<li key={index}>
-							{item.title} (x{item.qty})
+							{item.productTitle} (x{item.productQty})
 						</li>
 					);
 				})}
 			</ul>
 			<h3>Vos coordonnées:</h3>
 			<div className='order-summary_userInfos'>
-				<span>Nom : {userInformations.lastName}</span>
-				<span>Prenom : {userInformations.firstName}</span>
-				<span>Email: {userInformations.email}</span>
+				<span>Nom : {customerLastName}</span>
+				<span>Prenom : {customerFirstName}</span>
+				<span>Email: {customerEmail}</span>
 				<span>
-					Adresse : {userInformations.address} {userInformations.city}{" "}
-					{userInformations.postalCode}{" "}
+					Adresse : {customerStreet} {customerCity}{" "}
+					{customerPostalCode}{" "}
 				</span>
 				<span>
-					{userInformations.addressComplementary &&
-						userInformations.addressComplementary}
+					{customeraddressComplementary &&
+						customeraddressComplementary}
 				</span>
 			</div>
 

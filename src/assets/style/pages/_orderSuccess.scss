@@ -2,35 +2,47 @@
     @include mainPadding;
     display: flex;
     flex-direction: column;
-    h1{
+
+    .order-success{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      h1{
         font-family: $font1;
+      }
+    }
+    .order-fail, .order-summary{
+      color: $color1;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 20px;
+      padding: 8px 16px;
+      width: 600px;
+      padding-top: 40px;
+      align-self: center;
+      
+      h2{
+        text-align: center;
+        width: 100%;
+        font-weight: 500;
+        margin-top: 0;
+        @include mobile-only{
+            font-size: 1.2rem;
+        }
+    }
+      @include mobile-only{
+        width: 100%;
+        border-radius: 0;
+        padding: 8px 0;
+    }
     }
     .order-summary{
-        width: 600px;
-        align-self: center;
-        padding-top: 40px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        border-radius: 20px;
-        padding: 8px 16px;
         background: linear-gradient(to top right, #025939,#027333, #04D939);
-        color: $color1;
         -webkit-animation-duration: 0.75s;
         animation-duration: 0.75s;
         -webkit-animation-name: bounceIn;
         animation-name: bounceIn;
-        @include mobile-only{
-            width: 100%;
-            border-radius: 0;
-            padding: 8px 0;
-        }
-        h2{
-            text-align: center;
-            width: 100%;
-            font-weight: 500;
-            @include mobile-only{
-                font-size: 1.2rem;
-            }
-        }
+      
         h3{
             font-weight: 500;
         }
@@ -58,7 +70,70 @@
             }
         }
     }
+    .order-fail{
+      background: linear-gradient(to top right, #8e0a0a,#c21313, #f62b2b);
+      animation-name: shake;
+      -webkit-animation-name: shake;
+      animation-duration: 1s;
+      .order-fail_msg{
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+    }
 }
+
+@-webkit-keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+
 
   
   @-webkit-keyframes bounceIn {
