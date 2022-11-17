@@ -1,5 +1,6 @@
 import ProductCard from "../ProductCard/ProductCard";
 import { useData } from "../../hooks/useData";
+import Loader from "../Loader/Loader";
 
 const Index = ({ parentComponent, category }) => {
 	const { data, isLoading, error } = useData();
@@ -62,7 +63,7 @@ const Index = ({ parentComponent, category }) => {
 			) : (
 				<div className={`main-${parentComponent}_productContent`}>
 					{isLoading ? (
-						<p> Chargement en cours...</p>
+						<Loader/>
 					) : (
 						displayProduct()
 					)}

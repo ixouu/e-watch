@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const NavLinkComponent = ({ destination, title, close}) => {
+const NavLinkComponent = ({ destination, title, closeMobileNav}) => {
     return (
         <li>
         <NavLink
@@ -13,7 +13,7 @@ const NavLinkComponent = ({ destination, title, close}) => {
             ? 'pending'
             : ''
         }
-        onClick={()=> close()}
+        onClick={() => closeMobileNav !== 'undefined' && closeMobileNav()}
         >{title}</NavLink>
     </li>
     );

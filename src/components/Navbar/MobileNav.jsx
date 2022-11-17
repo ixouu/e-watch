@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import NavLinkComponent from "./NavLink";
+import NavLinkComponent from "./NavLinkComponent";
 
 const MobileNav = () => {
 
@@ -24,10 +24,10 @@ const MobileNav = () => {
          onClick={handleClick}
          ><i className="fa-solid fa-bars"></i></button>
            <ul className="mobileNavBar-links" ref={mobileNavBar}>
-                <NavLinkComponent destination="/" title="Acceuil" close={closeMobileNav}/>
-                <NavLinkComponent destination="/categories" title="Catégories"/>
-                <NavLinkComponent destination="/contact" title="Contact"/>
-                <NavLinkComponent destination="/cart" title="Panier"/>
+                <NavLinkComponent destination="/" title="Acceuil" closeMobileNav={closeMobileNav}/>
+                <NavLinkComponent destination="/categories" title="Catégories" closeMobileNav={closeMobileNav}/>
+                <NavLinkComponent destination="/contact" title="Contact" closeMobileNav={closeMobileNav}/>
+                <NavLinkComponent destination="/cart" title="Panier" closeMobileNav={closeMobileNav} />
            </ul> 
         </div>
     );

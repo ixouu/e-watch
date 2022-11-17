@@ -27,7 +27,7 @@ const CartForm = () => {
 			name: "lastName",
 			error: false,
 			errorMessage:
-				"Le nom renseigné est incorrect ( exemple valide : Dupont).",
+				"Le nom renseigné est incorrect (exemple valide : Dupont).",
 			className: "",
 		},
 		{
@@ -37,7 +37,7 @@ const CartForm = () => {
 			name: "firstName",
 			error: false,
 			errorMessage:
-				"Le prénom renseigné est incorrect ( exemple valide : Paul).",
+				"Le prénom renseigné est incorrect (exemple valide : Paul).",
 			className: "",
 		},
 		{
@@ -48,7 +48,7 @@ const CartForm = () => {
 			name: "email",
 			error: false,
 			errorMessage:
-				"L'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).",
+				"L'adresse mail renseignée est incorrect (exemple valide : paul@gmail.com).",
 			className: "",
 		},
 	]);
@@ -57,7 +57,8 @@ const CartForm = () => {
 		label: "Adresse",
 		type: "text",
 		id: "inputAddress",
-		name: "address",
+		name: "inputAddress",
+		autocomplete: 'off',
 		error: false,
 		errorMessage: "Veuillez saisir une adresse valide.",
 		className: "inputAddress",
@@ -194,7 +195,7 @@ const CartForm = () => {
 		}
 		if (
 			e.target.className === "inputAddress" &&
-			e.target.value.length !== 0
+			e.target.value.length > 0
 		) {
 			setOpenAdressFinder(true);
 		} else {
@@ -225,7 +226,7 @@ const CartForm = () => {
 					: rmError("email");
 				break;
 			case "address":
-				value.length < 10 ? addError("adress") : rmError("adress");
+				value.length < 3 ? addError("adress") : rmError("adress");
 				break;
 			case "postalCode":
 				value.length < 5
@@ -323,6 +324,7 @@ const CartForm = () => {
 							className={adress.className}
 							type={adress.type}
 							name={adress.name}
+							autoComplete={adress.autocomplete}
 							onChange={(e) => handleChange(e)}
 							onBlur={(e) => checkValidity(e)}
 						/>

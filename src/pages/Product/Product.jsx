@@ -5,8 +5,8 @@ import { client , urlFor } from "../../lib/client";
 import Star from '../../components/Star/Star';
 import AddToCartModal from "../../components/Modals/AddToCartModal/AddToCartModal";
 
-import { useStateContext } from '../../context/stateContext';
 import { useCart } from "../../hooks/useCart";
+import Loader from "../../components/Loader/Loader";
 
 const Product = () => {
     
@@ -127,7 +127,7 @@ const Product = () => {
         <main className="main-product">
             {error && <p>{error}</p> }
             {isLoading
-            ?<p>Chargement...</p>
+            ?<Loader/>
             :(
                 <>
                     <div className="product-container">

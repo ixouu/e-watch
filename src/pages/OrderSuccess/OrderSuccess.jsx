@@ -4,6 +4,7 @@ import OrderSummary from "./OrderSummary";
 import { client } from "../../lib/client";
 import SocialMedias from "../../components/SocialMedias/Index";
 import OrderError from "./OrderError";
+import Loader from "../../components/Loader/Loader";
 
 const OrderSuccess = () => {
 	document.title = "E-watch | Votre commande";
@@ -112,7 +113,7 @@ const OrderSuccess = () => {
 		<main className='order'>
 			{/* Display loarder  */}
 			{isLoading ? (
-				<p>Chargement...</p>
+				<Loader />
 			) : (
 
 						<>

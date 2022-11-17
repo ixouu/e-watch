@@ -1,5 +1,5 @@
 import Logo from '../Logo/Logo';
-import NavLinkComponent from './NavLink';
+import NavLinkComponent from './NavLinkComponent';
 import ShoppingNumber from './ShoppingNumber';
 import MobileNav from './MobileNav';
 
