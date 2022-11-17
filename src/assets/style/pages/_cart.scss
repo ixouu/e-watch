@@ -210,6 +210,9 @@
 }
 #inputAddress{
     position: relative;
+    input{
+        margin-bottom: 4px;
+    }
 }
 
 #cart-form{
@@ -270,9 +273,7 @@
 }
 
 .addressComplementary::placeholder{
-    @include mobile-only{
         font-size: .8rem;
-    }
 }
 
 .city{

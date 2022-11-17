@@ -105,8 +105,8 @@ const OrderSuccess = () => {
 	};
 
 	useEffect(() => {
-		setIsLoading(true);
-		sendOrder();
+		// setIsLoading(true);
+		// sendOrder();
 	}, []);
 
 	return (

@@ -22,6 +22,12 @@ form{
         height: 25px;
     }
 }
+input:focus ,textarea:focus{
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    outline: none !important;
+  }
 
 input, textarea{
     background-color: $color1;
@@ -29,14 +35,14 @@ input, textarea{
     padding : 5px;
     font-size: 1rem;
     font-family: $font1;
-    border: 3px solid transparent;
+    border: 2px solid transparent;
 }
 
 .inputInvalid {
-    border: 3px solid rgba(155, 44, 44, 0.5);
+    border: 2px solid rgba(155, 44, 44, 0.9);
 }
 .inputValid {
-    background-color: 3px solid rgba(155, 44, 44, 0.5);
+    border: 2px solid rgba(46, 142, 64, 0.9);
 }
 
 textarea{
