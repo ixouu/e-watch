@@ -219,7 +219,7 @@ const CartForm = () => {
 				value.length < 10 ? addError("adress") : rmError("adress");
 				break;
 			case "postalCode":
-				value.length === 5
+				value.length < 5
 					? addError("postalCode")
 					: rmError("postalCode");
 				break;

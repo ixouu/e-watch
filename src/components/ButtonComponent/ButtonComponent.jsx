@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const ButtonComponent = ({
 	title,
@@ -35,7 +35,7 @@ const ButtonComponent = ({
 
 	return (
 		<button
-			className={class1 ? `${class1}` : "btn"}
+			className={class1 ? `btn ${class1}` : "btn"}
 			style={{
 				backgroundColor: `${color}`,
 				width: `${width}`,

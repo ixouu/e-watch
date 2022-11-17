@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import Options from "./Options";
 import { useStateContext } from "../../context/stateContext";
+import { useNavigate } from "react-router-dom";
 
 
 const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange, isError, checkValidity }) => {
 	const {totalPrice } = useStateContext();
+	const navigate = useNavigate();
+
+	// submited form message
+	const [message, setMessage] = useState("");
+
+	//toggle class for form button
+	const [btnClassName, setBtnClassName] = useState("")
+
+
+	// If there is no errors, display success page
+	const submit = (e) => {
+		e.preventDefault();
+		if (isError){
+			setMessage("Veuillez renseignez les informations demandées.");
+			setBtnClassName("shake")
+			return
+		}
+		else{
+			setMessage("");
+			setBtnClassName("bounceOut")
+			// do not keep creditCard's informations for now
+			const timer = () => setTimeout(() => {
+				navigate('../order-success')
+			}, 750);
+			timer();
+			clearTimeout(timer);
+		}
+	}
+
 	return (
-		<form className='creditCard_form'>
+		<form className='creditCard_form' onSubmit={(e) => submit(e)}>
 			{inputs.map((elem) => {
 				return (
 					<div
@@ -89,11 +119,17 @@ const CreditCardForm = ({ cvcInput, expirationInputs, inputs, handleChange, isEr
 								onBlur={(e) => checkValidity(e)}
 							/>
 						}
+						{cvcInput.error ? (
+										<p>{cvcInput.errorMessage}</p>
+									) : (
+										null
+									)}
 					</div>
 				</div>
 			</div>
 			<div className="creditCard-form_btns">
-				<ButtonComponent title={"PAYER VOTRE COMMANDE ("+totalPrice()+",00 €)"} height={"80px"} color={"#239de5"} type={"submit"} disabled={isError}/>
+				<ButtonComponent title={"PAYER VOTRE COMMANDE ("+totalPrice()+",00 €)"} height={"80px"} color={"#239de5"} type={"submit"} disabled={isError} class1={btnClassName}/>
+				{message && <p>{message}</p>} 
 				<ButtonComponent title={"ANNULER"} height={"60px"} color={"#d2d0d0"} fontColor={"rgb(18, 18, 18)"} link={'../cart'} width={"130px"}/>
 			</div>
 			

@@ -1,0 +1,27 @@
+.socialLink-container{
+    display: flex;
+    align-self: center;
+    @include mobile-only{
+        flex-direction: column;
+    }
+    h2{
+        font-family: $font2;
+        display: inline-block;
+        width: fit-content!important;
+        line-height: 100px;
+        @include mobile-only{
+            line-height: 30px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .socialLink-icons{
+        display: flex;
+        margin-left: 40px;
+        font-size: 2rem;
+        align-items: center;
+        p{
+            margin: 0 20px;
+        }
+    }
+}

@@ -9,7 +9,7 @@ import regExpList from "../../utils/regExp";
 const Paiement = () => {
 	document.title = "E-watch | Paiement";
 
-	//
+	// form error
 	const [isError, setIsError] = useState(false);
 
 	// import cartList
