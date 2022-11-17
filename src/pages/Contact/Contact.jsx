@@ -13,7 +13,7 @@ const Contact = () => {
             autocomplete: 'name',
             name: 'lastName',
             error : false,
-            errorMessage: 'Le nom renseigné est incorrect ( exemple valide : Dupont).',
+            errorMessage: 'Le nom renseigné est incorrect (exemple valide : Dupont).',
             className: ""
         },
         {
@@ -22,17 +22,17 @@ const Contact = () => {
             id: "inputFirstName",
             name: 'firstName',
             error : false,
-            errorMessage : 'Le prénom renseigné est incorrect ( exemple valide : Paul).',
+            errorMessage : 'Le prénom renseigné est incorrect (exemple valide : Paul).',
             className: ""
         },
         {
-            label: 'Votre Adresse mail',
+            label: 'Votre adresse mail',
             type: 'email',
             id : 'inputEmail',
             autocomplete: 'email',
             name: 'email',
             error : false,
-            errorMessage : 'L\'adresse mail renseignée est incorrect ( exemple valide : paul@gmail.com).',
+            errorMessage : 'L\'adresse mail renseignée est incorrect (exemple valide : paul@gmail.com).',
             className: ""
         }
     ])

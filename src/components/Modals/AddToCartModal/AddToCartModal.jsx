@@ -108,6 +108,7 @@ const AddToCartModal = ({ open, onClose, successHandlter, productName }) => {
         <ButtonComponent
 						title={"Continuer mes achats"}
 						height={"50px"}
+						link={"../all-products"}
 					/>
         <ButtonComponent
 						title={"Passer la commande"}

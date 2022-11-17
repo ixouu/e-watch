@@ -7,6 +7,7 @@
 }
 .product-container{
     display: flex;
+    animation : displayContainer  .5s linear forwards;
     .product-container_left{
         display: flex;
         img{
@@ -134,4 +135,13 @@
     border-radius: 5px;
     width: 200px;
     height: 50px;
+}
+
+@keyframes displayContainer {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }

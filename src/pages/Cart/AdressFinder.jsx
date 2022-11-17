@@ -11,13 +11,13 @@ const AdressFinder = ({ address, replaceAdressValue, handleChange }) => {
 
 	useEffect(() => {
 		setAdressToFetch(
-			`${apiUrl}+${address
+			`${apiUrl}${address
 				.toLowerCase()
 				.trimStart()
 				.trimEnd()
 				.replace(/ +/g, "+")}`
 		);
-		if (address.length >= 3) {
+		if (address.length >= 4) {
 			const FetchData = async (urlToSearch) => {
 				try {
 					setAxiosIsLoading(true);
