@@ -4,7 +4,6 @@ import OrderSummary from "./OrderSummary";
 import { client } from "../../lib/client";
 import SocialMedias from "../../components/SocialMedias/Index";
 import OrderError from "./OrderError";
-import Error from "../Error/Error";
 
 const OrderSuccess = () => {
 	document.title = "E-watch | Votre commande";
@@ -97,7 +96,11 @@ const OrderSuccess = () => {
 			});
 			// add order to DB
 			addOrder();
-		} else return;
+		} else {
+			setError(true);
+			setIsLoading(false);
+			setErrorMessage('Votre panier est vide !')
+		};
 	};
 
 	useEffect(() => {
@@ -111,14 +114,10 @@ const OrderSuccess = () => {
 			{isLoading ? (
 				<p>Chargement...</p>
 			) : (
-				<>
-					{/* Verifies is the cart is not empty  */}
-					{orderInfos === undefined ? (
-						<Error />
-					) : (
+
 						<>
 							{/* Toggle error or orderSummary */}
-							{error ? (
+							{error || orderInfos === undefined ? (
 								<OrderError errorMessage={errorMessage} />
 							) : (
 								<div className='order-success'>
@@ -128,8 +127,7 @@ const OrderSuccess = () => {
 							)}
 							<SocialMedias />
 						</>
-					)}
-				</>
+
 			)}
 		</main>
 	);

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiUrl = "https://api-adresse.data.gouv.fr/search/?q=";
 
-const AdressFinder = ({ adress, replaceAdressValue, handleChange }) => {
+const AdressFinder = ({ address, replaceAdressValue, handleChange }) => {
 	const [adressToFetch, setAdressToFetch] = useState(null);
 	const [axiosData, setAxiosData] = useState([]);
 	const [axiosIsLoading, setAxiosIsLoading] = useState(false);
@@ -11,13 +11,13 @@ const AdressFinder = ({ adress, replaceAdressValue, handleChange }) => {
 
 	useEffect(() => {
 		setAdressToFetch(
-			`${apiUrl}+${adress
+			`${apiUrl}+${address
 				.toLowerCase()
 				.trimStart()
 				.trimEnd()
 				.replace(/ +/g, "+")}`
 		);
-		if (adress.length >= 3) {
+		if (address.length >= 3) {
 			const FetchData = async (urlToSearch) => {
 				try {
 					setAxiosIsLoading(true);
@@ -36,7 +36,7 @@ const AdressFinder = ({ adress, replaceAdressValue, handleChange }) => {
 			};
 			FetchData(adressToFetch);
 		} else return;
-	}, [adress, adressToFetch]);
+	}, [address, adressToFetch]);
 
 	const pasteTheFoundAdress = (e) => {
 		let address = e.target.textContent.split(" ");

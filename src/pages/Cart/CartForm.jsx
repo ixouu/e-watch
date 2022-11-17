@@ -176,6 +176,14 @@ const CartForm = () => {
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		// Assign new value to the appropriate form field
+		if (name === 'postalCode'){
+			const updatedForm = {
+				...form,
+				postalCode: parseInt(value),
+			};
+			// Update state form
+			setForm(updatedForm);
+		} else {
 		const updatedForm = {
 			...form,
 			[name]: value,
@@ -183,6 +191,7 @@ const CartForm = () => {
 		// Update state form
 		setForm(updatedForm);
 		// toggle the adress finder
+		}
 		if (
 			e.target.className === "inputAddress" &&
 			e.target.value.length !== 0
@@ -256,14 +265,14 @@ const CartForm = () => {
 	};
 
 	// handle the suggested adress and replace the input value
-	const replaceAdressValue = (adress, postalCode, city) => {
-		adressRef.current.value = adress;
+	const replaceAdressValue = (address, postalCode, city) => {
+		adressRef.current.value = address;
 		postalCodeRef.current.value = postalCode;
 		cityRef.current.value = city;
 		setOpenAdressFinder(false);
 		setForm({
 			...form,
-			adress,
+			address,
 			postalCode,
 			city,
 		});
@@ -320,7 +329,7 @@ const CartForm = () => {
 						{/* adress finder */}
 						{openAdressFinder && (
 							<AdressFinder
-								adress={adressRef.current.value}
+								address={adressRef.current.value}
 								replaceAdressValue={replaceAdressValue}
 							/>
 						)}
