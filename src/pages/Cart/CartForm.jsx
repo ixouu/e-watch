@@ -10,6 +10,7 @@ const CartForm = () => {
 	const adressRef = useRef(null);
 	const postalCodeRef = useRef(null);
 	const cityRef = useRef(null);
+	
 	// give the focus on the first input
 	useEffect(() => {
 		formRef.current[1].focus();
@@ -28,7 +29,7 @@ const CartForm = () => {
 			error: false,
 			errorMessage:
 				"Le nom renseigné est incorrect (exemple valide : Dupont).",
-			className: "",
+			className: "lastName",
 		},
 		{
 			label: "Prénom",
@@ -38,7 +39,7 @@ const CartForm = () => {
 			error: false,
 			errorMessage:
 				"Le prénom renseigné est incorrect (exemple valide : Paul).",
-			className: "",
+			className: "firstName",
 		},
 		{
 			label: "Votre Adresse mail",
@@ -49,7 +50,7 @@ const CartForm = () => {
 			error: false,
 			errorMessage:
 				"L'adresse mail renseignée est incorrect (exemple valide : paul@gmail.com).",
-			className: "",
+			className: "email",
 		},
 	]);
 
@@ -58,7 +59,7 @@ const CartForm = () => {
 		type: "text",
 		id: "inputAddress",
 		name: "inputAddress",
-		autocomplete: 'off',
+		autocomplete: "off",
 		error: false,
 		errorMessage: "Veuillez saisir une adresse valide.",
 		className: "inputAddress",
@@ -106,11 +107,11 @@ const CartForm = () => {
 	};
 
 	// error Statement
-	const [isError, setIsError] = useState(false);
+	const [isError, setIsError] = useState(true);
 
 	// Select the right input and add the corresponding error
 	function addError(inputName) {
-		setIsError(true);
+		isError === false && setIsError(true);
 		if (inputName === "postalCode") {
 			setPostalCode({
 				...postalCode,
@@ -118,7 +119,11 @@ const CartForm = () => {
 				className: "postalCode inputInvalid",
 			});
 		} else if (inputName === "city") {
-			setCity({ ...city, error: true, className: "city inputInvalid" });
+			setCity({ 
+				...city, 
+				error: true, 
+				className: "city inputInvalid" 
+			});
 		} else if (inputName === "adress") {
 			setAdress({
 				...adress,
@@ -126,11 +131,16 @@ const CartForm = () => {
 				className: "adress inputInvalid",
 			});
 		} else {
-			const newInputs = inputs.map((obj) => {
-				if (obj.name === inputName) {
-					return { ...obj, error: true, className: "inputInvalid" };
+			let newInputs = inputs.map((input) => {
+				if (input.name === inputName) {
+					console.log(input.name);
+					return {
+						...input,
+						error: true,
+						className: `${inputName} inputInvalid`,
+					};
 				}
-				return obj;
+				return input;
 			});
 			setInputs(newInputs);
 		}
@@ -139,45 +149,47 @@ const CartForm = () => {
 	// Select the right input and remove the error
 	function rmError(inputName) {
 		setIsError(false);
-		if (inputName === "postalCode"){
+		if (inputName === "postalCode") {
 			setPostalCode({
 				...postalCode,
 				error: false,
-				className: `${inputName}`,
+				className: `${inputName} inputValid`,
 			});
-		}
-		else if (inputName === "city"){
+		} else if (inputName === "city") {
 			setCity({
 				...city,
 				error: false,
-				className: `${inputName}`,
+				className: `${inputName} inputValid`,
 			});
-		}
-		else if (inputName === "adress"){
+		} else if (inputName === "adress") {
 			setAdress({
 				...adress,
 				error: false,
-				className: `${inputName}`,
+				className: `${inputName} inputValid`,
 			});
+		} else {
+			const newInputs = inputs.map((obj) => {
+				if (obj.name === inputName) {
+					return {
+						...obj,
+						error: false,
+						className: `${inputName} inputValid`,
+					};
+				}
+				return obj;
+			});
+			setInputs(newInputs);
 		}
-		else {
-		const newInputs = inputs.map((obj) => {
-			if (obj.name === inputName) {
-				return { ...obj, error: false, className: `${inputName}` };
-			}
-			return obj;
-		});
-		setInputs(newInputs);
-	}};
-
-	// Function that save changes
+	}
 
 	const [form, setForm] = useState(initialValues);
 	const [openAdressFinder, setOpenAdressFinder] = useState(false);
+
+	// Function that save changes
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		// Assign new value to the appropriate form field
-		if (name === 'postalCode'){
+		if (name === "postalCode") {
 			const updatedForm = {
 				...form,
 				postalCode: parseInt(value),
@@ -185,13 +197,13 @@ const CartForm = () => {
 			// Update state form
 			setForm(updatedForm);
 		} else {
-		const updatedForm = {
-			...form,
-			[name]: value,
-		};
-		// Update state form
-		setForm(updatedForm);
-		// toggle the adress finder
+			const updatedForm = {
+				...form,
+				[name]: value,
+			};
+			// Update state form
+			setForm(updatedForm);
+			// toggle the adress finder
 		}
 		if (
 			e.target.className === "inputAddress" &&
@@ -202,14 +214,14 @@ const CartForm = () => {
 			return;
 		}
 	};
+
 	// check inputs validity
-	const checkValidity = (e) => {
+	const checkValidity = (name, value) => {
 		// timer has been setted to be able to click the adress before the blur
 		setTimeout(() => {
 			setOpenAdressFinder(false);
 		}, 200);
-		const value = e.target.value;
-		switch (e.target.name) {
+		switch (name) {
 			case "lastName":
 				!regExpList.lastName.test(value)
 					? addError("lastName")
@@ -225,11 +237,11 @@ const CartForm = () => {
 					? addError("email")
 					: rmError("email");
 				break;
-			case "address":
+			case "inputAddress":
 				value.length < 3 ? addError("adress") : rmError("adress");
 				break;
 			case "postalCode":
-				value.length < 5
+				!regExpList.postalCode.test(value)
 					? addError("postalCode")
 					: rmError("postalCode");
 				break;
@@ -246,37 +258,47 @@ const CartForm = () => {
 	// submited form message
 	const [message, setMessage] = useState("");
 
-	// If there is no errors, display paiement page
+	// If there are no errors, display paiement page
 	const submit = (e, form) => {
+		const formToCheck = Object.entries(form);
+		console.log(formToCheck);
+		formToCheck.forEach((entry) => {
+			checkValidity(entry[0], entry[1]);
+		});
 		e.preventDefault();
-		if (isError){
+		if (isError) {
 			setMessage("Veuillez renseignez les informations demandées.");
-			e.target.className="shake"
-			return
-		} else{
-			e.target.className="bounceOut"
+			e.target.className = "cartForm-btn shake";
+			return;
+		} else {
+			e.target.className = "cartForm-btn bounceOut";
 			setMessage("");
 			saveUserInformations(form);
-			const timer = () => setTimeout(() => {
-				navigate('../paiement')
-			}, 750);
+			const timer = () =>
+				setTimeout(() => {
+					navigate("../paiement");
+				}, 750);
 			timer();
 			clearTimeout(timer);
 		}
 	};
 
 	// handle the suggested adress and replace the input value
-	const replaceAdressValue = (address, postalCode, city) => {
-		adressRef.current.value = address;
+	const replaceAdressValue = (addressInput, postalCode, city) => {
+		adressRef.current.value = addressInput;
 		postalCodeRef.current.value = postalCode;
 		cityRef.current.value = city;
 		setOpenAdressFinder(false);
 		setForm({
 			...form,
-			address,
+			addressInput,
 			postalCode,
 			city,
 		});
+		const adressInputs = [adressRef, postalCodeRef, cityRef];
+		for (const input of adressInputs) {
+			checkValidity(input.current.name, input.current.value);
+		}
 	};
 
 	return (
@@ -302,7 +324,12 @@ const CartForm = () => {
 									name={elem.name}
 									autoComplete={elem.autocomplete}
 									onChange={handleChange}
-									onBlur={(e) => checkValidity(e)}
+									onBlur={(e) =>
+										checkValidity(
+											e.target.name,
+											e.target.value
+										)
+									}
 								/>
 								{elem.error ? (
 									<p>{elem.errorMessage}</p>
@@ -326,7 +353,9 @@ const CartForm = () => {
 							name={adress.name}
 							autoComplete={adress.autocomplete}
 							onChange={(e) => handleChange(e)}
-							onBlur={(e) => checkValidity(e)}
+							onBlur={(e) =>
+								checkValidity(e.target.name, e.target.value)
+							}
 						/>
 						{/* adress finder */}
 						{openAdressFinder && (
@@ -345,11 +374,13 @@ const CartForm = () => {
 							name={addressComplementary.name}
 							placeholder={addressComplementary.placeholder}
 							onChange={(e) => handleChange(e)}
-							onBlur={(e) => checkValidity(e)}
+							onBlur={(e) =>
+								checkValidity(e.target.name, e.target.value)
+							}
 						/>
 						{adress.error ? <p>{adress.errorMessage}</p> : <p></p>}
 						<div className='city'>
-						{/* postal Code input */}
+							{/* postal Code input */}
 							<div className='city-postalCode'>
 								<label htmlFor={postalCode.id}>
 									{postalCode.label}
@@ -360,7 +391,12 @@ const CartForm = () => {
 									type={postalCode.type}
 									name={postalCode.name}
 									onChange={(e) => handleChange(e)}
-									onBlur={(e) => checkValidity(e)}
+									onBlur={(e) =>
+										checkValidity(
+											e.target.name,
+											e.target.value
+										)
+									}
 								/>
 								{postalCode.error ? (
 									<p>{postalCode.errorMessage}</p>
@@ -369,7 +405,7 @@ const CartForm = () => {
 								)}
 							</div>
 							<div className='city-city'>
-							{/* city input */}
+								{/* city input */}
 								<label htmlFor={city.id}>{city.label}</label>
 								<input
 									ref={cityRef}
@@ -377,7 +413,12 @@ const CartForm = () => {
 									type={city.type}
 									name={city.name}
 									onChange={(e) => handleChange(e)}
-									onBlur={(e) => checkValidity(e)}
+									onBlur={(e) =>
+										checkValidity(
+											e.target.name,
+											e.target.value
+										)
+									}
 								/>
 								{city.error ? (
 									<p>{city.errorMessage}</p>
@@ -391,7 +432,7 @@ const CartForm = () => {
 				<button
 					type='submit'
 					onClick={(e) => submit(e, form)}
-					className="cartForm-btn"
+					className='cartForm-btn'
 				>
 					Procéder au paiement
 				</button>

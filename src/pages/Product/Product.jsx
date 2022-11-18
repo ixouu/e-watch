@@ -105,7 +105,7 @@ const Product = () => {
   const [success, setSuccess] = useState(false);
   const [value, setValue] = useState(1);
 
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove, onAdd } = useCart();
+  const { onAdd } = useCart();
 
   const addToCart = (e) => {
     e.preventDefault();

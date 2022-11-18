@@ -5,47 +5,60 @@ import CreditCardFront from "./CreditCardFront";
 import { useStateContext } from "../../context/stateContext";
 import Error from "../Error/Error";
 import regExpList from "../../utils/regExp";
+import { formsUtils } from "../../utils/formsUtils";
+import { useNavigate } from "react-router-dom";
 
 const Paiement = () => {
 	document.title = "E-watch | Paiement";
+	const navigate = useNavigate();
+
+	const { verifiesActualDate, formatedNumber, generateYears } = formsUtils;
 
 	// form error
 	const [isError, setIsError] = useState(false);
 
 	// import cartList
-	const { cartItems, userInformations } = useStateContext();
+	const { cartItems, totalPrice} = useStateContext();
 
-	// From the actual date, return an array with the next 10 years
-	const generateYears = () => {
-		let years = [];
-		const currentYear = new Date().getFullYear();
-		for (let i = currentYear; i < currentYear + 8; i++) {
-			years.push(i);
-		}
-		return years;
-	};
+	// submited form message
+	const [errorMessage, setErrorMessage] = useState("");
 
-	// function who verifies if all informations needed are provided
-	const verifiesUserInformations = () => {
-		let result = true;
-		if (
-			userInformations.lastName === undefined ||
-			userInformations.firstName === undefined ||
-			userInformations.email === undefined ||
-			userInformations.address === undefined ||
-			userInformations.postalCode === undefined ||
-			userInformations.city === undefined
-		) {
-			result = !result;
+	//toggle class for form button
+	const [btnClassName, setBtnClassName] = useState("");
+
+	// If there is no errors, display success page
+	const submit = (e) => {
+		e.preventDefault();
+		if(verifiesActualDate(
+			paiementInformations.creditCardExpirationMonth,
+			paiementInformations.creditCardExpriationYear) === false ){
+				setIsError(true);
+				setBtnClassName("shake");
+				setErrorMessage("La date d'expiration renseignée n'est pas valide.");
+				return;
+			}
+		if (isError) {
+			setErrorMessage("Veuillez renseignez les informations demandées.");
+			setBtnClassName("shake");
+			return;
+		} else {
+			setErrorMessage("");
+			setBtnClassName("bounceOut");
+			// do not keep creditCard's informations for now
+			const timer = () =>
+				setTimeout(() => {
+					navigate("../order-success");
+				}, 750);
+			timer();
+			clearTimeout(timer);
 		}
-		return result;
 	};
 
 	// state to manage provided informations form the from
 	const [paiementInformations, setPaiementInformations] = useState({
 		creditCardNumber: "123 567 0000",
 		creditCardName: "John Doe",
-		creditCardExpirationMonth: "01",
+		creditCardExpirationMonth: 1,
 		creditCardExpriationYear: new Date().getFullYear(),
 		creditCardCvc: "000",
 	});
@@ -76,15 +89,12 @@ const Paiement = () => {
 			pattern: "[0-9]{10}",
 		},
 	]);
-	const [expirationInputs, setExpirationInputs] = useState([
+	const expirationInputs = [
 		{
 			title: "month",
 			type: "number",
 			id: "creditCardExpirationMonth",
-			error: false,
-			errorMessage: "Le mois renseigné n'est pas valide ",
 			className: "creditCardExpirationMonth",
-			autocomplete: true,
 			options: [
 				"01",
 				"02",
@@ -104,13 +114,10 @@ const Paiement = () => {
 			title: "year",
 			type: "number",
 			id: "creditCardExpriationYear",
-			error: false,
-			errorMessage: "L'année renseigné n'est pas valide ",
 			className: "creditCardExpriationYear",
-			autocomplete: true,
 			options: generateYears(),
 		},
-	]);
+	];
 
 	const [cvcInput, setCvcInput] = useState({
 		title: "CVC",
@@ -126,15 +133,9 @@ const Paiement = () => {
 		inputmode: "numeric",
 	});
 
-	// Format card Number
-	const formatedNumber = (value) => {
-		const arrNumb = [];
-		arrNumb.push(value.slice(0, 3), value.slice(3, 6), value.slice(6, 10));
-		return arrNumb.join(" ");
-	};
-
 	// Manage input changes
 	const handleChange = (e) => {
+		isError && setIsError(false);
 		const { id, value } = e.target;
 		// format card Number
 		if (id === "creditCardNumber") {
@@ -167,11 +168,11 @@ const Paiement = () => {
 					? addError("creditCardNumber")
 					: rmError("creditCardNumber");
 				break;
-            case "creditCardCvc":
-                !regExpList.creditCardCvc.test(value)
-                    ? addError("creditCardCvc")
-                    : rmError("creditCardCvc");
-                break;
+			case "creditCardCvc":
+				!regExpList.creditCardCvc.test(value)
+					? addError("creditCardCvc")
+					: rmError("creditCardCvc");
+				break;
 			default:
 				break;
 		}
@@ -180,27 +181,26 @@ const Paiement = () => {
 	// Select the right input and add the corresponding error
 	function addError(inputName) {
 		setIsError(true);
-        if(inputName===  "creditCardCvc"){
-            setCvcInput({
+		if (inputName === "creditCardCvc") {
+			setCvcInput({
 				...cvcInput,
 				error: true,
 				className: "inputInvalid",
 			});
-        } else{
-		const newInputs = inputs.map((obj) => {
-			if (obj.id === inputName) {
-				return { ...obj, error: true, className: "inputInvalid" };
-			}
-			return obj;
-            
-		});
-		setInputs(newInputs);
-    }
+		} else {
+			const newInputs = inputs.map((obj) => {
+				if (obj.id === inputName) {
+					return { ...obj, error: true, className: "inputInvalid" };
+				}
+				return obj;
+			});
+			setInputs(newInputs);
+		}
 	}
 
 	// Select the right input and remove the error
 	function rmError(inputName) {
-        if (inputName === "creditCardCvc"){
+		if (inputName === "creditCardCvc") {
 			setCvcInput({
 				...cvcInput,
 				error: false,
@@ -237,8 +237,12 @@ const Paiement = () => {
 							expirationInputs={expirationInputs}
 							inputs={inputs}
 							handleChange={handleChange}
-                            isError={isError}
-                            checkValidity={checkValidity}
+							isError={isError}
+							checkValidity={checkValidity}
+							submit={submit}
+							errorMessage={errorMessage}
+							btnClassName={btnClassName}
+							totalPrice={totalPrice}
 						/>
 					</div>
 				</>
@@ -248,5 +252,3 @@ const Paiement = () => {
 };
 
 export default Paiement;
-
-// || !verifiesUserInformations()

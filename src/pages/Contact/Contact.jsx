@@ -165,9 +165,7 @@ const Contact = () => {
                 <Form 
                 submit={submit}
                 initialValues={initialValues}
-                id={"contact-form"} 
                 legend={"Formulaire de contact"}
-                buttonValue={"Envoyer"}
                 inputs={inputs}
                 textArea={textArea}
                 checkValidity={checkValidity}

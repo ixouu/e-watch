@@ -1,16 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { contactFormContext } from "../../context/contactFormContext";
 
-const Form = (props) => {
+const Form = ({legend, inputs, textArea, checkValidity, isError, submit, initialValues }) => {
 	const formRef = useRef();
 	// give the focus on the first input
 	useEffect(() => {
 		formRef.current[1].focus();
 	}, []);
-
-	const { id, legend, buttonValue, inputs, textArea, checkValidity } = props;
-
-	const { children, submit = () => {}, initialValues } = props;
 
 	const [form, setForm] = useState(initialValues);
 
@@ -28,8 +25,9 @@ const Form = (props) => {
 
 	return (
 		<form
-			id={id}
+			id="contact-form"
 			ref={formRef}
+			onSubmit={() => submit(form)}
 		>
 			<contactFormContext.Provider
 				value={{
@@ -37,7 +35,6 @@ const Form = (props) => {
 					handleChange,
 				}}
 			>
-				{children}
 			</contactFormContext.Provider>
 			<fieldset>
 				<legend>{legend}</legend>
@@ -87,12 +84,13 @@ const Form = (props) => {
 						);
 					})}
 			</fieldset>
-			<button
-				type='button'
-				onClick={() => submit(form)}
-			>
-				{buttonValue}
-			</button>
+			<ButtonComponent
+				type='submit'
+				title={"ENVOYER"}
+				height={"60px"}
+				color={"#239de5"}
+				disabled={isError}
+			/>
 		</form>
 	);
 };
