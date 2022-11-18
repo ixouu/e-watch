@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { contactFormContext } from "../../context/contactFormContext";
 
-const Form = ({legend, inputs, textArea, checkValidity, isError, submit, initialValues }) => {
+const Form = ({
+	legend,
+	inputs,
+	textArea,
+	checkValidity,
+	isError,
+	submit,
+	initialValues,
+}) => {
 	const formRef = useRef();
 	// give the focus on the first input
 	useEffect(() => {
@@ -25,7 +33,7 @@ const Form = ({legend, inputs, textArea, checkValidity, isError, submit, initial
 
 	return (
 		<form
-			id="contact-form"
+			id='contact-form'
 			ref={formRef}
 			onSubmit={() => submit(form)}
 		>
@@ -34,8 +42,7 @@ const Form = ({legend, inputs, textArea, checkValidity, isError, submit, initial
 					form,
 					handleChange,
 				}}
-			>
-			</contactFormContext.Provider>
+			></contactFormContext.Provider>
 			<fieldset>
 				<legend>{legend}</legend>
 				{inputs.map((elem) => {

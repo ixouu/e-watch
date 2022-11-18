@@ -1,4 +1,4 @@
-.tag{
+.tag {
     background-color: $color2;
     border-radius: 20px;
     margin: 0 5px;
@@ -6,44 +6,50 @@
     height: fit-content;
     cursor: pointer;
     border: none;
-    span{
+
+    span {
         padding: 15px;
         font-size: 1.2rem;
         color: white;
-        @include mobile-only{
+
+        @include mobile-only {
             font-size: 1rem;
             padding: 15px;
         }
     }
-    i{
+
+    i {
         color: white;
         font-size: 1.2rem;
         padding: 2px;
     }
-    @include mobile-only{
+
+    @include mobile-only {
         margin-bottom: 10px;
     }
 }
 
-.tag-Close{
+.tag-Close {
     transition: all .3s;
-    animation: show .5s  1 forwards ease-out;
+    animation: show .5s 1 forwards ease-out;
     opacity: 0;
     background-color: rgb(192, 11, 11);
     transform: scale(.9);
-    @include mobile-only{
+
+    @include mobile-only {
         font-size: 0.9rem;
     }
 }
 
 @keyframes show {
-    0%{
+    0% {
         opacity: 0;
         transform: scale(.9);
     }
-    100%{
+
+    100% {
         opacity: 1;
         transform: scale(1);
     }
-    
+
 }

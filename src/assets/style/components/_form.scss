@@ -1,38 +1,42 @@
-.formInput{
+.formInput {
     display: flex;
     flex-direction: column;
 
 }
 
-fieldset{
+fieldset {
     border-radius: 5px;
 }
 
-legend{
+legend {
     font-size: 1.4rem;
 }
 
-form{
+form {
     width: 500px;
     position: relative;
     margin-bottom: 50px;
-    p{
-        color :rgb(155, 44, 44);
+
+    p {
+        color: rgb(155, 44, 44);
         font-size: .8rem;
         height: 25px;
     }
 }
-input:focus ,textarea:focus{
+
+input:focus,
+textarea:focus {
     box-shadow: none !important;
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     outline: none !important;
-  }
+}
 
-input, textarea{
+input,
+textarea {
     background-color: $color1;
     border-radius: 5px;
-    padding : 5px;
+    padding: 5px;
     font-size: 1rem;
     font-family: $font1;
     border: 2px solid transparent;
@@ -41,21 +45,24 @@ input, textarea{
 .inputInvalid {
     border: 2px solid rgba(155, 44, 44, 0.9);
 }
+
 .inputValid {
     border: 2px solid rgba(46, 142, 64, 0.9);
 }
 
-textarea{
+textarea {
     min-height: 300px;
 }
 
-#inputFirstName, #inputLastName, #inputEmail {
-    input{
+#inputFirstName,
+#inputLastName,
+#inputEmail {
+    input {
         width: 50%;
     }
 }
 
-#contact-form{
+#contact-form {
     button {
         align-self: center;
         position: absolute;

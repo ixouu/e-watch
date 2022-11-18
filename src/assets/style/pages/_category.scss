@@ -1,22 +1,26 @@
-.main-category{
+.main-category {
     @include mainPadding;
 
-    .main-category_productContent{
+    .main-category_productContent {
         margin-top: 40px;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        @include tablettes-only{
+
+        @include tablettes-only {
             flex-wrap: wrap;
         }
-        @include mobile-only{
+
+        @include mobile-only {
             flex-direction: column;
             align-items: center;
         }
     }
-    p{
+
+    p {
         text-align: justify;
-        @include mobile-only{
+
+        @include mobile-only {
             padding: 0 8px;
         }
     }

@@ -1,42 +1,53 @@
-.main-categories{
+.main-categories {
     @include mainPadding;
-    @include largeScreen-only{
+
+    @include largeScreen-only {
         margin: 0 20%;
     }
-    h1{
+
+    h1 {
         @include pageTitle;
     }
-    p{
+
+    p {
         margin: 0 20%;
-        @include mobile-only{
+
+        @include mobile-only {
             margin: 0;
         }
-        @include tablettes-only{
+
+        @include tablettes-only {
             margin: 0;
         }
-        @include largeScreen-only{
+
+        @include largeScreen-only {
             margin: 0;
         }
     }
 
-    ul{
+    ul {
         display: flex;
         padding: 40px 0 0 0;
         justify-content: center;
-        @include mobile-only{
+
+        @include mobile-only {
             flex-direction: column;
             align-items: center;
         }
-        @include tablettes-only{
+
+        @include tablettes-only {
             flex-direction: column;
             align-items: center;
         }
-        li{
+
+        li {
             list-style: none;
-            @include mobile-only{
+
+            @include mobile-only {
                 padding: 16px 0;
             }
-            @include tablettes-only{
+
+            @include tablettes-only {
                 padding: 16px 0;
             }
         }

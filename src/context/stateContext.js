@@ -5,9 +5,10 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
     let foundProduct;
+    // eslint-disable-next-line no-unused-vars
     let index;
     
-    const { isLoading, data, error } = useData();
+    const {data} = useData();
     const storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     const saveCart = (cart) => {
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -84,7 +85,6 @@ export const StateContext = ({ children }) => {
 
     const onAdd = (product, quantity) => {
             updateBasket(product.id, quantity, product.image, product.title, product.price, product.availableStock);
-
     }
 
     const totalQuantities = () => {
@@ -100,26 +100,24 @@ export const StateContext = ({ children }) => {
         else return 0;
     }
 
-        const totalPrice = () =>{
-            let prices = [];
-                if (cartItems.length >= 1) {
-                    cartItems.map((product) => {
-                        const item = data.find((item) => item._id === product.id);
-                        return item && prices.push(item.price * product.qty);
-                });
-                const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
-                return totalPrice;
-                } else {
-                    return 0;
-                }
-        }
+    const totalPrice = () =>{
+        let prices = [];
+            if (cartItems.length >= 1) {
+                cartItems.map((product) => {
+                    const item = data.find((item) => item._id === product.id);
+                    return item && prices.push(item.price * product.qty);
+            });
+            const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
+            return totalPrice;
+            } else {
+                return 0;
+            }
+    }
 
     const [ userInformations, setUserInformations ] = useState({})
     const saveUserInformations = (form) => {
         setUserInformations(form)
     }
-
-
 
     return (
         <Context.Provider value={{

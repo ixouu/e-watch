@@ -18,7 +18,7 @@ const Paiement = () => {
 	const [isError, setIsError] = useState(false);
 
 	// import cartList
-	const { cartItems, totalPrice} = useStateContext();
+	const { cartItems, totalPrice } = useStateContext();
 
 	// submited form message
 	const [errorMessage, setErrorMessage] = useState("");
@@ -29,14 +29,19 @@ const Paiement = () => {
 	// If there is no errors, display success page
 	const submit = (e) => {
 		e.preventDefault();
-		if(verifiesActualDate(
-			paiementInformations.creditCardExpirationMonth,
-			paiementInformations.creditCardExpriationYear) === false ){
-				setIsError(true);
-				setBtnClassName("shake");
-				setErrorMessage("La date d'expiration renseignée n'est pas valide.");
-				return;
-			}
+		if (
+			verifiesActualDate(
+				paiementInformations.creditCardExpirationMonth,
+				paiementInformations.creditCardExpriationYear
+			) === false
+		) {
+			setIsError(true);
+			setBtnClassName("shake");
+			setErrorMessage(
+				"La date d'expiration renseignée n'est pas valide."
+			);
+			return;
+		}
 		if (isError) {
 			setErrorMessage("Veuillez renseignez les informations demandées.");
 			setBtnClassName("shake");

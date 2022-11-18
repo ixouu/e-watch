@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiUrl = "https://api-adresse.data.gouv.fr/search/?q=";
 
-const AdressFinder = ({ address, replaceAdressValue, handleChange }) => {
+const AdressFinder = ({ address, replaceAdressValue }) => {
 	const [adressToFetch, setAdressToFetch] = useState(null);
 	const [axiosData, setAxiosData] = useState([]);
 	const [axiosIsLoading, setAxiosIsLoading] = useState(false);

@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useStateContext } from "../../context/stateContext";
-import { useData } from "../../hooks/useData";
 
 import CartForm from "./CartForm";
 import ProductCard from "./ProductCard";
@@ -10,8 +9,7 @@ const Cart = () => {
 	document.title = "E-watch | Panier";
 	const { cartItems, totalPrice } = useStateContext();
 	// fetch data from backend
-	const { isLoading, data, error } = useData();
-	
+
 	// display all Cart products based on localstorage informations
 	const displayCartProducts = () => {
 		if (cartItems.length >= 1) {
@@ -32,9 +30,9 @@ const Cart = () => {
 
 	// display the form
 	const [formIsOpen, setFormIsOpen] = useState(false);
-	const openForm =  () =>{
-		setFormIsOpen(prevState => !prevState)
-	}
+	const openForm = () => {
+		setFormIsOpen((prevState) => !prevState);
+	};
 
 	return (
 		<>
@@ -62,22 +60,40 @@ const Cart = () => {
 									</span>
 								</div>
 							</div>
-							<div className="btnContainer" onClick={openForm}>
-								{cartItems.length === 0 
-								? <ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} disabled={true}/>
-								:<ButtonComponent title={'COMMANDER'} color={'#239de5'} height={'80px'} width={'200px'} />
-								}
+							<div
+								className='btnContainer'
+								onClick={openForm}
+							>
+								{cartItems.length === 0 ? (
+									<ButtonComponent
+										title={"COMMANDER"}
+										color={"#239de5"}
+										height={"80px"}
+										width={"200px"}
+										disabled={true}
+									/>
+								) : (
+									<ButtonComponent
+										title={"COMMANDER"}
+										color={"#239de5"}
+										height={"80px"}
+										width={"200px"}
+									/>
+								)}
 							</div>
 						</div>
 					</div>
 				</div>
-				<div className="continueOrderBtn-Container">
-					<ButtonComponent title={'CONTINUER MES ACHATS'} height={'80px'} width={'230px'} link={'/'}/>
+				<div className='continueOrderBtn-Container'>
+					<ButtonComponent
+						title={"CONTINUER MES ACHATS"}
+						height={"80px"}
+						width={"230px"}
+						link={"/"}
+					/>
 				</div>
-				<div className="cart-from_container">
-					{
-						formIsOpen && <CartForm />
-					}
+				<div className='cart-from_container'>
+					{formIsOpen && <CartForm />}
 				</div>
 			</main>
 		</>

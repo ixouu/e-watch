@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ButtonComponent = ({
 	title,
@@ -12,13 +12,13 @@ const ButtonComponent = ({
 	class1,
 	borderRadius,
 	fontColor,
-	type
+	type,
 }) => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
 		if (link === undefined) {
-			return
+			return;
 		} else {
 			navigate(`${link}`);
 		}
@@ -41,7 +41,7 @@ const ButtonComponent = ({
 				width: `${width}`,
 				height: `${height}`,
 				borderRadius: `${borderRadius}`,
-				color: `${fontColor}`
+				color: `${fontColor}`,
 			}}
 			disabled={disabled}
 			type={`${type}`}

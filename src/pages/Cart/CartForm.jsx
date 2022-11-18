@@ -10,7 +10,7 @@ const CartForm = () => {
 	const adressRef = useRef(null);
 	const postalCodeRef = useRef(null);
 	const cityRef = useRef(null);
-	
+
 	// give the focus on the first input
 	useEffect(() => {
 		formRef.current[1].focus();
@@ -119,10 +119,10 @@ const CartForm = () => {
 				className: "postalCode inputInvalid",
 			});
 		} else if (inputName === "city") {
-			setCity({ 
-				...city, 
-				error: true, 
-				className: "city inputInvalid" 
+			setCity({
+				...city,
+				error: true,
+				className: "city inputInvalid",
 			});
 		} else if (inputName === "adress") {
 			setAdress({

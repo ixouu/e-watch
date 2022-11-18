@@ -1,31 +1,37 @@
-.paiement{
+.paiement {
     position: relative;
     display: flex;
-    @include tablettes-only{
+
+    @include tablettes-only {
         flex-direction: column;
     }
-    @include mobile-only{
+
+    @include mobile-only {
         flex-direction: column;
     }
-    .paiement-leftContainer{
+
+    .paiement-leftContainer {
         width: 30%;
         min-height: 100%;
-        background: rgb(54,57,57);
-        background:   linear-gradient(140deg, rgb(45, 47, 47) 20%, rgba(54,57,57,1) 25%, rgb(178, 179, 179) 35%, #B1B2B2 45%, rgba(54,57,57,1) 55%, rgba(54,57,57,1) 65%);
+        background: rgb(54, 57, 57);
+        background: linear-gradient(140deg, rgb(45, 47, 47) 20%, rgba(54, 57, 57, 1) 25%, rgb(178, 179, 179) 35%, #B1B2B2 45%, rgba(54, 57, 57, 1) 55%, rgba(54, 57, 57, 1) 65%);
         position: relative;
-        @include tablettes-only{
+
+        @include tablettes-only {
             width: 100%;
             min-height: 500px;
         }
-        @include mobile-only{
+
+        @include mobile-only {
             width: 100%;
             min-height: 300px;
         }
-        .creditCardFront{
+
+        .creditCardFront {
             width: 500px;
             height: 250px;
-            background: rgb(210,211,211);
-            background: linear-gradient(227deg, rgba(210,211,211,1) 45%, rgba(132, 151, 166) 54%, rgba(132, 151, 166) 58%, rgba(210,211,211,1) 65%);
+            background: rgb(210, 211, 211);
+            background: linear-gradient(227deg, rgba(210, 211, 211, 1) 45%, rgba(132, 151, 166) 54%, rgba(132, 151, 166) 58%, rgba(210, 211, 211, 1) 65%);
             border-radius: 10px;
             display: flex;
             flex-direction: column;
@@ -34,88 +40,102 @@
             left: 60%;
             z-index: 1100;
             top: 200px;
-            -webkit-animation-name: slideInLeft;
             animation: slideInLeft .6s 1 forwards;
-            @include tablettes-only{
+
+            @include tablettes-only {
                 left: 50%;
                 top: 60%;
-                transform: translate(-50%, -50%)!important;
+                transform: translate(-50%, -50%) !important;
                 box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             }
-            @include mobile-only{
+
+            @include mobile-only {
                 left: 50%;
                 top: 60%;
-                transform: translate(-50%, -50%)!important;
+                transform: translate(-50%, -50%) !important;
                 width: 250px;
                 height: 125px;
                 box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             }
-            .creditCardFront-circle_container{
+
+            .creditCardFront-circle_container {
                 display: flex;
                 width: 100%;
                 align-items: center;
                 margin-top: 20px;
-                @include mobile-only{
+
+                @include mobile-only {
                     margin-top: 10px;
                 }
-                .creditCardFront-circle_1{
+
+                .creditCardFront-circle_1 {
                     width: 50px;
                     height: 50px;
                     background-color: #FFF;
                     border-radius: 50%;
                     margin-left: 40px;
-                    @include mobile-only{
+
+                    @include mobile-only {
                         width: 25px;
                         height: 25px;
                         margin-left: 20px;
                     }
                 }
-                .creditCardFront-circle_2{
+
+                .creditCardFront-circle_2 {
                     width: 25px;
                     height: 25px;
                     border: 1px solid #FFF;
                     border-radius: 50%;
                     margin-left: 16px;
-                    @include mobile-only{
+
+                    @include mobile-only {
                         width: 12.5px;
                         height: 12.5px;
                         margin-left: 8px;
                     }
                 }
             }
-            .creditCardFront-number{
+
+            .creditCardFront-number {
                 margin: 40px 0 0 0;
                 width: 100%;
-                @include mobile-only{
+
+                @include mobile-only {
                     margin: 20px 0 0 0;
                 }
-                span{
+
+                span {
                     font-size: 1.8rem;
                     width: 100%;
                     text-align: center;
                     display: inline-block;
-                    @include mobile-only{
+
+                    @include mobile-only {
                         font-size: .9rem;
                     }
                 }
             }
-            .creditCardFront-bottom{
+
+            .creditCardFront-bottom {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
                 margin: auto 0 8px 0;
                 padding: 0 8px;
                 font-size: 1.3rem;
-                @include mobile-only{
+
+                @include mobile-only {
                     font-size: .8rem;
                 }
-            }  
+            }
         }
     }
-    .creditCardBack{
+
+    .creditCardBack {
         width: 500px;
         height: 250px;
-        background: rgb(210,211,211);
+        background: rgb(210, 211, 211);
         border-radius: 10px;
         left: 55%;
         z-index: 1099;
@@ -124,58 +144,67 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        -webkit-animation-name: slideInRight;
         animation: slideInRight .6s 1 forwards;
-        @include tablettes-only{
-            top:30%;
+
+        @include tablettes-only {
+            top: 30%;
             left: 45%;
-            transform: translate(-50%,-50%)!important;
+            transform: translate(-50%, -50%) !important;
         }
-        @include mobile-only{
-            top:30%;
+
+        @include mobile-only {
+            top: 30%;
             left: 45%;
-            transform: translate(-50%,-50%)!important;
+            transform: translate(-50%, -50%) !important;
             width: 250px;
             height: 125px;
         }
-        .creditCardBack-band{
+
+        .creditCardBack-band {
             margin-top: 40px;
             width: 100%;
             height: 44px;
             background-color: #252727;
-            @include mobile-only{
+
+            @include mobile-only {
                 margin-top: 20px;
             }
         }
-        .creditCardBack-cvc_container{
+
+        .creditCardBack-cvc_container {
             margin-top: 20px;
-            display:  flex;
+            display: flex;
             justify-content: center;
             width: 100%;
-            @include mobile-only{
+
+            @include mobile-only {
                 margin-top: 10px;
             }
-            .creditCardBack-cvc{
+
+            .creditCardBack-cvc {
                 width: 80%;
                 display: flex;
                 justify-content: flex-end;
                 background-color: #e7e9e9;
                 border-radius: 2px;
-                span{
+
+                span {
                     margin-right: 8px;
                     display: inline-block;
                     padding: 8px 0;
-                    @include mobile-only{
+
+                    @include mobile-only {
                         margin-right: 4px;
                         padding: 4px 0;
                         font-size: .8rem;
                     }
                 }
             }
-            
-            
+
+
         }
-        .creditCardBack-phantom_container{
+
+        .creditCardBack-phantom_container {
             margin-top: 16px;
             width: 40%;
             height: 80px;
@@ -184,52 +213,67 @@
             flex-wrap: wrap;
             justify-content: center;
             font-family: $font3;
-            .ccp{
+
+            .ccp {
                 background-color: #e7e9e9;
                 border-radius: 40px;
                 margin: 0 4px;
                 height: 4px;
             }
-            .ccp1{
+
+            .ccp1 {
                 width: 40px;
             }
-            .ccp2{
+
+            .ccp2 {
                 width: 8px;
             }
+
             .ccp3 {
                 width: 20px;
             }
+
             .ccp4 {
                 width: 32px;
             }
-            .ccp5{
+
+            .ccp5 {
                 width: 8px;
             }
-            .ccp6{
+
+            .ccp6 {
                 width: 24px;
             }
-            .ccp7{
+
+            .ccp7 {
                 width: 44px;
             }
-            .ccp8{
+
+            .ccp8 {
                 width: 30px;
             }
-            .ccp9{
+
+            .ccp9 {
                 width: 12px;
             }
-            .ccp10{
+
+            .ccp10 {
                 width: 55px;
             }
-            .ccp11{
+
+            .ccp11 {
                 width: 33px;
             }
-            .ccp12{
+
+            .ccp12 {
                 width: 55px;
             }
-            .ccp13{
+
+            .ccp13 {
                 width: 20px;
             }
-            .ccp14{
+
+            .ccp14 {
                 width: 20px;
             }
         }
@@ -239,21 +283,24 @@
 
 // right side of paiement page 
 
-.paiement-rightContainer{
+.paiement-rightContainer {
     position: relative;
     height: 91.1vh;
     width: 70%;
-    @include tablettes-only{
+
+    @include tablettes-only {
         width: 100%;
         min-height: 600px;
         height: auto;
     }
-    @include mobile-only{
+
+    @include mobile-only {
         width: 100%;
         min-height: 600px;
         height: auto;
     }
-    .creditCard_form{
+
+    .creditCard_form {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -262,104 +309,113 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        select{
+
+        select {
             background-color: $color1;
             border: none;
             border-radius: 5px;
-            padding : 5px;
+            padding: 5px;
             font-size: 1rem;
             font-family: $font1;
         }
-        p{
+
+        p {
             margin-top: 0;
         }
     }
-    .reditCard_form_bottomLine{
+
+    .reditCard_form_bottomLine {
         display: flex;
         justify-content: space-between;
         width: 100%;
-        input{
+
+        input {
             width: 70px;
         }
-        .reditCard_form_expiration, .reditCard_form-cvc{
+
+        .reditCard_form_expiration,
+        .reditCard_form-cvc {
             width: 50%;
             display: flex;
             flex-direction: column;
         }
-        .reditCard_form_expirationInputs{
+
+        .reditCard_form_expirationInputs {
             display: flex;
         }
-        #creditCardExpriationYear{
+
+        #creditCardExpriationYear {
             margin-left: 8px;
         }
-        .reditCard-form_cvc{
+
+        .reditCard-form_cvc {
             justify-content: flex-end;
         }
     }
-    .creditCard-form_btns{
+
+    .creditCard-form_btns {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         height: 175px;
-        button{
+
+        button {
             flex-wrap: nowrap;
         }
     }
 }
 
-  
-  @-webkit-keyframes slideInLeft {
+
+@-webkit-keyframes slideInLeft {
     from {
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-      visibility: visible;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
     }
-  
+
     to {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
-  }
-  
-  @keyframes slideInLeft {
+}
+
+@keyframes slideInLeft {
     from {
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-      visibility: visible;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
     }
-  
+
     to {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
-  }
-  
-  
-  @-webkit-keyframes slideInRight {
+}
+
+
+@-webkit-keyframes slideInRight {
     from {
-      -webkit-transform: translate3d(100%, 0, 0);
-      transform: translate3d(100%, 0, 0);
-      visibility: visible;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
     }
-  
+
     to {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
-  }
-  
-  @keyframes slideInRight {
+}
+
+@keyframes slideInRight {
     from {
-      -webkit-transform: translate3d(100%, 0, 0);
-      transform: translate3d(100%, 0, 0);
-      visibility: visible;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
     }
-  
+
     to {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
-  }
-  
-  
+}

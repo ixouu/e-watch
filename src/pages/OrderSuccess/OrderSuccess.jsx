@@ -100,13 +100,14 @@ const OrderSuccess = () => {
 		} else {
 			setError(true);
 			setIsLoading(false);
-			setErrorMessage('Votre panier est vide !')
-		};
+			setErrorMessage("Votre panier est vide !");
+		}
 	};
 
 	useEffect(() => {
-		// setIsLoading(true);
-		// sendOrder();
+		setIsLoading(true);
+		sendOrder();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -115,20 +116,18 @@ const OrderSuccess = () => {
 			{isLoading ? (
 				<Loader />
 			) : (
-
-						<>
-							{/* Toggle error or orderSummary */}
-							{error || orderInfos === undefined ? (
-								<OrderError errorMessage={errorMessage} />
-							) : (
-								<div className='order-success'>
-									<h1>Votre commande a été envoyée</h1>
-									<OrderSummary orderInfos={orderInfos} />
-								</div>
-							)}
-							<SocialMedias />
-						</>
-
+				<>
+					{/* Toggle error or orderSummary */}
+					{error || orderInfos === undefined ? (
+						<OrderError errorMessage={errorMessage} />
+					) : (
+						<div className='order-success'>
+							<h1>Votre commande a été envoyée</h1>
+							<OrderSummary orderInfos={orderInfos} />
+						</div>
+					)}
+					<SocialMedias />
+				</>
 			)}
 		</main>
 	);
