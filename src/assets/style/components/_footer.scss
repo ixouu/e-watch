@@ -6,4 +6,12 @@ footer {
     justify-content: center;
     align-items: center;
     margin-top: auto;
+
+    .footer-disclamer{
+        font-size: .7rem;
+        margin-left: 8px;
+        a{
+            color: $color1;
+        }
+    }
 }
