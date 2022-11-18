@@ -95,6 +95,9 @@
     form {
         display: flex;
         flex-direction: column;
+        @include mobile-only{
+            max-width: 100%;
+        }
 
         .formQty {
             padding-top: 50px;
@@ -117,9 +120,6 @@
         .formBtn {
             padding-top: 50px;
             display: flex;
-            @include mobile-only{
-                justify-content: center;
-            }
         }
 
         .shortStock {

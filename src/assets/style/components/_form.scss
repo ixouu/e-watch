@@ -63,6 +63,9 @@ textarea {
 }
 
 #contact-form {
+    @include mobile-only{
+        width: 100%;
+    }
     button {
         align-self: center;
         position: absolute;
