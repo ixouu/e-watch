@@ -23,6 +23,12 @@
   flex-direction: column;
   align-items: center;
   padding-top: 16px;
+  @include tablettes-only{
+    width: 95%;
+  }
+  @include mobile-only{
+    width: 95%;
+  }
 }
 
 .addToCart-container {
@@ -185,6 +191,11 @@
   display: flex;
   justify-content: right;
   margin-right: 24px;
+  @include mobile-only{
+    flex-direction: column;
+    margin-right: 0;
+    align-items: center;
+  }
 }
 
 

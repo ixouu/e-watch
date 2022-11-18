@@ -148,6 +148,19 @@
             margin: 20px 0 0 30px;
         }
     }
+    .noProductsInCart{
+        padding-right: 10%;
+        @include mobile-only{
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+        @include tablettes-only{
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+    }
 
     .cart-total {
         display: flex;

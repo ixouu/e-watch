@@ -4,23 +4,53 @@
     margin: 0 auto;
     flex-direction: column;
     margin-top: 5vh;
+    @include mobile-only{
+        margin-top: 0;
+        max-width: 100%;
+    }
+    @include tablettes-only{
+        margin-top: 2.5vh;
+        max-width: 70%;
+    }
+}
+
+.product-price_container{
+    @include mobile-only{
+        width: fit-content;
+    }
+    @include tablettes-only{
+        width: fit-content;
+    }
 }
 
 .product-container {
     display: flex;
     animation: displayContainer .5s linear forwards;
+    @include mobile-only{
+        flex-direction: column;
+    }
+    @include tablettes-only{
+        flex-direction: column;
+    }
 
     .product-container_left {
         display: flex;
-
+        @include tablettes-only{
+            justify-content: center;
+            align-items: center;
+        }
         img {
             margin-top: 160px;
+            @include tablettes-only{
+                margin-top: 80px;
+            }
         }
     }
 
     .product-container_right {
         display: flex;
         flex-direction: column;
+
 
         .product-price_container {
             display: flex;
@@ -61,12 +91,18 @@
 
 // Qty addToCar button
 .product-addToCart {
+
     form {
         display: flex;
         flex-direction: column;
 
         .formQty {
             padding-top: 50px;
+            @include mobile-only{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
 
         label {
@@ -81,6 +117,9 @@
         .formBtn {
             padding-top: 50px;
             display: flex;
+            @include mobile-only{
+                justify-content: center;
+            }
         }
 
         .shortStock {
@@ -102,6 +141,11 @@
         border-bottom: 1px solid #eeeff4;
         flex-wrap: wrap;
         justify-content: center;
+        @include mobile-only{
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
 
         li {
             padding: 20px 10px 20px 0;
@@ -117,12 +161,17 @@
 
 .tabs {
     margin-bottom: 40px;
-
     ul {
         list-style: none;
         display: flex;
         padding: 0;
         margin: 40px 0 0 0;
+        @include mobile-only{
+            justify-content: center;
+        }
+        @include tablettes-only{
+            margin: 0 5%;
+        }
 
         li {
             padding: 20px;

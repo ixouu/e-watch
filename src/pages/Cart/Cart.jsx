@@ -25,7 +25,7 @@ const Cart = () => {
 					/>
 				);
 			});
-		} else return <p>Aucuns produits présent dans votre panier.</p>;
+		} else return <p className="noProductsInCart">Aucuns produits présent dans votre panier.</p>;
 	};
 
 	// display the form

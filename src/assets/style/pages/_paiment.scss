@@ -28,8 +28,10 @@
         }
 
         .creditCardFront {
-            width: 500px;
-            height: 250px;
+            width: 30vw;
+            height: 15vw;
+            max-width: 500px;
+            max-height: 250px;
             background: rgb(210, 211, 211);
             background: linear-gradient(227deg, rgba(210, 211, 211, 1) 45%, rgba(132, 151, 166) 54%, rgba(132, 151, 166) 58%, rgba(210, 211, 211, 1) 65%);
             border-radius: 10px;
@@ -43,6 +45,8 @@
             animation: slideInLeft .6s 1 forwards;
 
             @include tablettes-only {
+                width: 500px;
+                height: 250px;
                 left: 50%;
                 top: 60%;
                 transform: translate(-50%, -50%) !important;
@@ -133,8 +137,10 @@
     }
 
     .creditCardBack {
-        width: 500px;
-        height: 250px;
+        width: 30vw;
+        height: 15vw;
+        max-width: 500px;
+        max-height: 250px;
         background: rgb(210, 211, 211);
         border-radius: 10px;
         left: 55%;
@@ -147,6 +153,8 @@
         animation: slideInRight .6s 1 forwards;
 
         @include tablettes-only {
+            width: 500px;
+            height: 250px;
             top: 30%;
             left: 45%;
             transform: translate(-50%, -50%) !important;
