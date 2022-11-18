@@ -1,8 +1,17 @@
-footer{
+footer {
     background-color: $color2;
     color: $color1;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: auto;
+
+    .footer-disclamer{
+        font-size: .7rem;
+        margin-left: 8px;
+        a{
+            color: $color1;
+        }
+    }
 }

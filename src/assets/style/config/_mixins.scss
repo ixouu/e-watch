@@ -1,21 +1,44 @@
 //media querries
 
 @mixin mobile-only {
-    @media screen and (max-width : map-get($breakpoints, mobile)){
-      @content
-    }
-  };
+  @media screen and (max-width : map-get($breakpoints, mobile)) {
+    @content
+  }
+}
+
+;
 
 
 @mixin tablettes-only {
-    @media screen and (min-width: map-get($breakpoints, mobile)) and (max-width : map-get($breakpoints, desktop)) {
-      @content
-    }
-  };
+  @media screen and (min-width: map-get($breakpoints, mobile)) and (max-width : map-get($breakpoints, desktop)) {
+    @content
+  }
+}
 
- 
-  @mixin largscreen-only {
-    @media screen and (min-width : map-get($breakpoints, largeScreen)) {
-      @content
-    }
-  };
+;
+
+
+@mixin largeScreen-only {
+  @media screen and (min-width : map-get($breakpoints, largeScreen)) {
+    @content
+  }
+}
+
+;
+
+@mixin pageTitle {
+  text-align: center;
+  font-family: $font2;
+
+  @include mobile-only {
+    font-size: 1.5rem;
+  }
+}
+
+@mixin mainPadding {
+  padding: 40px 10%;
+
+  @include mobile-only {
+    padding: 20px 0;
+  }
+}

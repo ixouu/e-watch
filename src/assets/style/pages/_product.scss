@@ -1,0 +1,217 @@
+.main-product {
+    max-width: 940px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-top: 5vh;
+    @include mobile-only{
+        margin-top: 0;
+        max-width: 100%;
+    }
+    @include tablettes-only{
+        margin-top: 2.5vh;
+        max-width: 70%;
+    }
+}
+
+.product-price_container{
+    @include mobile-only{
+        width: fit-content;
+    }
+    @include tablettes-only{
+        width: fit-content;
+    }
+}
+
+.product-container {
+    display: flex;
+    animation: displayContainer .5s linear forwards;
+    @include mobile-only{
+        flex-direction: column;
+    }
+    @include tablettes-only{
+        flex-direction: column;
+    }
+
+    .product-container_left {
+        display: flex;
+        @include tablettes-only{
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            margin-top: 160px;
+            @include tablettes-only{
+                margin-top: 80px;
+            }
+        }
+    }
+
+    .product-container_right {
+        display: flex;
+        flex-direction: column;
+
+
+        .product-price_container {
+            display: flex;
+            color: grey;
+            align-items: flex-start;
+            font-size: 1.5rem;
+
+            .product-price,
+            .product-price_sign {
+                font-size: 2.5rem;
+            }
+
+            .product-price_sign {
+                padding-left: 10px;
+            }
+
+            .product-price_decimal {
+                display: block;
+                padding-top: 5px;
+            }
+        }
+
+    }
+}
+
+.expandDetailsBtn {
+    background-color: transparent;
+    font-size: 1rem;
+    font-family: $font1;
+    border: none;
+    font-weight: 500;
+}
+
+.product-desc {
+    overflow: hidden;
+    max-width: 600px;
+}
+
+// Qty addToCar button
+.product-addToCart {
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        .formQty {
+            padding-top: 50px;
+            @include mobile-only{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        label {
+            padding-right: 20px;
+        }
+
+        input {
+            width: 90px;
+            padding-left: 15px;
+        }
+
+        .formBtn {
+            padding-top: 50px;
+            display: flex;
+            @include mobile-only{
+                justify-content: center;
+            }
+        }
+
+        .shortStock {
+            i {
+                padding-right: 5px;
+            }
+
+            font-size: 1rem;
+        }
+    }
+
+}
+
+.reassurance {
+    ul {
+        list-style: none;
+        display: flex;
+        border-top: 1px solid #eeeff4;
+        border-bottom: 1px solid #eeeff4;
+        flex-wrap: wrap;
+        justify-content: center;
+        @include mobile-only{
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        li {
+            padding: 20px 10px 20px 0;
+
+            i {
+                padding-right: 5px;
+                font-size: 2rem;
+                color: grey;
+            }
+        }
+    }
+}
+
+.tabs {
+    margin-bottom: 40px;
+    ul {
+        list-style: none;
+        display: flex;
+        padding: 0;
+        margin: 40px 0 0 0;
+        @include mobile-only{
+            justify-content: center;
+        }
+        @include tablettes-only{
+            margin: 0 5%;
+        }
+
+        li {
+            padding: 20px;
+            margin-right: 5px;
+            background-color: #eeeff4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .tabs-details {
+        min-height: 40px;
+        width: 100%;
+        border: 1px solid #eeeff4;
+        padding: 20px 10px;
+        line-height: 1.7rem;
+    }
+}
+
+.rating {
+    .fa-star {
+        // color: goldenrod;
+        font-size: 2rem;
+    }
+}
+
+.product-button {
+    background-color: #239de5 !important;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+}
+
+@keyframes displayContainer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

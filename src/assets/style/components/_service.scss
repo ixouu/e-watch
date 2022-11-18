@@ -1,0 +1,64 @@
+.main-Services {
+    @include mainPadding;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+
+    @include mobile-only {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    @include tablettes-only {
+        flex-direction: column;
+        padding: 20px 10%;
+    }
+
+    .home-service {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        min-height: 300px;
+
+        @include mobile-only {
+            width: 100%;
+            min-height: 250px;
+        }
+
+        @include tablettes-only {
+            width: 100%;
+            min-height: 150px;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        transition: all .3s ease-out;
+    }
+
+    .service-iconContainer {
+        font-size: 2rem;
+        display: inline-block;
+        align-self: center;
+        height: 50px;
+        transition: all .3s ease-out;
+
+        &:hover {
+            color: goldenrod;
+        }
+
+        &:hover+h2 {
+            color: goldenrod;
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+        padding: 0 10%;
+        text-align: justify;
+
+        @include mobile-only {
+            padding: 0 8px;
+        }
+    }
+}

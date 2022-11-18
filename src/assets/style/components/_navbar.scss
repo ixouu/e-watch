@@ -1,4 +1,4 @@
-nav{
+nav {
     background-color: black;
     height: 4em;
     display: flex;
@@ -7,15 +7,16 @@ nav{
     padding: 0 5%;
     align-items: center;
 
-    .desktop-Nav{
+    .desktop-Nav {
         display: flex;
         list-style: none;
-        @include mobile-only{
+
+        @include mobile-only {
             display: none;
         }
     }
 
-    a{
+    a {
         color: $color1;
         text-decoration: none;
         text-transform: uppercase;
@@ -24,80 +25,99 @@ nav{
         font-size: 1.2rem;
         position: relative;
         transition: all .3s ease-in-out;
+        @include tablettes-only{
+            font-size: 1rem;
+            padding: 0 4px;
+        }
     }
-    .logo{
+
+    .logo {
         position: absolute;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        img{
+
+        img {
             height: 3.5rem;
             margin-top: 10px;
         }
     }
-    .fa-bag-shopping{
+
+    .fa-bag-shopping {
         color: $color1;
         position: relative;
     }
-    .itemNumber{
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        background-color:red;
+
+    .itemNumber {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background-color: red;
         color: black;
         border-radius: 50%;
         position: absolute;
-        top: 90%;
-        right: 2px;
+        top: 95%;
+        right: -8px;
         transform: translateY(-50%);
-        font-size: .8rem;
+        font-size: .9rem;
         text-align: center;
     }
+
     // MOBILE NAV BAR
-    .mobileNavBar{
-    transform: translateX(9999px);
-    color: $color1;
-    display: flex;
-    position: relative;
-    z-index: 2000;
-    .mobileNavBar-links{
-        padding-top: 50px;
-        li{
-            border-bottom: 1px solid $color1;
-            list-style : none;
-            padding: 5px 0;
+    .mobileNavBar {
+        transform: translateX(9999px);
+        color: $color1;
+        display: flex;
+        position: relative;
+        z-index: 2000;
+
+        .mobileNavBar-links {
+            padding-top: 41px;
+
+            li {
+                border-bottom: 1px solid $color1;
+                list-style: none;
+                padding: 5px 0;
+                background-color: $color2;
+            }
+        }
+
+        ul {
+            display: none;
+        }
+
+        @include mobile-only {
+            transform: translateX(0);
+        }
+
+        .mobileNavBar-btn {
+            padding: 5px;
+            border: none;
+            width: 50px;
+            height: 50px;
+            z-index: 2000;
+        }
+
+        .fa-bars {
+            font-size: 2rem;
+        }
+
+        // display mobile menu
+        .showMenu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+
+
         }
     }
-    ul {
-        display: none;
-    }
-    @include mobile-only{
-        transform: translateX(0);
-    }
-    .mobileNavBar-btn{
-        padding: 5px;
-        border: none;
-        width: 50px;
-        height: 50px;
-        z-index: 2000;
-    }
-    .fa-bars{
-        font-size: 2rem;
-    }
-    // display mobile menu
-    .showMenu{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        right: 0;
 
-        
-    }
-}
     // active link
-    .active{
+    .active {
         text-decoration: underline;
         transition: all .3s ease-in-out;
     }
 }
-

@@ -1,5 +1,3 @@
-import { number } from "prop-types";
-
 export default {
     name: 'product',
     title: 'Product',
@@ -65,5 +63,11 @@ export default {
                 ]
             }
         },
+        {
+            name : 'popularity',
+            title : 'populairty',
+            type: 'number',
+            max: 5
+        }
     ]
 }
