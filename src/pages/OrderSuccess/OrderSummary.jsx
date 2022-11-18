@@ -20,6 +20,7 @@ const OrderSummary = ({orderInfos}) => {
 	useEffect(()=>{
 		onClearLocalStorage()
 		saveUserInformations({});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
 	return (

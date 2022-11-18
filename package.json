@@ -34,7 +34,14 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": ["jsx-a11y"],
+    "rules": {
+      "jsx-a11y/aria-role": [ 2, {
+          "allowedInvalidRoles": ["text"],
+          "ignoreNonDOM": true
+      }]
+  }
   },
   "browserslist": {
     "production": [
@@ -53,6 +60,8 @@
     "javascript": "javascriptreact"
   },
   "devDependencies": {
-    "dotenv-webpack": "^8.0.1"
+    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.27.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1"
   }
 }

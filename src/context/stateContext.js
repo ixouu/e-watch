@@ -105,7 +105,7 @@ export const StateContext = ({ children }) => {
                 if (cartItems.length >= 1) {
                     cartItems.map((product) => {
                         const item = data.find((item) => item._id === product.id);
-                        item && prices.push(item.price * product.qty);
+                        return item && prices.push(item.price * product.qty);
                 });
                 const totalPrice = prices.length > 0 && prices.reduce((a, b) => a + b);
                 return totalPrice;

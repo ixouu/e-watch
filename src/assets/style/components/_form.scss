@@ -53,25 +53,15 @@ textarea{
     input{
         width: 50%;
     }
-    
 }
 
 #contact-form{
     button {
-        border: none;
-        font-size: 1rem;
-        padding: 10px 20px;
-        color: $color1;
-        background-color: $color2;
         align-self: center;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: -17px;
-        border-radius: 5px;
-        transition: all .3s ease-out;
-        &:hover{
-            background-color: rgb(64, 63, 63);
-        }
+        bottom: -32px;
+
     }
 }
