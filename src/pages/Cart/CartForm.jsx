@@ -133,7 +133,6 @@ const CartForm = () => {
 		} else {
 			let newInputs = inputs.map((input) => {
 				if (input.name === inputName) {
-					console.log(input.name);
 					return {
 						...input,
 						error: true,
@@ -261,7 +260,6 @@ const CartForm = () => {
 	// If there are no errors, display paiement page
 	const submit = (e, form) => {
 		const formToCheck = Object.entries(form);
-		console.log(formToCheck);
 		formToCheck.forEach((entry) => {
 			checkValidity(entry[0], entry[1]);
 		});

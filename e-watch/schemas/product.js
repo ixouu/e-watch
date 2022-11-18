@@ -48,6 +48,7 @@ export default {
             name: 'availableStock',
             title: 'Available Stocks',
             type: 'number',
+            min: 0,
         },
         {
             name: 'category',

@@ -54,7 +54,7 @@ nav {
         justify-content: center;
         width: 24px;
         height: 24px;
-        background-color: red;
+        background-color: rgb(195, 40, 40);
         color: black;
         border-radius: 50%;
         position: absolute;
@@ -63,6 +63,10 @@ nav {
         transform: translateY(-50%);
         font-size: .9rem;
         text-align: center;
+        @include tablettes-only{
+            width: 20px;
+            height: 20px;
+        }
     }
 
     // MOBILE NAV BAR
