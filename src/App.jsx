@@ -9,6 +9,7 @@ import Contact from "./pages/Contact/Contact.jsx";
 import Paiement from "./pages/Paiement/Paiement.jsx";
 import Error from "./pages/Error/Error.jsx";
 import OrderSuccess from "./pages/OrderSuccess/OrderSuccess.jsx";
+import { Analytics } from '@vercel/analytics/react';
 
 import NavBar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -68,6 +69,7 @@ function App() {
 				</Routes>
 				<Footer />
 			</StateContext>
+			<Analytics />
 		</>
 	);
 }
